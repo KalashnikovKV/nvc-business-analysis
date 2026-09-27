@@ -361,44 +361,32 @@ button, input, select { font: inherit; }
 }
 @media (max-width: 800px) { .viewer { grid-template-columns: 1fr; } }
 .viewport {
-  background: #111827; border-radius: 12px; min-height: 380px; position: relative; overflow: hidden;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 62%);
+  border-radius: 12px; min-height: 380px; position: relative; overflow: hidden;
   border: 1px solid #1f2937;
 }
-.floor {
-  position: absolute; left: 14%; right: 14%; bottom: 22%; height: 42%;
-  background:
-    linear-gradient(180deg, rgba(0,191,165,0.16), transparent 28%),
-    linear-gradient(180deg, #4b5563, #1f2937);
-  border: 2px solid rgba(0, 191, 165, 0.7);
-  border-radius: 6px;
-  transform: perspective(520px) rotateX(56deg);
-  transform-origin: center bottom;
-}
-.person {
-  position: absolute; left: 47%; bottom: 42%; width: 16px; height: 28px;
-  background: var(--accent); border-radius: 7px 7px 3px 3px;
-}
-.person::before {
-  content: "";
-  position: absolute; top: -12px; left: 1px;
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--accent);
-}
+.scene { display: block; width: 100%; height: 100%; min-height: 380px; }
 .hud {
-  position: absolute; left: 12px; bottom: 12px; right: 12px;
-  display: flex; justify-content: space-between; gap: 8px;
-  font-size: 0.78rem; color: rgba(255,255,255,0.75); font-family: var(--mono);
+  position: absolute; left: 10px; bottom: 10px; right: 10px;
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.hud span {
+  padding: 4px 8px; border-radius: 999px; background: rgba(0,0,0,0.62);
+  font-size: 0.75rem; color: #e5e7eb; font-family: var(--mono); white-space: nowrap;
 }
 .side-panel {
   background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px;
   display: flex; flex-direction: column; gap: 12px;
 }
 .frame-thumb {
-  aspect-ratio: 4/3; border-radius: 8px;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.45)),
-    linear-gradient(135deg, #6b7280, #374151);
-  display: flex; align-items: flex-end; padding: 10px; color: #fff; font-size: 0.8rem;
+  position: relative; aspect-ratio: 4/3; border-radius: 8px; overflow: hidden;
+  background: linear-gradient(180deg, #9ca3af, #4b5563);
+}
+.frame-thumb svg { display: block; width: 100%; height: 100%; }
+.frame-thumb span {
+  position: absolute; left: 8px; right: 8px; bottom: 8px;
+  color: #fff; font-size: 0.8rem; line-height: 1.3;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
 .note { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
 

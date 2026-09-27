@@ -37,9 +37,23 @@
           <h2>Карта · проверка коллизии</h2>
           <p class="help">Управление — WASD или стрелки. Персонаж должен простоять на поверхности не меньше 5 секунд и пройти карту от края до края.</p>
           <div class="viewer">
-            <div class="viewport" aria-label="3D viewport wireframe">
-              <div class="floor"></div>
-              <div class="person" title="Персонаж показа"></div>
+            <div class="viewport" aria-label="Проверка: персонаж стоит на коллизии">
+              <svg class="scene" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <polygon points="140,110 500,110 600,310 40,310" fill="#3d4d63" stroke="#2dd4bf" stroke-width="2.5" />
+                <g stroke="rgba(255,255,255,0.22)" stroke-width="1">
+                  <line x1="108" y1="160" x2="532" y2="160" />
+                  <line x1="76" y1="210" x2="564" y2="210" />
+                  <line x1="48" y1="260" x2="592" y2="260" />
+                  <line x1="250" y1="110" x2="150" y2="310" />
+                  <line x1="320" y1="110" x2="320" y2="310" />
+                  <line x1="390" y1="110" x2="490" y2="310" />
+                </g>
+                <ellipse cx="320" cy="262" rx="18" ry="5" fill="rgba(0,0,0,0.35)" />
+                <g transform="translate(320 232)">
+                  <circle cy="-30" r="14" fill="#2dd4bf" />
+                  <rect x="-13" y="-14" width="26" height="42" rx="8" fill="#2dd4bf" />
+                </g>
+              </svg>
               <div class="hud">
                 <span>коллизия</span>
                 <span>на поверхности · 0:07</span>
@@ -47,7 +61,17 @@
               </div>
             </div>
             <aside class="side-panel">
-              <div class="frame-thumb">Исходный кадр · та же камера</div>
+              <div class="frame-thumb">
+                <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <polygon points="70,48 250,48 300,150 20,150" fill="#4b5563" stroke="#d1d5db" stroke-width="1.5" />
+                  <g stroke="rgba(255,255,255,0.25)" stroke-width="1">
+                    <line x1="50" y1="82" x2="270" y2="82" />
+                    <line x1="32" y1="116" x2="288" y2="116" />
+                    <line x1="160" y1="48" x2="160" y2="150" />
+                  </g>
+                </svg>
+                <span>Исходный кадр · та же камера</span>
+              </div>
               <p class="note">Хорошая карта похожа на кадр съёмки. Масштаб под игру выбирает разработчик, который импортирует пакет.</p>
               <label class="field" for="char">
                 Размер персонажа (показ)
