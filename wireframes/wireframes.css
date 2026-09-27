@@ -165,9 +165,7 @@ button, input, select { font: inherit; }
   border: 4px solid #fff; background: #b42318; color: #fff;
   font-weight: 700; font-size: 1rem; cursor: pointer;
 }
-.record-btn.active {
-  width: 88px; height: 52px; border-radius: 16px; background: #7f1d1d;
-}
+.record-btn.active { background: #7f1d1d; }
 .record-btn:disabled { opacity: 0.55; }
 .scan {
   flex: 1; min-height: 0; display: flex; flex-direction: column;
@@ -242,13 +240,14 @@ button, input, select { font: inherit; }
 .maps-empty h2 { margin: 0; font-size: 1.2rem; }
 .maps-empty p { margin: 0; color: var(--text-muted); font-size: 0.92rem; line-height: 1.4; }
 .map-card {
-  margin: 16px; padding: 14px; border-radius: 14px; background: #f8fafc; border: 1px solid var(--line);
+  margin: 56px 16px 16px; padding: 14px; border-radius: 14px; background: #f8fafc; border: 1px solid var(--line);
 }
-.map-card h3 { margin: 0 0 4px; font-size: 0.95rem; }
-.map-card p { margin: 0; color: var(--text-muted); font-size: 0.82rem; }
+.map-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.map-card h3 { margin: 0 0 4px; font-size: 0.95rem; line-height: 1.3; }
+.map-card p { margin: 0; color: var(--text-muted); font-size: 0.82rem; line-height: 1.35; }
 .map-card .row { margin-top: 12px; }
 .map-badge {
-  float: right; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 999px;
+  flex: none; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 999px;
   background: #ecfdf5; color: #065f46;
 }
 .map-badge.warn { background: #fff7ed; color: #c2410c; }
