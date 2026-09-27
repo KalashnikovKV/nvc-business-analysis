@@ -27,6 +27,12 @@ jobs:
             06-nfr-risks-readiness.md \
             wireframes/index.html \
             wireframes/wireframes.css \
+            wireframes/d01-summary.html \
+            wireframes/d02-stakeholders.html \
+            wireframes/d03-personas.html \
+            wireframes/d04-stories.html \
+            wireframes/d05-screens.html \
+            wireframes/d06-nfr.html \
             wireframes/m1-record.html \
             wireframes/m2-preflight.html \
             wireframes/m3-error.html \

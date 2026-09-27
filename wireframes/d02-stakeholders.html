@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>02 · Стейкхолдеры и границы</title>
+  <link rel="stylesheet" href="wireframes.css" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Все wireframes</a>
+    <h1>02 · Стейкхолдеры</h1>
+    <p>Роли продукта, In/Out, альтернативы.</p>
+    <nav>
+      <a href="d01-summary.html">01 Резюме</a>
+      <a class="active" href="d02-stakeholders.html">02 Стейкхолдеры</a>
+      <a href="d03-personas.html">03 Персоны</a>
+      <a href="d04-stories.html">04 Stories</a>
+      <a href="d05-screens.html">05 Экраны</a>
+      <a href="d06-nfr.html">06 NFR</a>
+    </nav>
+    <p class="meta">doc → 02-stakeholders-scope-alternatives.md</p>
+  </aside>
+  <main class="stage">
+    <div class="doc-board">
+      <div class="bar"><span>BA · 02</span><span>product roles only</span></div>
+      <div class="body">
+        <h2>Стейкхолдеры, границы, альтернативы</h2>
+        <p class="lead">Только роли конечного продукта и границы релиза.</p>
+        <div class="doc-grid">
+          <div class="doc-card">
+            <h3>Стейкхолдеры</h3>
+            <ul>
+              <li>Оператор — зона и preflight</li>
+              <li>Сборщик — загрузка, отчёт, ходьба</li>
+              <li>Разработчик игры — пакет без rescale</li>
+              <li>Владелец сервиса — контейнер, секреты</li>
+              <li>Люди в кадре — без лиц крупным планом</li>
+            </ul>
+          </div>
+          <div class="doc-card">
+            <h3>Influence / Interest</h3>
+            <div class="matrix">Interest →
+         Low              High
+High │                  │ Оператор
+     │                  │ Сборщик
+Med  │ Владелец сервиса │ Разраб. игры
+Low  │                  │ Люди в кадре</div>
+          </div>
+          <div class="doc-card">
+            <h3>Входит</h3>
+            <ul>
+              <li>LiDAR-съёмка + проверка</li>
+              <li>Пакет в метрах датчика</li>
+              <li>API, очередь, веб-проверка</li>
+              <li>Публичный URL, контейнер</li>
+            </ul>
+          </div>
+          <div class="doc-card">
+            <h3>Не входит</h3>
+            <ul>
+              <li>Rescale под персонажа</li>
+              <li>Полноценная игра / Unreal</li>
+              <li>Своя модель глубины</li>
+              <li>Android как основная съёмка</li>
+            </ul>
+          </div>
+        </div>
+        <div class="doc-card" style="margin-top:12px">
+          <h3>Альтернативы</h3>
+          <ul>
+            <li>Meshroom/RealityScan — нет единого пакета и быстрой проверки</li>
+            <li>Только монокуляр — нет надёжных размеров в метрах; резерв</li>
+            <li>Polycam/KIRI — чужой закрытый контракт</li>
+            <li>RoomPlan — комната, не patch ~80×80 см</li>
+          </ul>
+          <p style="margin-top:10px"><strong>Выбор:</strong> LiDAR → свой пайплайн → GLB → ходьба в браузере.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

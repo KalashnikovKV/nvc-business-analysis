@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>06 · NFR, риски, готовность</title>
+  <link rel="stylesheet" href="wireframes.css" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Все wireframes</a>
+    <h1>06 · NFR</h1>
+    <p>Нефункциональные требования, риски, готовность релиза.</p>
+    <nav>
+      <a href="d01-summary.html">01 Резюме</a>
+      <a href="d02-stakeholders.html">02 Стейкхолдеры</a>
+      <a href="d03-personas.html">03 Персоны</a>
+      <a href="d04-stories.html">04 Stories</a>
+      <a href="d05-screens.html">05 Экраны</a>
+      <a class="active" href="d06-nfr.html">06 NFR</a>
+    </nav>
+    <p class="meta">doc → 06-nfr-risks-readiness.md</p>
+  </aside>
+  <main class="stage">
+    <div class="doc-board">
+      <div class="bar"><span>BA · 06</span><span>readiness</span></div>
+      <div class="body">
+        <h2>NFR, риски, готовность</h2>
+        <div class="doc-grid">
+          <div class="doc-card">
+            <h3>NFR</h3>
+            <ul>
+              <li>NFR-1 воспроизводимость ±15%</li>
+              <li>NFR-2 код на английском</li>
+              <li>NFR-3 секреты вне git/образа</li>
+              <li>NFR-4 проверка без движка</li>
+              <li>NFR-5 конфиг воспроизводим</li>
+              <li>NFR-6 публичный URL + контейнер</li>
+            </ul>
+          </div>
+          <div class="doc-card">
+            <h3>Риски</h3>
+            <ul>
+              <li>Неузнаваемый меш → малая зона, позы, fail</li>
+              <li>Нет LiDAR у проверяющего → эталонные бандлы</li>
+              <li>Тяжёлая зона → 80×80 default</li>
+              <li>Случайный rescale → запрет в манифесте</li>
+              <li>Обрыв upload → idempotency + retry</li>
+            </ul>
+          </div>
+          <div class="doc-card">
+            <h3>Этика данных</h3>
+            <ul>
+              <li>Пол / стол / макет</li>
+              <li>Без лиц крупным планом</li>
+              <li>Доступ по API-ключу на старте</li>
+            </ul>
+          </div>
+          <div class="doc-card">
+            <h3>Готовность релиза</h3>
+            <ul>
+              <li>Понятный preflight</li>
+              <li>Отчёт + ходьба в браузере</li>
+              <li>Пакет meters / Y-up</li>
+              <li>Честный отказ</li>
+              <li>KPI-1…4 и NFR-1…6</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

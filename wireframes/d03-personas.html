@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>03 · Персоны и сценарии</title>
+  <link rel="stylesheet" href="wireframes.css" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Все wireframes</a>
+    <h1>03 · Персоны</h1>
+    <p>Персоны, сценарии SC-1…5, use cases.</p>
+    <nav>
+      <a href="d01-summary.html">01 Резюме</a>
+      <a href="d02-stakeholders.html">02 Стейкхолдеры</a>
+      <a class="active" href="d03-personas.html">03 Персоны</a>
+      <a href="d04-stories.html">04 Stories</a>
+      <a href="d05-screens.html">05 Экраны</a>
+      <a href="d06-nfr.html">06 NFR</a>
+    </nav>
+    <p class="meta">doc → 03-personas-scenarios-usecases.md</p>
+  </aside>
+  <main class="stage">
+    <div class="doc-board">
+      <div class="bar"><span>BA · 03</span><span>personas · journeys</span></div>
+      <div class="body">
+        <h2>Персоны и сценарии</h2>
+        <div class="doc-grid">
+          <div class="doc-card">
+            <h3>Оператор</h3>
+            <p>«Покажите квадрат и скажите, когда остановиться»</p>
+            <ul>
+              <li>Цель: понять, годится ли запись</li>
+              <li>Экраны: M1–M3</li>
+            </ul>
+          </div>
+          <div class="doc-card">
+            <h3>Сборщик</h3>
+            <p>«Нужны отчёт и ходьба в браузере»</p>
+            <ul>
+              <li>Цель: загрузить → отчёт → пройти</li>
+              <li>Экраны: B1–B4</li>
+            </ul>
+          </div>
+          <div class="doc-card">
+            <h3>Разработчик игры</h3>
+            <p>«Дайте метры как есть»</p>
+            <ul>
+              <li>Цель: импорт GLB без чужого rescale</li>
+              <li>UI: скачивание пакета</li>
+            </ul>
+          </div>
+          <div class="doc-card">
+            <h3>Сценарии</h3>
+            <ul>
+              <li>SC-1 успех съёмки и сборки</li>
+              <li>SC-2 плохая съёмка → пересъём</li>
+              <li>SC-3 тот же idempotency-key</li>
+              <li>SC-4 новый ключ, ±15% tris</li>
+              <li>SC-5 монокуляр — вне Must</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flow-mini" style="margin-top:16px">
+          <span>Записать</span><span class="arrow">→</span>
+          <span>Проверить</span><span class="arrow">→</span>
+          <span>Загрузить</span><span class="arrow">→</span>
+          <span>Отчёт</span><span class="arrow">→</span>
+          <span>Ходьба</span><span class="arrow">→</span>
+          <span>Пакет в движок</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

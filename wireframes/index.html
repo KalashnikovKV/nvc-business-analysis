@@ -3,44 +3,80 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NVC — HTML wireframes</title>
+  <title>NVC Maps — wireframes</title>
   <link rel="stylesheet" href="wireframes.css" />
 </head>
 <body class="hub">
   <header class="hub-header">
-    <p class="eyebrow">Product BA · NVC Maps</p>
-    <h1>Wireframes: игровые 3D-карты из видео</h1>
-    <p class="lede">Экраны съёмки и веб-клиента. Акцент <code>#00BFA5</code>.</p>
+    <p class="eyebrow">NVC Maps · product BA</p>
+    <h1>Wireframes пакета бизнес-анализа</h1>
+    <p class="lede">Шесть экранов по документам 01–06 и UI-макеты съёмки / веб-клиента. Акцент <code>#00BFA5</code>.</p>
   </header>
 
   <section class="hub-section">
-    <h2>Телефон · nvc-capture</h2>
+    <h2>Документы BA · 01–06</h2>
     <div class="hub-grid">
-      <a class="hub-card" href="m1-record.html">
-        <span class="tag">M1</span>
-        <strong>Запись</strong>
-        <span>Зона, рельсы, таймер, подсказки обхода</span>
+      <a class="hub-card" href="d01-summary.html">
+        <span class="tag">01</span>
+        <strong>Резюме, проблема, цели</strong>
+        <span>Боль, видение, KPI-1…4</span>
       </a>
-      <a class="hub-card" href="m2-preflight.html">
-        <span class="tag">M2</span>
-        <strong>Проверка бандла</strong>
-        <span>Чеклист готовности или причина отказа</span>
+      <a class="hub-card" href="d02-stakeholders.html">
+        <span class="tag">02</span>
+        <strong>Стейкхолдеры и границы</strong>
+        <span>Роли, In/Out, альтернативы</span>
       </a>
-      <a class="hub-card" href="m3-error.html">
-        <span class="tag">M3</span>
-        <strong>Ошибка / пересъёмка</strong>
-        <span>Текст ошибки и CTA «Переснять»</span>
+      <a class="hub-card" href="d03-personas.html">
+        <span class="tag">03</span>
+        <strong>Персоны и сценарии</strong>
+        <span>Оператор, сборщик, разработчик</span>
+      </a>
+      <a class="hub-card" href="d04-stories.html">
+        <span class="tag">04</span>
+        <strong>User stories · MoSCoW</strong>
+        <span>US-1…5 и приоритеты релиза</span>
+      </a>
+      <a class="hub-card" href="d05-screens.html">
+        <span class="tag">05</span>
+        <strong>Экраны и стиль</strong>
+        <span>M1–M3, B1–B4, токены, ошибки</span>
+      </a>
+      <a class="hub-card" href="d06-nfr.html">
+        <span class="tag">06</span>
+        <strong>NFR, риски, готовность</strong>
+        <span>Качество сервиса и критерии релиза</span>
       </a>
     </div>
   </section>
 
   <section class="hub-section">
-    <h2>Браузер · веб-клиент</h2>
+    <h2>UI · телефон</h2>
+    <div class="hub-grid">
+      <a class="hub-card" href="m1-record.html">
+        <span class="tag">M1</span>
+        <strong>Запись</strong>
+        <span>Зона, рельсы, таймер, обход</span>
+      </a>
+      <a class="hub-card" href="m2-preflight.html">
+        <span class="tag">M2</span>
+        <strong>Проверка бандла</strong>
+        <span>Чеклист готовности</span>
+      </a>
+      <a class="hub-card" href="m3-error.html">
+        <span class="tag">M3</span>
+        <strong>Ошибка / пересъёмка</strong>
+        <span>Причина + CTA</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <h2>UI · браузер</h2>
     <div class="hub-grid">
       <a class="hub-card" href="b1-upload.html">
         <span class="tag">B1</span>
         <strong>Загрузка бандла</strong>
-        <span>Файл, ключ, проверка состава</span>
+        <span>Файл, ключ, состав</span>
       </a>
       <a class="hub-card" href="b2-jobs.html">
         <span class="tag">B2</span>
@@ -50,19 +86,18 @@
       <a class="hub-card" href="b3-report.html">
         <span class="tag">B3</span>
         <strong>Отчёт</strong>
-        <span>Метрики Q1–Q5 / fail reason</span>
+        <span>Статус, метод, метрики</span>
       </a>
       <a class="hub-card" href="b4-viewer.html">
         <span class="tag">B4</span>
         <strong>Просмотр карты</strong>
-        <span>Кадр + mesh + ходьба по коллизии</span>
+        <span>Кадр + ходьба по коллизии</span>
       </a>
     </div>
   </section>
 
   <footer class="hub-footer">
-    <a href="../README.md">← Пакет BA</a>
-    <span>Открыть любой HTML в браузере · переходы между экранами внутри макетов</span>
+    <span>Соответствует docs 01–06 в репозитории nvc-business-analysis</span>
   </footer>
 </body>
 </html>
