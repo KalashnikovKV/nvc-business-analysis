@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  docs:
+    name: Validate BA package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Required files exist
+        run: |
+          set -euo pipefail
+          for f in \
+            README.md \
+            BA-METHOD.md \
+            01-summary-problem-goals.md \
+            02-stakeholders-scope-alternatives.md \
+            03-personas-scenarios-usecases.md \
+            04-user-stories-moscow.md \
+            05-screens-style-usability.md \
+            06-nfr-risks-readiness.md \
+            wireframes/index.html \
+            wireframes/wireframes.css \
+            wireframes/m1-record.html \
+            wireframes/m2-preflight.html \
+            wireframes/m3-error.html \
+            wireframes/b1-upload.html \
+            wireframes/b2-jobs.html \
+            wireframes/b3-report.html \
+            wireframes/b4-viewer.html
+          do
+            test -f "$f" || { echo "missing: $f"; exit 1; }
+          done
+          echo "All required package files present."
+
+      - name: Markdown links to package files
+        run: |
+          set -euo pipefail
+          # Internal relative links from README to sibling md / wireframes
+          grep -E '\]\((01|02|03|04|05|06|BA-METHOD|wireframes/)[^)]+\)' README.md >/dev/null
+          echo "README references package sections."
+
+      - name: HTML screens are non-empty
+        run: |
+          set -euo pipefail
+          for f in wireframes/*.html; do
+            bytes=$(wc -c < "$f")
+            test "$bytes" -gt 500 || { echo "too small: $f ($bytes bytes)"; exit 1; }
+          done
+          echo "Wireframe HTML files look populated."
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install markdownlint
+        run: npm install --no-save markdownlint-cli@0.43.0
+
+      - name: Lint Markdown
+        run: npx markdownlint "**/*.md" --ignore node_modules --config .markdownlint.json

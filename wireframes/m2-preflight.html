@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>M2 · Проверка бандла</title>
+  <link rel="stylesheet" href="wireframes.css" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Все экраны</a>
+    <h1>M2 · Проверка бандла</h1>
+    <p>Preflight: длительность, обход, span, позы, глубина LiDAR. Успех или причина отказа.</p>
+    <nav>
+      <a href="m1-record.html">M1 Запись</a>
+      <a class="active" href="m2-preflight.html">M2 Проверка</a>
+      <a href="m3-error.html">M3 Ошибка</a>
+    </nav>
+    <p class="meta">US-1 · KPI-7 · share bundle</p>
+  </aside>
+  <main class="stage">
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="notch"></div>
+        <div class="sheet">
+          <h2>Проверка съёмки</h2>
+          <p class="sub">Бандл готов к шарингу / загрузке в браузер.</p>
+          <ul class="check-list">
+            <li><span>Длительность 10–30 с</span><span class="ok">22 с ✓</span></li>
+            <li><span>Обход path ≥ 0,28 м</span><span class="ok">0,41 м ✓</span></li>
+            <li><span>Yaw ≥ 90°</span><span class="ok">124° ✓</span></li>
+            <li><span>Span ≤ 0,92 м</span><span class="ok">0,78 м ✓</span></li>
+            <li><span>Позы schema 1.0.0</span><span class="ok">OK ✓</span></li>
+            <li><span>LiDAR depth</span><span class="ok">186 кадров ✓</span></li>
+          </ul>
+          <div style="flex:1"></div>
+          <a class="cta" href="../README.md">Поделиться бандлом</a>
+          <a class="cta secondary" href="m1-record.html">К списку карт</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

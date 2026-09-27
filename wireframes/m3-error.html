@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>M3 · Ошибка / пересъёмка</title>
+  <link rel="stylesheet" href="wireframes.css" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Все экраны</a>
+    <h1>M3 · Ошибка</h1>
+    <p>SC-2: непригодная съёмка. Причина одной фразой + CTA «Переснять».</p>
+    <nav>
+      <a href="m1-record.html">M1 Запись</a>
+      <a href="m2-preflight.html">M2 Проверка</a>
+      <a class="active" href="m3-error.html">M3 Ошибка</a>
+    </nav>
+    <p class="meta">N1 · no_orbit</p>
+  </aside>
+  <main class="stage">
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="notch"></div>
+        <div class="sheet">
+          <h2>Съёмка не прошла проверку</h2>
+          <p class="sub">Исправьте обход и запишите зону заново.</p>
+          <div class="error-box">
+            Слишком короткий обход — пройдите вокруг участка (~80×80 см). Нужен путь камеры не менее 0,28 м и смена ракурса ≥ 90°.
+          </div>
+          <ul class="check-list">
+            <li><span>Длительность</span><span class="ok">14 с ✓</span></li>
+            <li><span>Обход path</span><span class="bad">0,09 м ✗</span></li>
+            <li><span>Yaw</span><span class="bad">35° ✗</span></li>
+            <li><span>Span</span><span class="ok">0,71 м ✓</span></li>
+          </ul>
+          <div style="flex:1"></div>
+          <a class="cta danger" href="m1-record.html">Переснять</a>
+          <a class="cta secondary" href="m2-preflight.html">Подробнее о требованиях</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

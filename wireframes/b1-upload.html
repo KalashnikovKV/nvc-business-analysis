@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>B1 · Загрузка бандла</title>
+  <link rel="stylesheet" href="wireframes.css" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Все экраны</a>
+    <h1>B1 · Загрузка</h1>
+    <p>Форма проверяет состав бандла до отправки. API-ключ и idempotency-key. Ошибки 401/403 текстом.</p>
+    <nav>
+      <a class="active" href="b1-upload.html">B1 Загрузка</a>
+      <a href="b2-jobs.html">B2 Задания</a>
+      <a href="b3-report.html">B3 Отчёт</a>
+      <a href="b4-viewer.html">B4 Просмотр</a>
+    </nav>
+    <p class="meta">US-2 · F10 · OpenAPI</p>
+  </aside>
+  <main class="stage">
+    <div class="browser">
+      <div class="browser-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <div class="url">https://nvc.example.app/upload</div>
+      </div>
+      <div class="browser-body">
+        <div class="app-nav">
+          <div class="brand">NVC <span>Maps</span></div>
+          <div class="links">
+            <a class="active" href="b1-upload.html">Загрузка</a>
+            <a href="b2-jobs.html">Задания</a>
+          </div>
+        </div>
+        <div class="app-main">
+          <h2>Загрузить бандл съёмки</h2>
+          <p class="help">Ожидаются video, poses, metadata и глубина LiDAR. Клиент проверит состав до отправки.</p>
+          <form class="form" onsubmit="return false;">
+            <div class="drop" role="button" tabindex="0">
+              <strong>Перетащите zip или выберите папку бандла</strong>
+              capture_2026-09-27_143012.zip · 42 МБ
+            </div>
+            <div class="alert ok">Состав OK: video · poses · metadata · depth/</div>
+            <div class="field">
+              <label for="key">Ключ доступа</label>
+              <input id="key" type="password" value="••••••••••••" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="idem">Ключ идемпотентности</label>
+              <input id="idem" type="text" value="s1-run-001" />
+            </div>
+            <div class="row">
+              <button class="btn" type="button" onclick="location.href='b2-jobs.html'">Отправить в очередь</button>
+              <button class="btn ghost" type="button">Проверить ещё раз</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

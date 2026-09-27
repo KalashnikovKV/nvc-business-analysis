@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>B2 · Список заданий</title>
+  <link rel="stylesheet" href="wireframes.css" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Все экраны</a>
+    <h1>B2 · Задания</h1>
+    <p>Список своих jobs с фильтром по статусу. Не админ-панель.</p>
+    <nav>
+      <a href="b1-upload.html">B1 Загрузка</a>
+      <a class="active" href="b2-jobs.html">B2 Задания</a>
+      <a href="b3-report.html">B3 Отчёт</a>
+      <a href="b4-viewer.html">B4 Просмотр</a>
+    </nav>
+    <p class="meta">F13 · SC-1 / SC-3</p>
+  </aside>
+  <main class="stage">
+    <div class="browser">
+      <div class="browser-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <div class="url">https://nvc.example.app/jobs</div>
+      </div>
+      <div class="browser-body">
+        <div class="app-nav">
+          <div class="brand">NVC <span>Maps</span></div>
+          <div class="links">
+            <a href="b1-upload.html">Загрузка</a>
+            <a class="active" href="b2-jobs.html">Задания</a>
+          </div>
+        </div>
+        <div class="app-main">
+          <h2>Мои задания</h2>
+          <p class="help">Фильтр по статусу · повтор с тем же idempotency-key не создаёт вторую сборку.</p>
+          <div class="filters" role="group" aria-label="Фильтр статуса">
+            <button type="button" class="chip on">Все</button>
+            <button type="button" class="chip">queued</button>
+            <button type="button" class="chip">running</button>
+            <button type="button" class="chip">success</button>
+            <button type="button" class="chip">fail</button>
+          </div>
+          <table class="table">
+            <thead>
+              <tr><th>ID</th><th>Создано</th><th>Статус</th><th>Метод</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>job_8f2a</code></td>
+                <td>27.09 14:12</td>
+                <td><span class="badge success">success</span></td>
+                <td>metric_depth_fusion</td>
+                <td><a href="b3-report.html">Отчёт</a> · <a href="b4-viewer.html">Карта</a></td>
+              </tr>
+              <tr>
+                <td><code>job_91bc</code></td>
+                <td>27.09 13:40</td>
+                <td><span class="badge running">running</span></td>
+                <td>—</td>
+                <td><a href="b3-report.html">Статус</a></td>
+              </tr>
+              <tr>
+                <td><code>job_77de</code></td>
+                <td>26.09 19:02</td>
+                <td><span class="badge fail">fail</span></td>
+                <td>—</td>
+                <td><a href="b3-report.html">Причина</a></td>
+              </tr>
+              <tr>
+                <td><code>job_55aa</code></td>
+                <td>26.09 18:50</td>
+                <td><span class="badge queued">queued</span></td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

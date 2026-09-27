@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>M1 · Запись</title>
+  <link rel="stylesheet" href="wireframes.css" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Все экраны</a>
+    <h1>M1 · Запись</h1>
+    <p>Зелёные рельсы 80×80 см до Record. После lock — оранжевые. Подсказка обхода и таймер 10–30 с.</p>
+    <nav>
+      <a class="active" href="m1-record.html">M1 Запись</a>
+      <a href="m2-preflight.html">M2 Проверка</a>
+      <a href="m3-error.html">M3 Ошибка</a>
+    </nav>
+    <p class="meta">US-1 · SC-1 · capture_mode: map_zone</p>
+  </aside>
+  <main class="stage">
+    <div class="phone" aria-label="Макет телефона">
+      <div class="phone-screen">
+        <div class="notch" aria-hidden="true"></div>
+        <div class="ar-bg">
+          <div class="top-status">
+            <span class="pill ok">AR готов</span>
+            <span class="wizard-steps"><span class="on">Зона</span> · Запись · Обход · Проверка</span>
+          </div>
+          <div class="zone-rails">
+            <div class="zone-label">80×80 см · наведите</div>
+          </div>
+          <div class="hint-bar">Наведите камеру на участок ~80×80 см на полу. Держите телефон на высоте ~0,5–0,8 м.</div>
+        </div>
+        <div class="bottom-bar">
+          <div>
+            <div class="timer">00:00</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.6)">лимит 30 с</div>
+          </div>
+          <button class="record-btn" type="button" aria-label="Начать запись" title="Запись"></button>
+          <div style="width:64px;text-align:right;font-size:0.75rem;color:rgba(255,255,255,0.6)">Запись</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phone" aria-label="После lock">
+      <div class="phone-screen">
+        <div class="notch" aria-hidden="true"></div>
+        <div class="ar-bg">
+          <div class="top-status">
+            <span class="pill ok">Zone locked</span>
+            <span class="wizard-steps">Зона · <span class="on">Обход</span> · Проверка</span>
+          </div>
+          <div class="zone-rails locked">
+            <div class="zone-label">зафиксировано · обойдите</div>
+          </div>
+          <div class="hint-bar">Медленно обойдите зону по кругу, покажите все углы. Нужны path ≥ 0,28 м и yaw ≥ 90°.</div>
+        </div>
+        <div class="bottom-bar">
+          <div>
+            <div class="timer">00:18</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.6)">идёт запись</div>
+          </div>
+          <button class="record-btn active" type="button" aria-label="Остановить запись"></button>
+          <div style="width:64px;text-align:right;font-size:0.75rem;color:rgba(255,255,255,0.6)">Стоп</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

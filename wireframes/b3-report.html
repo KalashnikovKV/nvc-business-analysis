@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>B3 · Отчёт</title>
+  <link rel="stylesheet" href="wireframes.css" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Все экраны</a>
+    <h1>B3 · Отчёт</h1>
+    <p>Метрики Q1–Q5 / Q7. На fail — непустой текст причины. Метод не placeholder.</p>
+    <nav>
+      <a href="b1-upload.html">B1 Загрузка</a>
+      <a href="b2-jobs.html">B2 Задания</a>
+      <a class="active" href="b3-report.html">B3 Отчёт</a>
+      <a href="b4-viewer.html">B4 Просмотр</a>
+    </nav>
+    <p class="meta">US-3 · report.json</p>
+  </aside>
+  <main class="stage">
+    <div class="browser">
+      <div class="browser-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <div class="url">https://nvc.example.app/jobs/job_8f2a</div>
+      </div>
+      <div class="browser-body">
+        <div class="app-nav">
+          <div class="brand">NVC <span>Maps</span></div>
+          <div class="links">
+            <a href="b1-upload.html">Загрузка</a>
+            <a href="b2-jobs.html">Задания</a>
+          </div>
+        </div>
+        <div class="app-main">
+          <h2>Отчёт · job_8f2a</h2>
+          <p class="help">S1 · зона по умолчанию 80×80 см · sensor meters</p>
+          <div class="alert ok">status: success · method: metric_depth_fusion · не placeholder</div>
+          <div class="metrics">
+            <div class="metric"><div class="k">Visual tris</div><div class="v">38 412</div></div>
+            <div class="metric"><div class="k">Collision tris</div><div class="v">8 904</div></div>
+            <div class="metric"><div class="k">map.glb</div><div class="v">4.2 MB</div></div>
+            <div class="metric"><div class="k">collision.glb</div><div class="v">0.9 MB</div></div>
+            <div class="metric"><div class="k">Q7 delta</div><div class="v">7%</div></div>
+            <div class="metric"><div class="k">Zone</div><div class="v">0.80 m</div></div>
+          </div>
+          <div class="row">
+            <a class="btn" href="b4-viewer.html">Открыть карту</a>
+            <button class="btn ghost" type="button">Скачать пакет (5 файлов)</button>
+            <a class="btn ghost" href="b2-jobs.html">К списку</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
