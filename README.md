@@ -15,7 +15,7 @@
 | User stories и приоритеты | [04-user-stories-moscow.md](04-user-stories-moscow.md) |
 | Экраны и стиль | [05-screens-style-usability.md](05-screens-style-usability.md) |
 | Нефункциональные требования, риски, готовность | [06-nfr-risks-readiness.md](06-nfr-risks-readiness.md) |
-| Макеты | [wireframes/index.html](wireframes/index.html) · [на сайте](https://kalashnikovkv.github.io/nvc-business-analysis/) |
+| Сайт с разделами и экранами | [wireframes/index.html](wireframes/index.html) · [на сайте](https://kalashnikovkv.github.io/nvc-business-analysis/) |
 | Весь анализ одним файлом | [NVC-Maps-бизнес-анализ.md](NVC-Maps-бизнес-анализ.md) |
 
 **Репозитории:** [`nvc-capture`](../nvc-capture) — съёмка; [`neuralVideoCartography`](../neuralVideoCartography) — сборка карты; сервис и веб-клиент — загрузка, статус, ходьба по карте.

@@ -1,6 +1,6 @@
 # 05. Экраны и стиль
 
-Макеты: [`wireframes/index.html`](wireframes/index.html). Каждый экран связан со сценарием из раздела 03.
+Схемы экранов: [`wireframes/index.html`](wireframes/index.html). Каждый экран связан со сценарием из раздела 03.
 
 ## 5.1 Стиль
 
