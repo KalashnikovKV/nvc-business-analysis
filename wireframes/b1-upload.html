@@ -10,14 +10,14 @@
   <aside class="side">
     <a class="back" href="index.html">← Все макеты</a>
     <h1>B1 · Загрузка</h1>
-    <p>Форма проверяет состав бандла до отправки. Нужны ключ доступа и ключ идемпотентности, чтобы повторная отправка не запустила вторую сборку. Ошибки доступа показываются текстом.</p>
+    <p>Форма проверяет состав бандла до отправки. Ключ доступа открывает приём. То же видео с теми же параметрами сборки даёт ту же карту. Ошибки доступа показываются текстом.</p>
     <nav>
       <a class="active" href="b1-upload.html">B1 Загрузка</a>
       <a href="b2-jobs.html">B2 Задания</a>
       <a href="b3-report.html">B3 Отчёт</a>
       <a href="b4-viewer.html">B4 Просмотр</a>
     </nav>
-    <p class="meta">Сценарии: пригодная съёмка, повтор с тем же ключом · US‑2</p>
+    <p class="meta">Сценарии: пригодная съёмка, та же съёмка ещё раз · US‑2</p>
   </aside>
   <main class="stage themes">
     <section class="theme-block">
@@ -48,10 +48,6 @@
             <div class="field">
               <label for="key-dark">Ключ доступа</label>
               <input id="key-dark" type="password" value="••••••••••••" autocomplete="off" />
-            </div>
-            <div class="field">
-              <label for="idem-dark">Ключ идемпотентности</label>
-              <input id="idem-dark" type="text" value="s1-run-001" />
             </div>
             <div class="row">
               <button class="btn" type="button" onclick="location.href='b2-jobs.html'">Отправить в очередь</button>
@@ -91,10 +87,6 @@
             <div class="field">
               <label for="key">Ключ доступа</label>
               <input id="key" type="password" value="••••••••••••" autocomplete="off" />
-            </div>
-            <div class="field">
-              <label for="idem">Ключ идемпотентности</label>
-              <input id="idem" type="text" value="s1-run-001" />
             </div>
             <div class="row">
               <button class="btn" type="button" onclick="location.href='b2-jobs.html'">Отправить в очередь</button>
