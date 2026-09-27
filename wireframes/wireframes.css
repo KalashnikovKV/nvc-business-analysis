@@ -87,8 +87,8 @@ button, input, select { font: inherit; }
   flex-direction: row; flex-wrap: nowrap; align-items: flex-start; justify-content: safe center;
   overflow-x: auto;
 }
-.theme-block { display: flex; flex-direction: column; align-items: center; gap: 12px; width: auto; flex: none; }
-.theme-label { margin: 12px 0 0; font-size: 1.05rem; font-weight: 700; color: #0f172a; }
+.theme-block { display: flex; flex-direction: column; align-items: center; gap: 12px; width: max-content; max-width: 100%; flex: none; }
+.theme-label { margin: 0; font-size: 1.05rem; font-weight: 700; color: #0f172a; text-align: center; }
 .pair { display: flex; flex-wrap: nowrap; justify-content: flex-start; gap: 28px; width: auto; }
 .shot { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 0; }
 .shot figcaption { font-size: 0.95rem; font-weight: 700; color: #0f172a; }
@@ -111,7 +111,8 @@ button, input, select { font: inherit; }
 
 /* Browser frame */
 .browser {
-  width: min(920px, 100%);
+  width: 880px;
+  max-width: 100%;
   border-radius: 14px; overflow: hidden;
   background: #fff; box-shadow: var(--shadow); border: 1px solid var(--line);
 }
