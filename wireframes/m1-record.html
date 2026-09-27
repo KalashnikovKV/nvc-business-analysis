@@ -23,19 +23,20 @@
     <div class="phone" aria-label="AR ещё не готов">
       <div class="phone-screen">
         <div class="notch" aria-hidden="true"></div>
-        <div class="ar-bg" style="display:flex;flex-direction:column;padding:48px 16px 0">
+        <div class="ar-bg scan">
           <div class="scan-head">
             <h2>Сканирование</h2>
             <span class="ar-pill"><i></i> AR недоступен</span>
           </div>
           <div class="stepper" aria-label="Шаги съёмки">
-            <div class="step on"><b>1</b>Зона</div>
-            <div class="step"><b>2</b>Запись</div>
-            <div class="step"><b>3</b>Обход</div>
-            <div class="step"><b>4</b>Проверка</div>
+            <div class="step on"><b>1</b><span>Зона</span></div>
+            <div class="step"><b>2</b><span>Запись</span></div>
+            <div class="step"><b>3</b><span>Обход</span></div>
+            <div class="step"><b>4</b><span>Проверка</span></div>
           </div>
           <p class="scan-hint">Подождите — AR-камера запускается…</p>
-          <div class="scan-body">
+          <div class="scan-stage"></div>
+          <div class="scan-controls">
             <button class="record-btn" type="button" disabled>Запись</button>
           </div>
           <nav class="tabbar">
@@ -49,32 +50,32 @@
     <div class="phone" aria-label="Обход зоны">
       <div class="phone-screen">
         <div class="notch" aria-hidden="true"></div>
-        <div class="ar-bg">
-          <div style="position:absolute;top:48px;left:16px;right:16px">
-            <div class="scan-head">
-              <h2>Сканирование</h2>
-              <span class="ar-pill ok"><i></i> AR готов</span>
-            </div>
-            <div class="stepper">
-              <div class="step"><b>✓</b>Зона</div>
-              <div class="step"><b>✓</b>Запись</div>
-              <div class="step on"><b>3</b>Обход</div>
-              <div class="step"><b>4</b>Проверка</div>
-            </div>
-            <p class="scan-hint">Медленно обойдите зону по кругу, покажите все углы.</p>
+        <div class="ar-bg scan">
+          <div class="scan-head">
+            <h2>Сканирование</h2>
+            <span class="ar-pill ok"><i></i> AR готов</span>
           </div>
-          <div class="zone-rails locked" style="top:42%">
-            <div class="zone-label">зафиксировано · обойдите</div>
+          <div class="stepper" aria-label="Шаги съёмки">
+            <div class="step done"><b>✓</b><span>Зона</span></div>
+            <div class="step done"><b>✓</b><span>Запись</span></div>
+            <div class="step on"><b>3</b><span>Обход</span></div>
+            <div class="step"><b>4</b><span>Проверка</span></div>
           </div>
+          <p class="scan-hint">Медленно обойдите зону по кругу, покажите все углы.</p>
+          <div class="scan-stage">
+            <div class="zone-rails locked">
+              <div class="zone-label">зафиксировано</div>
+            </div>
+          </div>
+          <div class="scan-controls">
+            <div class="timer-pill">18 сек</div>
+            <button class="record-btn active" type="button">Стоп</button>
+          </div>
+          <nav class="tabbar">
+            <a class="on" href="m1-record.html">Сканировать</a>
+            <a href="m4-maps.html">Мои карты</a>
+          </nav>
         </div>
-        <div class="scan-body" style="position:absolute;left:0;right:0;bottom:64px">
-          <div class="timer-line">18 сек</div>
-          <button class="record-btn active" type="button">Стоп</button>
-        </div>
-        <nav class="tabbar" style="position:absolute;left:0;right:0;bottom:0">
-          <a class="on" href="m1-record.html">Сканировать</a>
-          <a href="m4-maps.html">Мои карты</a>
-        </nav>
       </div>
     </div>
   </main>
