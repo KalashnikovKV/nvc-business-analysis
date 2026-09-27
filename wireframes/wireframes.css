@@ -225,7 +225,10 @@ button, input, select { font: inherit; }
   padding: 6px 4px 4px; border-radius: 16px;
 }
 .tabbar a.on { background: rgba(255,255,255,0.14); color: #fff; font-weight: 700; }
-.phone.light .phone-screen { background: #fff; color: var(--text-dark); }
+.phone.light .phone-screen {
+  background: #fff; color: var(--text-dark);
+  padding-top: 52px; box-sizing: border-box;
+}
 .phone.light .tabbar { background: #f3f4f6; }
 .phone.light .tabbar a { color: #6b7280; }
 .phone.light .tabbar a.on { background: #fff; color: #0f766e; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
@@ -240,7 +243,7 @@ button, input, select { font: inherit; }
 .maps-empty h2 { margin: 0; font-size: 1.2rem; }
 .maps-empty p { margin: 0; color: var(--text-muted); font-size: 0.92rem; line-height: 1.4; }
 .map-card {
-  margin: 56px 16px 16px; padding: 14px; border-radius: 14px; background: #f8fafc; border: 1px solid var(--line);
+  margin: 0 16px 16px; padding: 14px; border-radius: 14px; background: #f8fafc; border: 1px solid var(--line);
 }
 .map-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .map-card h3 { margin: 0 0 4px; font-size: 0.95rem; line-height: 1.3; }
