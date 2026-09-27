@@ -13,6 +13,8 @@
 | User stories, MoSCoW | [04-user-stories-moscow.md](04-user-stories-moscow.md) |
 | Экраны, стиль, usability | [05-screens-style-usability.md](05-screens-style-usability.md) |
 | NFR, риски, готовность | [06-nfr-risks-readiness.md](06-nfr-risks-readiness.md) |
-| HTML wireframes | [wireframes/index.html](wireframes/index.html) |
+| HTML wireframes | [wireframes/index.html](wireframes/index.html) · [live Pages](https://kalashnikovkv.github.io/nvc-business-analysis/) |
 
 **Репозитории:** [`nvc-capture`](../nvc-capture) (съёмка) · [`neuralVideoCartography`](../neuralVideoCartography) (сборка карты) · сервис + веб-клиент (загрузка, статус, ходьба).
+
+**Сайт макетов:** https://kalashnikovkv.github.io/nvc-business-analysis/

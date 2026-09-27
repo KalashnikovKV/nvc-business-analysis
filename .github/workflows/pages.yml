@@ -1,0 +1,45 @@
+name: Deploy wireframes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "wireframes/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare site root from wireframes/
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          cp -R wireframes/. _site/
+          test -f _site/index.html
+          # Ensure relative asset links work at Pages root
+          ls -la _site
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
