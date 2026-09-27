@@ -19,7 +19,53 @@
     </nav>
     <p class="meta">Сценарии: пригодная съёмка, повтор с тем же ключом · US‑2</p>
   </aside>
-  <main class="stage">
+  <main class="stage themes">
+    <section class="theme-block">
+      <h2 class="theme-label">Тёмная</h2>
+      <div class="pair">
+    <div class="browser dark">
+      <div class="browser-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <div class="url">https://nvc.example.app/upload</div>
+      </div>
+      <div class="browser-body">
+        <div class="app-nav">
+          <div class="brand">NVC <span>Maps</span></div>
+          <div class="links">
+            <a class="active" href="b1-upload.html">Загрузка</a>
+            <a href="b2-jobs.html">Задания</a>
+          </div>
+        </div>
+        <div class="app-main">
+          <h2>Загрузить бандл съёмки</h2>
+          <p class="help">В бандле должны быть видео, позы, метаданные и глубина LiDAR. Состав проверяется до отправки.</p>
+          <form class="form" onsubmit="return false;">
+            <div class="drop" role="button" tabindex="0">
+              <strong>Перетащите zip или выберите папку бандла</strong>
+              capture_2026-09-27_143012.zip · 42 МБ
+            </div>
+            <div class="alert ok">Все файлы на месте: видео, позы, метаданные, глубина</div>
+            <div class="field">
+              <label for="key-dark">Ключ доступа</label>
+              <input id="key-dark" type="password" value="••••••••••••" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="idem-dark">Ключ идемпотентности</label>
+              <input id="idem-dark" type="text" value="s1-run-001" />
+            </div>
+            <div class="row">
+              <button class="btn" type="button" onclick="location.href='b2-jobs.html'">Отправить в очередь</button>
+              <button class="btn ghost" type="button">Проверить ещё раз</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    </section>
+    <section class="theme-block">
+      <h2 class="theme-label">Светлая</h2>
+      <div class="pair">
     <div class="browser">
       <div class="browser-bar">
         <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
@@ -58,6 +104,8 @@
         </div>
       </div>
     </div>
+  </div>
+    </section>
   </main>
 </body>
 </html>

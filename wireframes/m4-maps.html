@@ -19,7 +19,53 @@
     </nav>
     <p class="meta">Список на телефоне</p>
   </aside>
-  <main class="stage">
+  <main class="stage themes">
+    <section class="theme-block">
+      <h2 class="theme-label">Тёмная</h2>
+      <div class="pair">
+    <div class="phone dark" aria-label="Пустой список">
+      <div class="phone-screen">
+        <div class="notch" style="background:#111"></div>
+        <div class="maps-empty">
+          <div class="icon" aria-hidden="true"></div>
+          <h2>Пока нет карт</h2>
+          <p>Перейдите на вкладку «Сканировать», снимите участок и вернитесь сюда.</p>
+        </div>
+        <nav class="tabbar">
+          <a href="m1-record.html">Сканировать</a>
+          <a class="on" href="m4-maps.html">Мои карты</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="phone dark" aria-label="Есть сохранённая карта">
+      <div class="phone-screen">
+        <div class="notch" style="background:#111"></div>
+        <div class="map-card">
+          <div class="map-card-head">
+            <h3>Карта</h3>
+            <span class="map-badge">Готова</span>
+          </div>
+          <p>6 октября, 14:59</p>
+          <p>22 с · 186 кадров</p>
+          <p>LiDAR · пол найден</p>
+          <div class="row">
+            <button class="btn" type="button">Поделиться</button>
+            <button class="btn ghost" type="button">Удалить</button>
+          </div>
+        </div>
+        <div style="flex:1"></div>
+        <nav class="tabbar">
+          <a href="m1-record.html">Сканировать</a>
+          <a class="on" href="m4-maps.html">Мои карты</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+    </section>
+    <section class="theme-block">
+      <h2 class="theme-label">Светлая</h2>
+      <div class="pair">
     <div class="phone light" aria-label="Пустой список">
       <div class="phone-screen">
         <div class="notch" style="background:#111"></div>
@@ -58,6 +104,8 @@
         </nav>
       </div>
     </div>
+  </div>
+    </section>
   </main>
 </body>
 </html>

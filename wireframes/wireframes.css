@@ -83,6 +83,10 @@ button, input, select { font: inherit; }
   display: flex; align-items: center; justify-content: center;
   padding: 40px 24px; gap: 28px; flex-wrap: wrap;
 }
+.stage.themes { flex-direction: column; align-items: stretch; }
+.theme-block { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+.theme-label { margin: 4px 0 0; font-size: 0.85rem; font-weight: 700; color: #94a3b8; }
+.pair { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; width: 100%; }
 
 /* Phone frame */
 .phone {
@@ -225,13 +229,78 @@ button, input, select { font: inherit; }
   padding: 6px 4px 4px; border-radius: 16px;
 }
 .tabbar a.on { background: rgba(255,255,255,0.14); color: #fff; font-weight: 700; }
-.phone.light .phone-screen {
-  background: #fff; color: var(--text-dark);
+.phone.light .phone-screen { background: #fff; color: var(--text-dark); }
+.phone.light .phone-screen:has(.map-card),
+.phone.light .phone-screen:has(.maps-empty),
+.phone.dark .phone-screen:has(.map-card),
+.phone.dark .phone-screen:has(.maps-empty) {
   padding-top: 52px; box-sizing: border-box;
 }
+.phone.light .notch { background: #111; }
+.phone.light .ar-bg {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.45)),
+    repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(0,0,0,0.045) 25px),
+    linear-gradient(160deg, #f8fafc, #dbe3ec);
+  color: #111827;
+}
+.phone.light .scan-head h2,
+.phone.light .scan-hint,
+.phone.light .stepper .step.on { color: #111827; }
+.phone.light .stepper .step { color: #6b7280; }
+.phone.light .stepper .step b { background: #fff; border-color: #cbd5e1; color: #4b5563; }
+.phone.light .stepper .step.on b,
+.phone.light .stepper .step.done b { background: var(--accent); border-color: var(--accent); color: #042f2e; }
 .phone.light .tabbar { background: #f3f4f6; }
 .phone.light .tabbar a { color: #6b7280; }
 .phone.light .tabbar a.on { background: #fff; color: #0f766e; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.phone.light .sheet { background: #fff; color: #111827; }
+.phone.light .sheet .sub { color: #60646c; }
+.phone.light .check-list li { background: #f4f5f7; border-color: #e5e7eb; }
+.phone.light .check-list .ok { color: #047857; }
+.phone.light .cta.secondary { color: #111827; border-color: #d1d5db; }
+.phone.light .error-box { color: #991b1b; background: #fef2f2; }
+.phone.dark .phone-screen { background: #000; color: #fff; }
+.phone.dark .notch { background: #000; }
+.phone.dark .maps-empty .icon { background: rgba(0, 191, 165, 0.28); }
+.phone.dark .maps-empty p,
+.phone.dark .map-card p { color: #b0b4ba; }
+.phone.dark .map-card { background: #1c1c1e; border-color: #2e3135; }
+.phone.dark .tabbar { background: #1c1c1e; }
+.phone.dark .tabbar a { color: #b0b4ba; }
+.phone.dark .tabbar a.on { background: #2e3135; color: #5eead4; box-shadow: none; }
+.phone.dark .btn.ghost { background: #2e3135; color: #fff; border-color: #3a3d42; }
+.browser.dark .browser-body { background: #0b0d10; color: #f4f4f5; }
+.browser.dark .app-nav { background: #111318; border-bottom-color: #27272a; }
+.browser.dark .app-nav .brand,
+.browser.dark .app-main h2,
+.browser.dark .drop strong,
+.browser.dark .field label { color: #fff; }
+.browser.dark .app-nav .links,
+.browser.dark .app-nav .links a,
+.browser.dark .app-main .help,
+.browser.dark .note,
+.browser.dark .metric .k,
+.browser.dark .metric .lim { color: #a1a1aa; }
+.browser.dark .app-nav .links a.active { color: #fff; }
+.browser.dark .form,
+.browser.dark .metric,
+.browser.dark .side-panel,
+.browser.dark .table,
+.browser.dark .chip,
+.browser.dark .btn.ghost,
+.browser.dark .field input,
+.browser.dark .field select {
+  background: #18181b; color: #f4f4f5; border-color: #3f3f46;
+}
+.browser.dark .metric .v,
+.browser.dark .table td { color: #f4f4f5; }
+.browser.dark .drop { background: #111318; border-color: #3f3f46; color: #a1a1aa; }
+.browser.dark .table th { background: #111318; color: #a1a1aa; border-bottom-color: #27272a; }
+.browser.dark .table td { border-bottom-color: #27272a; }
+.browser.dark .chip.on { background: rgba(0, 191, 165, 0.18); color: #5eead4; border-color: var(--accent); }
+.browser.dark .table a,
+.browser.dark .app-main a { color: #5eead4; }
 .maps-empty {
   flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; padding: 24px; gap: 8px;
