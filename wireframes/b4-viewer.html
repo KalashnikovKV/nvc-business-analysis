@@ -8,16 +8,16 @@
 </head>
 <body class="page">
   <aside class="side">
-    <a class="back" href="index.html">← Все экраны</a>
+    <a class="back" href="index.html">← Все макеты</a>
     <h1>B4 · Просмотр</h1>
-    <p>Ходьба по collision.glb. Рядом — исходный кадр с той же камеры. Размер персонажа задаётся при показе. Не игра.</p>
+    <p>Персонаж ходит по коллизии, рядом — кадр съёмки с той же камеры. Размер персонажа выбирает тот, кто показывает карту. Это проверка карты, а не игра.</p>
     <nav>
       <a href="b1-upload.html">B1 Загрузка</a>
       <a href="b2-jobs.html">B2 Задания</a>
       <a href="b3-report.html">B3 Отчёт</a>
       <a class="active" href="b4-viewer.html">B4 Просмотр</a>
     </nav>
-    <p class="meta">US-4 · KPI-2 · collision walk</p>
+    <p class="meta">Сценарий: пригодная съёмка · US-4</p>
   </aside>
   <main class="stage">
     <div class="browser">
@@ -35,20 +35,20 @@
         </div>
         <div class="app-main">
           <h2>Карта · проверка коллизии</h2>
-          <p class="help">WASD / стрелки · персонаж не проваливается · пройти край–край (≥ 5 с на поверхности)</p>
+          <p class="help">Управление — WASD или стрелки. Персонаж должен простоять на поверхности не меньше 5 секунд и пройти карту от края до края.</p>
           <div class="viewer">
             <div class="viewport" aria-label="3D viewport wireframe">
               <div class="mesh-fake"></div>
               <div class="person" title="Персонаж показа"></div>
               <div class="hud">
                 <span>collision.glb</span>
-                <span>on surface · 0:07</span>
-                <span>scale: presenter</span>
+                <span>на поверхности · 0:07</span>
+                <span>масштаб показа</span>
               </div>
             </div>
             <aside class="side-panel">
               <div class="frame-thumb">Исходный кадр · та же камера</div>
-              <p class="note">Качество = визуальное сходство со съёмкой. Масштаб под геймплей выбирает импортёр пакета, не пайплайн.</p>
+              <p class="note">Хорошая карта похожа на кадр съёмки. Масштаб под игру выбирает разработчик, который импортирует пакет.</p>
               <label class="field" for="char">
                 Размер персонажа (показ)
                 <input id="char" type="range" min="1" max="20" value="8" />

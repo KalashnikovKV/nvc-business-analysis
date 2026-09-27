@@ -8,67 +8,55 @@
 </head>
 <body class="page">
   <aside class="side">
-    <a class="back" href="index.html">← Все wireframes</a>
+    <a class="back" href="index.html">← Все макеты</a>
     <h1>03 · Персоны</h1>
-    <p>Персоны, сценарии SC-1…5, use cases.</p>
+    <p>Кто работает с экранами и какими путями проходит.</p>
     <nav>
-      <a href="d01-summary.html">01 Резюме</a>
+      <a href="d01-summary.html">01 Проблема и цели</a>
       <a href="d02-stakeholders.html">02 Стейкхолдеры</a>
       <a class="active" href="d03-personas.html">03 Персоны</a>
-      <a href="d04-stories.html">04 Stories</a>
+      <a href="d04-stories.html">04 User stories</a>
       <a href="d05-screens.html">05 Экраны</a>
-      <a href="d06-nfr.html">06 NFR</a>
+      <a href="d06-nfr.html">06 Риски</a>
     </nav>
-    <p class="meta">doc → 03-personas-scenarios-usecases.md</p>
   </aside>
   <main class="stage">
     <div class="doc-board">
-      <div class="bar"><span>BA · 03</span><span>personas · journeys</span></div>
+      <div class="bar"><span>03</span><span>NVC Maps</span></div>
       <div class="body">
         <h2>Персоны и сценарии</h2>
+        <p class="lead">Экраны есть у двух персон. Часто это один и тот же человек.</p>
         <div class="doc-grid">
           <div class="doc-card">
-            <h3>Оператор</h3>
-            <p>«Покажите квадрат и скажите, когда остановиться»</p>
-            <ul>
-              <li>Цель: понять, годится ли запись</li>
-              <li>Экраны: M1–M3</li>
-            </ul>
+            <h3>Оператор съёмки</h3>
+            <p>«Покажите квадрат и скажите, когда остановиться». Хорошо знает телефон, с 3D не работал. Ему нужны понятная зона и причина отказа без загадок.</p>
           </div>
           <div class="doc-card">
-            <h3>Сборщик</h3>
-            <p>«Нужны отчёт и ходьба в браузере»</p>
-            <ul>
-              <li>Цель: загрузить → отчёт → пройти</li>
-              <li>Экраны: B1–B4</li>
-            </ul>
+            <h3>Сборщик карты</h3>
+            <p>«Мне нужны отчёт и ходьба в браузере, а не редактор». Загружает бандл, следит за статусом и решает, отдавать ли карту дальше.</p>
           </div>
-          <div class="doc-card">
-            <h3>Разработчик игры</h3>
-            <p>«Дайте метры как есть»</p>
-            <ul>
-              <li>Цель: импорт GLB без чужого rescale</li>
-              <li>UI: скачивание пакета</li>
-            </ul>
-          </div>
-          <div class="doc-card">
-            <h3>Сценарии</h3>
-            <ul>
-              <li>SC-1 успех съёмки и сборки</li>
-              <li>SC-2 плохая съёмка → пересъём</li>
-              <li>SC-3 тот же idempotency-key</li>
-              <li>SC-4 новый ключ, ±15% tris</li>
-              <li>SC-5 монокуляр — вне Must</li>
-            </ul>
-          </div>
+        </div>
+        <div class="doc-card" style="margin-top:12px">
+          <h3>Разработчик игры</h3>
+          <p>Своего экрана у него нет: он получает пять файлов пакета. «Дайте метры как есть, масштаб я выставлю у себя».</p>
+        </div>
+        <div class="doc-card" style="margin-top:12px">
+          <h3>Сценарии</h3>
+          <ul>
+            <li><strong>Пригодная съёмка.</strong> Зона, обход 10–30 с, проверка, загрузка, успешная сборка, ходьба по карте.</li>
+            <li><strong>Непригодная съёмка.</strong> Короче 10 с, длиннее 30 с, без обхода или без поз — причина на экране, пересъёмка.</li>
+            <li><strong>Повтор с тем же ключом.</strong> Система возвращает текущее задание, вторая сборка не стартует.</li>
+            <li><strong>Второй прогон.</strong> Новый ключ, сборка заново, тот же метод и расхождение не больше 15%.</li>
+            <li><strong>Резервный режим.</strong> Без глубины, монокуляр выбран в конфиге; на приёмку не влияет.</li>
+          </ul>
         </div>
         <div class="flow-mini" style="margin-top:16px">
           <span>Записать</span><span class="arrow">→</span>
           <span>Проверить</span><span class="arrow">→</span>
           <span>Загрузить</span><span class="arrow">→</span>
           <span>Отчёт</span><span class="arrow">→</span>
-          <span>Ходьба</span><span class="arrow">→</span>
-          <span>Пакет в движок</span>
+          <span>Пройти по карте</span><span class="arrow">→</span>
+          <span>Отдать пакет</span>
         </div>
       </div>
     </div>

@@ -8,65 +8,74 @@
 </head>
 <body class="page">
   <aside class="side">
-    <a class="back" href="index.html">← Все wireframes</a>
+    <a class="back" href="index.html">← Все макеты</a>
     <h1>05 · Экраны</h1>
-    <p>Токены, карта экранов, ссылки на UI-макеты.</p>
+    <p>Как выглядят и связаны экраны телефона и браузера.</p>
     <nav>
-      <a href="d01-summary.html">01 Резюме</a>
+      <a href="d01-summary.html">01 Проблема и цели</a>
       <a href="d02-stakeholders.html">02 Стейкхолдеры</a>
       <a href="d03-personas.html">03 Персоны</a>
-      <a href="d04-stories.html">04 Stories</a>
+      <a href="d04-stories.html">04 User stories</a>
       <a class="active" href="d05-screens.html">05 Экраны</a>
-      <a href="d06-nfr.html">06 NFR</a>
+      <a href="d06-nfr.html">06 Риски</a>
     </nav>
-    <p class="meta">doc → 05-screens-style-usability.md</p>
   </aside>
   <main class="stage">
     <div class="doc-board">
-      <div class="bar"><span>BA · 05</span><span>UI map</span></div>
+      <div class="bar"><span>05</span><span>NVC Maps</span></div>
       <div class="body">
-        <h2>Экраны, стиль, usability</h2>
+        <h2>Экраны и стиль</h2>
         <div class="pill-row" style="margin-bottom:14px">
-          <span class="soft-pill" style="background:#00BFA5;color:#042f2e;border:none">#00BFA5 accent</span>
-          <span class="soft-pill" style="background:#4CAF50;color:#fff;border:none">success</span>
-          <span class="soft-pill" style="background:#FF9800;color:#111;border:none">zone lock</span>
-          <span class="soft-pill" style="background:#EF5350;color:#fff;border:none">error</span>
+          <span class="soft-pill" style="background:#00BFA5;color:#042f2e;border:none">акцент</span>
+          <span class="soft-pill" style="background:#4CAF50;color:#fff;border:none">успех</span>
+          <span class="soft-pill" style="background:#FF9800;color:#111;border:none">зона зафиксирована</span>
+          <span class="soft-pill" style="background:#EF5350;color:#fff;border:none">ошибка</span>
         </div>
         <div class="doc-grid">
           <div class="doc-card">
             <h3>Телефон</h3>
             <ul>
-              <li><a href="m1-record.html">M1 Запись</a></li>
-              <li><a href="m2-preflight.html">M2 Проверка</a></li>
-              <li><a href="m3-error.html">M3 Ошибка</a></li>
+              <li><a href="m1-record.html">Запись</a> — рамка зоны и подсказка обхода</li>
+              <li><a href="m2-preflight.html">Проверка</a> — годится ли запись</li>
+              <li><a href="m3-error.html">Ошибка</a> — причина и пересъёмка</li>
             </ul>
-            <p style="margin-top:8px">Нет облачной отправки и in-app 3D.</p>
+            <p style="margin-top:8px">Бандл с телефона на сервер не уходит, карту в приложении не посмотреть.</p>
           </div>
           <div class="doc-card">
             <h3>Браузер</h3>
             <ul>
-              <li><a href="b1-upload.html">B1 Загрузка</a></li>
-              <li><a href="b2-jobs.html">B2 Задания</a></li>
-              <li><a href="b3-report.html">B3 Отчёт</a></li>
-              <li><a href="b4-viewer.html">B4 Просмотр</a></li>
+              <li><a href="b1-upload.html">Загрузка</a> — файл и ключ доступа</li>
+              <li><a href="b2-jobs.html">Задания</a> — статусы с фильтром</li>
+              <li><a href="b3-report.html">Отчёт</a> — метрики и причина отказа</li>
+              <li><a href="b4-viewer.html">Просмотр</a> — ходьба рядом с кадром</li>
+            </ul>
+          </div>
+          <div class="doc-card">
+            <h3>Шрифт и сетка</h3>
+            <p>Системный шрифт на телефоне, IBM Plex в браузере. Телефон: поля 20 pt, кнопки внизу. Браузер: одна колонка, формы до 520 px, у просмотра карты боковая панель с кадром.</p>
+          </div>
+          <div class="doc-card">
+            <h3>Как пишем ошибки</h3>
+            <ul>
+              <li>«Запись должна длиться от 10 до 30 секунд»</li>
+              <li>«Нужен обход зоны: пройдите вокруг участка»</li>
+              <li>«Зона слишком большая — снимите участок около 80×80 см»</li>
+              <li>«Нет доступа — проверьте ключ»</li>
             </ul>
           </div>
         </div>
         <div class="flow-mini" style="margin-top:16px">
-          <span>M1</span><span class="arrow">→</span>
-          <span>M2</span><span class="arrow">→</span>
-          <span>Share</span><span class="arrow">→</span>
-          <span>B1</span><span class="arrow">→</span>
-          <span>B2</span><span class="arrow">→</span>
-          <span>B3</span><span class="arrow">→</span>
-          <span>B4</span>
+          <span>Запись</span><span class="arrow">→</span>
+          <span>Проверка</span><span class="arrow">→</span>
+          <span>Передать бандл</span><span class="arrow">→</span>
+          <span>Загрузка</span><span class="arrow">→</span>
+          <span>Задания</span><span class="arrow">→</span>
+          <span>Отчёт</span><span class="arrow">→</span>
+          <span>Просмотр</span>
         </div>
         <div class="doc-card" style="margin-top:12px">
-          <h3>Тексты ошибок</h3>
-          <ul>
-            <li>duration · no_orbit · zone_too_large</li>
-            <li>poses · depth · auth · build_fail</li>
-          </ul>
+          <h3>Проверка на людях</h3>
+          <p>Пять человек без опыта 3D проходят запись на макетах. Смотрим, понимают ли они зону, обход и момент, когда запись готова. Результаты пока не собраны.</p>
         </div>
       </div>
     </div>

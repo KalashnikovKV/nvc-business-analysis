@@ -1,20 +1,20 @@
 # Бизнес-анализ: NVC Maps
 
-**Продукт:** система создания игровых 3D-карт по короткой видеозаписи  
-**English:** A System for Creating 3D Game Maps from Video  
+**Продукт:** система создания игровых 3D-карт по видеозаписи
+**English:** A System for Creating 3D Game Maps from Video
 
-Документ для владельца продукта и команды. Описывает **зачем** продукт нужен и **что** должен уметь пользователь. Техническая спецификация реализации — отдельно: [`../diplom-docs-2026-09-27/explain/tz-sistema-igrovyh-3d-kart.md`](../diplom-docs-2026-09-27/explain/tz-sistema-igrovyh-3d-kart.md).
+Документ отвечает на два вопроса: зачем нужен продукт и что должен уметь пользователь. Читают его владелец продукта и команда. Как это реализуется — числовые пороги, тестовые случаи, API и поставка — описано в ТЗ.
+
+Пакет согласован с [ТЗ](../diplom-docs-2026-09-27/explain/tz-sistema-igrovyh-3d-kart.md), разделы 9–10, и с [Blueprint](../diplom-docs-2026-09-27/explain/blueprint-pipeline-3d-kart.md). При расхождении главным считается ТЗ.
 
 | Раздел | Файл |
 |--------|------|
-| Резюме, проблема, цели, KPI | [01-summary-problem-goals.md](01-summary-problem-goals.md) |
-| Стейкхолдеры, границы, альтернативы | [02-stakeholders-scope-alternatives.md](02-stakeholders-scope-alternatives.md) |
+| Резюме, проблема, цели, критерии успеха | [01-summary-problem-goals.md](01-summary-problem-goals.md) |
+| Стейкхолдеры, границы, допущения, альтернативы | [02-stakeholders-scope-alternatives.md](02-stakeholders-scope-alternatives.md) |
 | Персоны, сценарии, use cases | [03-personas-scenarios-usecases.md](03-personas-scenarios-usecases.md) |
-| User stories, MoSCoW | [04-user-stories-moscow.md](04-user-stories-moscow.md) |
-| Экраны, стиль, usability | [05-screens-style-usability.md](05-screens-style-usability.md) |
-| NFR, риски, готовность | [06-nfr-risks-readiness.md](06-nfr-risks-readiness.md) |
-| HTML wireframes | [wireframes/index.html](wireframes/index.html) · [live Pages](https://kalashnikovkv.github.io/nvc-business-analysis/) |
+| User stories и приоритеты | [04-user-stories-moscow.md](04-user-stories-moscow.md) |
+| Экраны, стиль, проверка понимания | [05-screens-style-usability.md](05-screens-style-usability.md) |
+| Нефункциональные требования, риски, готовность | [06-nfr-risks-readiness.md](06-nfr-risks-readiness.md) |
+| Макеты | [wireframes/index.html](wireframes/index.html) · [на сайте](https://kalashnikovkv.github.io/nvc-business-analysis/) |
 
-**Репозитории:** [`nvc-capture`](../nvc-capture) (съёмка) · [`neuralVideoCartography`](../neuralVideoCartography) (сборка карты) · сервис + веб-клиент (загрузка, статус, ходьба).
-
-**Сайт макетов:** https://kalashnikovkv.github.io/nvc-business-analysis/
+**Репозитории:** [`nvc-capture`](../nvc-capture) — съёмка; [`neuralVideoCartography`](../neuralVideoCartography) — сборка карты; сервис и веб-клиент — загрузка, статус, ходьба по карте.
