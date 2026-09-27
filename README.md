@@ -3,7 +3,7 @@
 **Продукт:** система создания игровых 3D-карт по видеозаписи
 **English:** A System for Creating 3D Game Maps from Video
 
-Документ отвечает на два вопроса: зачем нужен продукт и что должен уметь пользователь. Читают его владелец продукта и команда. Как это реализуется — числовые пороги, тестовые случаи, API и поставка — описано в ТЗ.
+Документ отвечает на два вопроса: зачем нужен продукт и что должен уметь пользователь. Его читают автор и руководитель. Как это реализуется — числовые пороги, тестовые случаи, API и поставка — описано в ТЗ.
 
 Пакет согласован с [ТЗ](../diplom-docs-2026-09-27/explain/tz-sistema-igrovyh-3d-kart.md), разделы 9–10, и с [Blueprint](../diplom-docs-2026-09-27/explain/blueprint-pipeline-3d-kart.md). При расхождении главным считается ТЗ.
 
@@ -13,7 +13,7 @@
 | Стейкхолдеры, границы, допущения, альтернативы | [02-stakeholders-scope-alternatives.md](02-stakeholders-scope-alternatives.md) |
 | Персоны, сценарии, use cases | [03-personas-scenarios-usecases.md](03-personas-scenarios-usecases.md) |
 | User stories и приоритеты | [04-user-stories-moscow.md](04-user-stories-moscow.md) |
-| Экраны, стиль, проверка понимания | [05-screens-style-usability.md](05-screens-style-usability.md) |
+| Экраны и стиль | [05-screens-style-usability.md](05-screens-style-usability.md) |
 | Нефункциональные требования, риски, готовность | [06-nfr-risks-readiness.md](06-nfr-risks-readiness.md) |
 | Макеты | [wireframes/index.html](wireframes/index.html) · [на сайте](https://kalashnikovkv.github.io/nvc-business-analysis/) |
 
