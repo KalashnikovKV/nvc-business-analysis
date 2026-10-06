@@ -3,39 +3,38 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>M2 · Проверка бандла</title>
+  <title>M2 · Карта готова</title>
   <link rel="stylesheet" href="wireframes.css" />
 </head>
 <body class="page">
   <aside class="side">
     <a class="back" href="index.html">← Все макеты</a>
-    <h1>M2 · Проверка бандла</h1>
-    <p>Перед сохранением телефон проверяет длительность, обход, размер зоны, траекторию камеры и глубину. Итог — запись готова или понятная причина отказа.</p>
+    <h1>M2 · Карта готова</h1>
+    <p>После остановки записи приложение само проверяет съёмку и показывает этот лист. Бандл уходит не на сервер, а через «Поделиться».</p>
     <nav>
-      <a href="m1-record.html">M1 Запись</a>
-      <a class="active" href="m2-preflight.html">M2 Проверка</a>
-      <a href="m3-error.html">M3 Ошибка</a>
+      <a href="m1-record.html">M1 Сканирование</a>
+      <a class="active" href="m2-preflight.html">M2 Результат</a>
+      <a href="m3-error.html">M3 Переснять</a>
+      <a href="m4-maps.html">M4 Мои карты</a>
     </nav>
-    <p class="meta">Сценарий: пригодная съёмка · US-1</p>
+    <p class="meta">Успешная проверка</p>
   </aside>
   <main class="stage">
     <div class="phone">
       <div class="phone-screen">
         <div class="notch"></div>
         <div class="sheet">
-          <h2>Проверка съёмки</h2>
-          <p class="sub">Запись готова. Передайте бандл сборщику — он загрузит его в браузере.</p>
+          <h2>Карта готова</h2>
+          <p class="sub">Съёмка прошла проверку качества. Можно отправить бандл на компьютер.</p>
           <ul class="check-list">
-            <li><span>Длительность 10–30 с</span><span class="ok">22 с ✓</span></li>
-            <li><span>Путь камеры от 0,28 м</span><span class="ok">0,41 м ✓</span></li>
-            <li><span>Поворот от 90°</span><span class="ok">124° ✓</span></li>
-            <li><span>Зона до 0,92 м</span><span class="ok">0,78 м ✓</span></li>
-            <li><span>Траектория камеры</span><span class="ok">в порядке ✓</span></li>
-            <li><span>Глубина LiDAR</span><span class="ok">186 кадров ✓</span></li>
+            <li><span>Длительность</span><span class="ok">22 с</span></li>
+            <li><span>Кадры позы</span><span class="ok">186</span></li>
+            <li><span>Глубина</span><span class="ok">LiDAR · 186</span></li>
+            <li><span>Пол</span><span class="ok">найден</span></li>
           </ul>
           <div style="flex:1"></div>
-          <a class="cta" href="b1-upload.html">Передать бандл</a>
-          <a class="cta secondary" href="m1-record.html">Новая запись</a>
+          <a class="cta" href="m4-maps.html">Поделиться бандлом</a>
+          <a class="cta secondary" href="m4-maps.html">Готово</a>
         </div>
       </div>
     </div>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>M4 · Мои карты</title>
+  <link rel="stylesheet" href="wireframes.css" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Все макеты</a>
+    <h1>M4 · Мои карты</h1>
+    <p>Вторая вкладка приложения. Пока записей нет — пустой экран. Когда съёмка сохранена, здесь карточка с длительностью, глубиной и кнопками «Поделиться» и «Удалить».</p>
+    <nav>
+      <a href="m1-record.html">M1 Сканирование</a>
+      <a href="m2-preflight.html">M2 Результат</a>
+      <a href="m3-error.html">M3 Переснять</a>
+      <a class="active" href="m4-maps.html">M4 Мои карты</a>
+    </nav>
+    <p class="meta">Список на телефоне</p>
+  </aside>
+  <main class="stage">
+    <div class="phone light" aria-label="Пустой список">
+      <div class="phone-screen">
+        <div class="notch" style="background:#111"></div>
+        <div class="maps-empty">
+          <div class="icon" aria-hidden="true"></div>
+          <h2>Пока нет карт</h2>
+          <p>Перейдите на вкладку «Сканировать», снимите участок и вернитесь сюда.</p>
+        </div>
+        <nav class="tabbar">
+          <a href="m1-record.html">Сканировать</a>
+          <a class="on" href="m4-maps.html">Мои карты</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="phone light" aria-label="Есть сохранённая карта">
+      <div class="phone-screen">
+        <div class="notch" style="background:#111"></div>
+        <div class="map-card">
+          <span class="map-badge">Готова</span>
+          <h3>Карта · 06.10.2026, 14:59</h3>
+          <p>22 с · 186 кадров</p>
+          <p>LiDAR · 186 кадров глубины · пол найден</p>
+          <div class="row">
+            <button class="btn" type="button">Поделиться</button>
+            <button class="btn ghost" type="button">Удалить</button>
+          </div>
+        </div>
+        <div style="flex:1"></div>
+        <nav class="tabbar">
+          <a href="m1-record.html">Сканировать</a>
+          <a class="on" href="m4-maps.html">Мои карты</a>
+        </nav>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

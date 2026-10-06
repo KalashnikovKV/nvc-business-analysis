@@ -36,6 +36,7 @@ jobs:
             wireframes/m1-record.html \
             wireframes/m2-preflight.html \
             wireframes/m3-error.html \
+            wireframes/m4-maps.html \
             wireframes/b1-upload.html \
             wireframes/b2-jobs.html \
             wireframes/b3-report.html \
