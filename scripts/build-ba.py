@@ -269,7 +269,7 @@ PAGE = """<!DOCTYPE html>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title} · NVC Maps</title>
-  <link rel="stylesheet" href="wireframes.css?v=11" />
+  <link rel="stylesheet" href="wireframes.css?v=12" />
 </head>
 <body class="page">
   <aside class="side">
@@ -292,6 +292,14 @@ PAGE = """<!DOCTYPE html>
 </body>
 </html>
 """
+
+
+# Якоря для запасных слайдов (s09-backup.html).
+ANCHORS = {
+    "1.3. Анализ аналогов": "analogs",
+    "2.6. Сценарии использования": "use-cases",
+    "2.9. Риски": "risks",
+}
 
 
 def md_to_html(text: str) -> str:
@@ -320,11 +328,23 @@ def build_site() -> None:
             text += "\n\n" + notes.definitions() + "\n"
         body = md_to_html(text)
         body = body.replace('src="wireframes/', 'src="')
+        for heading, anchor in ANCHORS.items():
+            body = body.replace(f"<h2>{heading}</h2>", f'<h2 id="{anchor}">{heading}</h2>')
+            body = body.replace(f"<h3>{heading}</h3>", f'<h3 id="{anchor}">{heading}</h3>')
         (SITE / page).write_text(PAGE.format(
             title=html.escape(title), nav=nav, body=body,
             tag=page[1:3], mermaid=MERMAID_JS,
         ))
         print("site:", page)
+
+
+# --- Слайды для защиты ---------------------------------------------------------
+
+def build_slides() -> None:
+    import slides
+
+    for page in slides.render(SITE):
+        print("slide:", page)
 
 
 # --- DOCX --------------------------------------------------------------------
@@ -467,10 +487,11 @@ STEPS = {
     "summary": build_summary,
     "shots": build_shots,
     "site": build_site,
+    "slides": build_slides,
     "docx": build_docx,
 }
 
 if __name__ == "__main__":
-    steps = sys.argv[1:] or ["references", "backlog", "summary", "site", "docx"]
+    steps = sys.argv[1:] or ["references", "backlog", "summary", "site", "slides", "docx"]
     for step in steps:
         STEPS[step]()

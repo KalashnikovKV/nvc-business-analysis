@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2 · Цель · Защита · NVC Maps</title>
+  <link rel="stylesheet" href="wireframes.css?v=12" />
+</head>
+<body class="deck">
+  <header class="deck-bar">
+    <a href="index.html">← Бизнес-анализ</a>
+    <span>Слайд 2 / 8</span>
+  </header>
+  <main class="slide">
+    <div class="chain"><span>Проблема</span><i>→</i><span class="on">Цель</span><i>→</i><span>KPI</span><i>→</i><span>Эпик</span></div>
+    <h2 class="slide-head">Один обход телефоном — и проходимый уровень без ручной доводки</h2>
+
+
+        <ol class="task-row">
+          <li><b>1.1</b>Как сейчас</li>
+          <li><b>1.2–1.3</b>Источники и аналоги</li>
+          <li><b>2.1</b>Видение и KPI</li>
+          <li><b>2.5–2.7</b>Требования</li>
+          <li><b>2.8–2.10</b>Право, риски, оценка</li>
+        </ol>
+        <div class="slide-grid two">
+          <div class="pill-card"><span>Объект</span>Создание уровня по реальному месту</div>
+          <div class="pill-card"><span>Предмет</span>Проверка съёмки, сборка карты, ходьба в браузере</div>
+        </div>
+    <footer class="slide-ref">Введение · Цель и задачи, объект и предмет</footer>
+  </main>
+  <nav class="deck-nav">
+    <a data-prev href="s01-problem.html">← 1 · Проблема</a>
+    <a data-next href="s03-process.html">3 · Процесс →</a>
+  </nav>
+  <script>
+    document.addEventListener("keydown", function (e) {
+      var link = e.key === "ArrowRight" ? document.querySelector("[data-next]") : e.key === "ArrowLeft" ? document.querySelector("[data-prev]") : null;
+      if (link) location.href = link.getAttribute("href");
+    });
+  </script>
+</body>
+</html>

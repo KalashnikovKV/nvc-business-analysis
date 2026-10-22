@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>6 · Эпики · Защита · NVC Maps</title>
+  <link rel="stylesheet" href="wireframes.css?v=12" />
+</head>
+<body class="deck">
+  <header class="deck-bar">
+    <a href="index.html">← Бизнес-анализ</a>
+    <span>Слайд 6 / 8</span>
+  </header>
+  <main class="slide">
+    <div class="chain"><span>Проблема</span><i>→</i><span>Цель</span><i>→</i><span>KPI</span><i>→</i><span class="on">Эпик</span></div>
+    <h2 class="slide-head">Шесть эпиков ведут к KPI; ключевая история — ходьба по карте</h2>
+
+
+        <div class="trace">
+          <span>BG-1 Без доводки</span><i>→</i><span>KPI-1</span><i>→</i><span>E3 · E4 · E5</span><i>→</i><span class="hot">US-4.1 Ходьба по карте</span>
+        </div>
+        <div class="epic-row">
+          <span>E1 Съёмка</span><span>E2 Задания</span><span>E3 Сборка и отчёт</span>
+          <span class="hot">E4 Ходьба</span><span>E5 Пакет</span><span>E6 Тестовая ссылка</span>
+        </div>
+        <ol class="flow small">
+          <li>Рамка зоны</li><li>Обход 10–30 с</li><li>Проверка</li><li>Отправить</li><li>Задание в очереди</li>
+        </ol>
+        <p class="slide-note">UC-1. Если проверка не прошла — причина и «Переснять»; при обрыве повтор не запускает вторую сборку.</p>
+    <footer class="slide-ref">Разделы 2.5–2.6</footer>
+  </main>
+  <nav class="deck-nav">
+    <a data-prev href="s05-vision.html">← 5 · Видение и KPI</a>
+    <a data-next href="s07-nfr.html">7 · NFR и право →</a>
+  </nav>
+  <script>
+    document.addEventListener("keydown", function (e) {
+      var link = e.key === "ArrowRight" ? document.querySelector("[data-next]") : e.key === "ArrowLeft" ? document.querySelector("[data-prev]") : null;
+      if (link) location.href = link.getAttribute("href");
+    });
+  </script>
+</body>
+</html>

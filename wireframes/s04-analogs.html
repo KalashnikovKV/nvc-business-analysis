@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>4 · Аналоги · Защита · NVC Maps</title>
+  <link rel="stylesheet" href="wireframes.css?v=12" />
+</head>
+<body class="deck">
+  <header class="deck-bar">
+    <a href="index.html">← Бизнес-анализ</a>
+    <span>Слайд 4 / 8</span>
+  </header>
+  <main class="slide">
+    <div class="chain"><span class="on">Проблема</span><i>→</i><span>Цель</span><i>→</i><span>KPI</span><i>→</i><span>Эпик</span></div>
+    <h2 class="slide-head">Сканеры делают модель для просмотра, а не уровень</h2>
+
+
+        <table class="check-table">
+          <tr><th></th><th>Polycam, Scaniverse, KIRI</th><th>World Labs Marble</th><th>Video2Game</th><th class="us">NVC Maps</th></tr>
+          <tr><td>Размеры в метрах</td><td class="yes">✓</td><td class="no">✕</td><td class="no">✕</td><td class="us yes">✓</td></tr>
+          <tr><td>Лёгкая опора</td><td class="no">✕</td><td class="part">~</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
+          <tr><td>Проверка ходьбой</td><td class="no">✕</td><td class="part">~</td><td class="yes">✓</td><td class="us yes">✓</td></tr>
+          <tr><td>Отказ с причиной</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="us yes">✓</td></tr>
+        </table>
+        <p class="slide-text">Никто не отдаёт сразу опору в метрах, проверку ходьбой и честный отказ.</p>
+    <footer class="slide-ref">Разделы 1.3–1.4</footer>
+  </main>
+  <nav class="deck-nav">
+    <a data-prev href="s03-process.html">← 3 · Процесс</a>
+    <a data-next href="s05-vision.html">5 · Видение и KPI →</a>
+  </nav>
+  <script>
+    document.addEventListener("keydown", function (e) {
+      var link = e.key === "ArrowRight" ? document.querySelector("[data-next]") : e.key === "ArrowLeft" ? document.querySelector("[data-prev]") : null;
+      if (link) location.href = link.getAttribute("href");
+    });
+  </script>
+</body>
+</html>

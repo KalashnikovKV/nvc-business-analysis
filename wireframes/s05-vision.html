@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>5 · Видение и KPI · Защита · NVC Maps</title>
+  <link rel="stylesheet" href="wireframes.css?v=12" />
+</head>
+<body class="deck">
+  <header class="deck-bar">
+    <a href="index.html">← Бизнес-анализ</a>
+    <span>Слайд 5 / 8</span>
+  </header>
+  <main class="slide">
+    <div class="chain"><span>Проблема</span><i>→</i><span>Цель</span><i>→</i><span class="on">KPI</span><i>→</i><span>Эпик</span></div>
+    <h2 class="slide-head">Снял — прошёл по уровню в браузере — забрал в движок</h2>
+
+
+        <div class="kpi-row">
+          <div><span>KPI-1 · уровень без доводки</span><b>0% → 100%</b></div>
+          <div><span>KPI-2 · до проверки ходьбой</span><b>2–4 ч → ≤15 мин</b></div>
+          <div><span>KPI-3 · отказ на браке</span><b>0% → 100%</b></div>
+          <div><span>KPI-4 · треугольников</span><b>сотни тыс. → ≤50 000</b></div>
+        </div>
+        <div class="slide-grid two scope">
+          <div class="in"><span>Входит</span>iPhone с LiDAR · сборка на сервере · ходьба в браузере · пакет GLB</div>
+          <div class="out"><span>Не входит</span>Игра · Android · текстуры · админка</div>
+        </div>
+    <footer class="slide-ref">Разделы 2.1, 2.3</footer>
+  </main>
+  <nav class="deck-nav">
+    <a data-prev href="s04-analogs.html">← 4 · Аналоги</a>
+    <a data-next href="s06-epics.html">6 · Эпики →</a>
+  </nav>
+  <script>
+    document.addEventListener("keydown", function (e) {
+      var link = e.key === "ArrowRight" ? document.querySelector("[data-next]") : e.key === "ArrowLeft" ? document.querySelector("[data-prev]") : null;
+      if (link) location.href = link.getAttribute("href");
+    });
+  </script>
+</body>
+</html>

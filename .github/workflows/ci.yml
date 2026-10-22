@@ -37,6 +37,17 @@ jobs:
             wireframes/d06-statements.html \
             wireframes/BA_Kalashnikov_Kirill.docx \
             wireframes/shots/key-stories.png \
+            wireframes/s00-title.html \
+            wireframes/s01-problem.html \
+            wireframes/s02-goal.html \
+            wireframes/s03-process.html \
+            wireframes/s04-analogs.html \
+            wireframes/s05-vision.html \
+            wireframes/s06-epics.html \
+            wireframes/s07-nfr.html \
+            wireframes/s08-concept.html \
+            wireframes/s09-backup.html \
+            wireframes/s10-questions.html \
             wireframes/m1-record.html \
             wireframes/m2-preflight.html \
             wireframes/m3-error.html \

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Запасные слайды · Защита · NVC Maps</title>
+  <link rel="stylesheet" href="wireframes.css?v=12" />
+</head>
+<body class="deck">
+  <header class="deck-bar">
+    <a href="index.html">← Бизнес-анализ</a>
+    <span>Запасные слайды</span>
+  </header>
+  <main class="slide">
+    <h2 class="slide-head">Запасные слайды</h2>
+
+
+        <div class="backup-grid">
+          <a href="d01-analysis.html#analogs"><span>1.3</span>Полная таблица аналогов</a>
+          <a href="d04-backlog.html"><span>Прил. 1</span>Полный бэклог</a>
+          <a href="d02-requirements.html#risks"><span>2.9</span>Таблица рисков</a>
+          <a href="d02-requirements.html#use-cases"><span>2.6</span>Полный текст сценариев</a>
+        </div>
+        <p class="slide-note">Показываются после доклада по вопросам комиссии.</p>
+    <footer class="slide-ref">Требования к защите · Backup slides</footer>
+  </main>
+  <nav class="deck-nav">
+    <a data-prev href="s08-concept.html">← 8 · Концепция и риски</a>
+    <a data-next href="s10-questions.html">Вопросы комиссии →</a>
+  </nav>
+  <script>
+    document.addEventListener("keydown", function (e) {
+      var link = e.key === "ArrowRight" ? document.querySelector("[data-next]") : e.key === "ArrowLeft" ? document.querySelector("[data-prev]") : null;
+      if (link) location.href = link.getAttribute("href");
+    });
+  </script>
+</body>
+</html>
