@@ -17,6 +17,7 @@
 | Приложение 2. Диаграммы | [05-appendix-b-diagrams.md](05-appendix-b-diagrams.md) |
 | Заявления: ИИ, вклад, согласие организации | [06-statements.md](06-statements.md) |
 | Сайт с разделами и экранами | [wireframes/index.html](wireframes/index.html) · [на сайте](https://kalashnikovkv.github.io/nvc-business-analysis/) |
+| Презентация для защиты: 8 слайдов, запасные слайды, ответы на вопросы | [wireframes/deck.html](wireframes/deck.html) · [PowerPoint](wireframes/NVC-Maps-защита.pptx) |
 | Весь анализ одним файлом | [NVC-Maps-бизнес-анализ.md](NVC-Maps-бизнес-анализ.md) · [PDF](wireframes/NVC-Maps-бизнес-анализ.pdf) · [DOCX для эксперта](wireframes/BA_Kalashnikov_Kirill.docx) |
 
 ## Сборка

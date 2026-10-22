@@ -3,10 +3,12 @@
   "private": true,
   "description": "Сборка DOCX блока бизнес-анализа",
   "scripts": {
-    "docx": "node scripts/build-docx.mjs"
+    "docx": "node scripts/build-docx.mjs",
+    "pptx": "node scripts/build-pptx.mjs"
   },
   "devDependencies": {
     "docx": "9.5.1",
-    "marked": "15.0.12"
+    "marked": "15.0.12",
+    "pptxgenjs": "4.0.1"
   }
 }

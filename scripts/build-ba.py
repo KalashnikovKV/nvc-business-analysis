@@ -345,6 +345,11 @@ def build_slides() -> None:
 
     for page in slides.render(SITE):
         print("slide:", page)
+    # Тот же набор слайдов — в PowerPoint для скачивания.
+    CACHE.mkdir(exist_ok=True)
+    slides.export_json(CACHE / "slides.json")
+    subprocess.run(["node", str(ROOT / "scripts" / "build-pptx.mjs"), str(CACHE / "slides.json"),
+                    str(SITE / "NVC-Maps-защита.pptx")], check=True)
 
 
 # --- DOCX --------------------------------------------------------------------

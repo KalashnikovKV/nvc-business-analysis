@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Защита · NVC Maps</title>
+  <link rel="stylesheet" href="wireframes.css?v=14" />
+</head>
+<body class="deck-view">
+  <div class="deck-progress"><span></span></div>
+  <main class="deck-stage">
+    <section class="s-slide" id="s0" data-nav="Титульный слайд" data-label="Титул">
+      <div class="s-title"><p class="s-kicker">NVC Maps · бакалаврский проект</p><h1>Система создания игровых 3D-карт по видеозаписи</h1><p class="s-sub">A System for Creating 3D Game Maps from Video</p><div class="s-people"><span>Кирилл Калашников</span><span>Руководитель: доцент, кандидат технических наук Сергей Валентинович Авдейчик</span></div></div>
+      <footer class="s-ref">Титульный лист</footer>
+    </section>
+    <section class="s-slide" id="s1" data-nav="Проблема" data-label="1 из 8">
+      <div class="s-chain"><span class="on">Проблема</span><i>→</i><span>Цель</span><i>→</i><span>Показатели</span><i>→</i><span>Эпики</span></div>
+      <h2 class="s-head">Телефон снимает место, но не делает из него уровень</h2>
+      <div class="s-split"><div class="s-number"><strong>70&nbsp;000</strong><span>авторов карт в Fortnite в 2024 году — почти втрое больше, чем годом раньше</span></div><p class="s-text">Опору для персонажа, упрощение и размеры делают вручную. Брак съёмки виден только в игровом движке.</p></div>
+      <footer class="s-ref">Введение: актуальность и проблема</footer>
+    </section>
+    <section class="s-slide" id="s2" data-nav="Цель" data-label="2 из 8">
+      <div class="s-chain"><span>Проблема</span><i>→</i><span class="on">Цель</span><i>→</i><span>Показатели</span><i>→</i><span>Эпики</span></div>
+      <h2 class="s-head">Один обход телефоном — и проходимый уровень без ручной доводки</h2>
+      <ol class="s-tasks"><li><b>Раздел 1.1</b>Как делают сейчас</li><li><b>Разделы 1.2–1.3</b>Источники и аналоги</li><li><b>Раздел 2.1</b>Видение и показатели</li><li><b>Разделы 2.5–2.7</b>Требования</li><li><b>Разделы 2.8–2.10</b>Право, риски, оценка</li></ol>
+      <div class="s-split"><div class="s-card"><span>Объект</span>Создание игрового уровня по реальному месту</div><div class="s-card"><span>Предмет</span>Проверка съёмки, сборка карты, проверка ходьбой</div></div>
+      <footer class="s-ref">Введение: цель и задачи, объект и предмет</footer>
+    </section>
+    <section class="s-slide" id="s3" data-nav="Текущий процесс" data-label="3 из 8">
+      <div class="s-chain"><span class="on">Проблема</span><i>→</i><span>Цель</span><i>→</i><span>Показатели</span><i>→</i><span>Эпики</span></div>
+      <h2 class="s-head">Время теряется на ручной доводке, данные — при экспорте</h2>
+      <ol class="s-flow"><li>Снять</li><li>Выгрузить</li><li class="lost">Почистить<small>вручную</small></li><li class="lost">Построить опору<small>вручную</small></li><li class="lost">Выставить размеры<small>теряются</small></li><li class="late">Проверить<small>только в движке</small></li></ol>
+      <div class="s-matrix"><div class="hi"><span>Сильное влияние, высокий интерес</span>Пользователи, владелец продукта</div><div><span>Сильное влияние, низкий интерес</span>Apple, игровые движки, закон о данных</div><div><span>Среднее влияние</span>Хостинг, конкуренты</div><div><span>Слабое влияние, высокий интерес</span>Игрок, владелец места, человек в кадре</div></div>
+      <footer class="s-ref">Разделы 1.1 и 2.2</footer>
+    </section>
+    <section class="s-slide" id="s4" data-nav="Аналоги" data-label="4 из 8">
+      <div class="s-chain"><span class="on">Проблема</span><i>→</i><span>Цель</span><i>→</i><span>Показатели</span><i>→</i><span>Эпики</span></div>
+      <h2 class="s-head">Сканеры делают модель для просмотра, а не уровень</h2>
+      <table class="s-check"><tr><th></th><th>Polycam, Scaniverse, KIRI Engine</th><th>World Labs Marble</th><th>Video2Game</th><th class="us">NVC Maps</th></tr><tr><td>Размеры в метрах</td><td class="yes">✓</td><td class="no">✕</td><td class="no">✕</td><td class="yes us">✓</td></tr><tr><td>Лёгкая опора для персонажа</td><td class="no">✕</td><td class="part">частично</td><td class="yes">✓</td><td class="yes us">✓</td></tr><tr><td>Проверка ходьбой</td><td class="no">✕</td><td class="part">частично</td><td class="yes">✓</td><td class="yes us">✓</td></tr><tr><td>Отказ с причиной</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="yes us">✓</td></tr></table>
+      <p class="s-text">Никто не отдаёт сразу опору в метрах, проверку ходьбой и честный отказ.</p>
+      <footer class="s-ref">Разделы 1.3–1.4</footer>
+    </section>
+    <section class="s-slide" id="s5" data-nav="Видение и показатели" data-label="5 из 8">
+      <div class="s-chain"><span>Проблема</span><i>→</i><span>Цель</span><i>→</i><span class="on">Показатели</span><i>→</i><span>Эпики</span></div>
+      <h2 class="s-head">Снял — прошёл по уровню в браузере — забрал в движок</h2>
+      <div class="s-tiles"><div><span>Уровень без ручной доводки</span><b>0% → 100%</b></div><div><span>От отправки до проверки ходьбой</span><b>2–4 часа → до 15 минут</b></div><div><span>Брак получает отказ с причиной</span><b>0% → 100%</b></div><div><span>Треугольников в карте</span><b>сотни тысяч → до 50 000</b></div></div>
+      <div class="s-split scope"><div class="in"><span>Входит</span>Съёмка на iPhone с датчиком глубины, сборка на сервере, проверка в браузере, файлы для движков</div><div class="out"><span>Не входит</span>Игра, Android, текстуры, панель администрирования</div></div>
+      <footer class="s-ref">Разделы 2.1 и 2.3</footer>
+    </section>
+    <section class="s-slide" id="s6" data-nav="Эпики и сценарий" data-label="6 из 8">
+      <div class="s-chain"><span>Проблема</span><i>→</i><span>Цель</span><i>→</i><span>Показатели</span><i>→</i><span class="on">Эпики</span></div>
+      <h2 class="s-head">Шесть эпиков ведут к показателям; ключевая история — ходьба по карте</h2>
+      <div class="s-trace"><span>Цель: без ручной доводки</span><i>→</i><span>Показатель: проходимый уровень</span><i>→</i><span>Эпики: сборка, ходьба, файлы</span><i>→</i><span class="hot">История: пройти по карте в браузере</span></div>
+      <div class="s-chips"><span>Съёмка и проверка</span><span>Отправка и задания</span><span>Сборка и отчёт</span><span class="hot">Ходьба по карте</span><span>Файлы для движка</span><span>Тестовая ссылка</span></div>
+      <ol class="s-flow small"><li>Рамка зоны</li><li>Обход 10–30 секунд</li><li class="late">Проверка записи<small>нет — «Переснять»</small></li><li>Отправить</li><li>Задание в очереди</li></ol>
+      <footer class="s-ref">Разделы 2.5–2.6</footer>
+    </section>
+    <section class="s-slide" id="s7" data-nav="Качество и право" data-label="7 из 8">
+      <div class="s-chain"><span>Проблема</span><i>→</i><span>Цель</span><i>→</i><span class="on">Показатели</span><i>→</i><span>Эпики</span></div>
+      <h2 class="s-head">Быстро, только своим и по закону</h2>
+      <div class="s-tiles"><div><span>Сборка карты</span><b>до 10 минут</b></div><div><span>Открыть карту в браузере</span><b>до 10 секунд</b></div><div><span>Сервис доступен</span><b>не меньше 99% времени</b></div><div><span>Доступность веб-страниц</span><b>уровень AA</b></div></div>
+      <div class="s-legal"><div><span>Своя съёмка</span>Договор с пользователем — регламент Евросоюза о защите данных, статья 6</div><div><span>Случайные люди в кадре</span>Законный интерес; лица крупным планом не публикуются</div><div><span>Хранение</span>До 90 дней, удаление по запросу — до 30 дней</div><div><span>Библиотеки</span>Только открытые лицензии</div></div>
+      <footer class="s-ref">Разделы 2.7–2.8</footer>
+    </section>
+    <section class="s-slide" id="s8" data-nav="Концепция и риски" data-label="8 из 8">
+      <div class="s-chain"><span>Проблема</span><i>→</i><span>Цель</span><i>→</i><span>Показатели</span><i>→</i><span class="on">Эпики</span></div>
+      <h2 class="s-head">Телефон снимает, сервер собирает, браузер проверяет</h2>
+      <div class="s-concept"><div class="s-ctx"><div class="node"><span>Оператор</span><b>Телефон</b><small>съёмка с датчиком глубины</small></div><i>съёмка →</i><div class="node main"><span>Система</span><b>Сервер</b><small>приём, очередь, сборка карты</small></div><i>← карта и отчёт</i><div class="node"><span>Сборщик</span><b>Браузер</b><small>отчёт, ходьба, скачать</small></div><div class="ext">Хостинг: база и файлы</div><div class="ext">Игровые движки: Godot, Unity, Unreal</div></div><ol class="s-risks"><li><b>Карта неузнаваема</b>Маленькая зона, обязательные позы камеры, отказ вместо случайной геометрии</li><li><b>Опора не держит персонажа</b>Проверка ходьбой до выдачи файлов</li><li><b>Портрет пользователя не подтверждён</b>Пять интервью до следующего релиза</li></ol></div>
+      <footer class="s-ref">Разделы 2.4 и 2.9</footer>
+    </section>
+    <section class="s-slide" id="s9" data-nav="Запасные слайды" data-label="После доклада">
+      <h2 class="s-head">Запасные слайды</h2>
+      <div class="s-backup"><a href="d01-analysis.html#analogs"><span>Раздел 1.3</span>Полная таблица аналогов</a><a href="d04-backlog.html"><span>Приложение 1</span>Все эпики и истории</a><a href="d02-requirements.html#risks"><span>Раздел 2.9</span>Таблица рисков</a><a href="d02-requirements.html#use-cases"><span>Раздел 2.6</span>Полный текст сценариев</a></div>
+      <p class="s-note">Показываются после доклада, по вопросам комиссии.</p>
+      <footer class="s-ref">Требования к защите: запасные слайды</footer>
+    </section>
+    <section class="s-slide" id="s10" data-nav="Вопросы комиссии" data-label="После доклада">
+      <h2 class="s-head">Ответы на типовые вопросы комиссии</h2>
+      <dl class="s-qa"><dt>Как вы убедились, что проблема реальна?</dt><dd>Анализ рынка и девяти аналогов: ни один не отдаёт опору в метрах и проверку ходьбой. Интервью пока не было — это отдельный риск, план: пять интервью с инди-разработчиками.</dd><dt>Чем решение лучше аналога?</dt><dd>Это не сканер, а сборщик уровня: лёгкая опора, настоящие размеры, ходьба в браузере, честный отказ, повторяемость. Картинка проще — это осознанная граница.</dd><dt>Почему такие показатели и как их измерить?</dt><dd>Каждый показатель — одна боль: ручная доводка, время, брак, вес карты. Измеряются прогоном четырёх эталонных съёмок по тестовой ссылке.</dd><dt>Что вне проекта и почему?</dt><dd>Игра, Android, текстуры, своя модель глубины, панель администрирования. Один разработчик и фиксированный срок — в релиз входит только путь «снял — прошёл — забрал».</dd><dt>Какие истории обязательны и что уберёте при нехватке времени?</dt><dd>Пятнадцать обязательных историй, без которых не достичь показателей. Первыми уходят желательные: подсказка обхода, фильтр, сравнение сборок, рост персонажа, инструкция для Godot.</dd><dt>Какие персональные данные и на каком основании?</dt><dd>Ключ устройства, видео участка, сетевые адреса в журналах. Регламент Евросоюза о защите данных, статья 6: договор и законный интерес; хранение до 90 дней, удаление по запросу.</dd><dt>Что самое рискованное?</dt><dd>Качество карты. Снижаем маленькой зоной, обязательными позами камеры и отказом вместо случайной геометрии; проверяем ходьбой до выдачи.</dd></dl>
+      <footer class="s-ref">Требования к защите: типовые вопросы комиссии</footer>
+    </section>
+  </main>
+  <nav class="deck-overview" hidden>
+    <a href="#0"><span>Титул</span>Титульный слайд</a>
+    <a href="#1"><span>1 из 8</span>Проблема</a>
+    <a href="#2"><span>2 из 8</span>Цель</a>
+    <a href="#3"><span>3 из 8</span>Текущий процесс</a>
+    <a href="#4"><span>4 из 8</span>Аналоги</a>
+    <a href="#5"><span>5 из 8</span>Видение и показатели</a>
+    <a href="#6"><span>6 из 8</span>Эпики и сценарий</a>
+    <a href="#7"><span>7 из 8</span>Качество и право</a>
+    <a href="#8"><span>8 из 8</span>Концепция и риски</a>
+    <a href="#9"><span>После доклада</span>Запасные слайды</a>
+    <a href="#10"><span>После доклада</span>Вопросы комиссии</a>
+  </nav>
+  <footer class="deck-toolbar">
+    <a class="deck-home" href="index.html">← Бизнес-анализ</a>
+    <div class="deck-controls">
+      <button type="button" data-go="-1" aria-label="Предыдущий слайд">◀</button>
+      <span class="deck-pos"></span>
+      <button type="button" data-go="1" aria-label="Следующий слайд">▶</button>
+    </div>
+    <div class="deck-actions">
+      <button type="button" data-overview>Все слайды</button>
+      <button type="button" data-fullscreen>Во весь экран</button>
+      <a class="deck-download" href="NVC-Maps-защита.pptx" download="NVC-Maps-защита.pptx">Скачать презентацию</a>
+    </div>
+  </footer>
+  <script>
+    var slides = Array.prototype.slice.call(document.querySelectorAll(".s-slide"));
+    var pos = document.querySelector(".deck-pos");
+    var bar = document.querySelector(".deck-progress span");
+    var overview = document.querySelector(".deck-overview");
+    var current = 0;
+
+    function show(i) {
+      current = Math.max(0, Math.min(slides.length - 1, i));
+      slides.forEach(function (s, k) { s.classList.toggle("on", k === current); });
+      var s = slides[current];
+      pos.textContent = s.dataset.label + " · " + s.dataset.nav;
+      bar.style.width = ((current + 1) / slides.length * 100) + "%";
+      if (location.hash !== "#" + current) history.replaceState(null, "", "#" + current);
+    }
+    function fromHash() {
+      var n = parseInt(location.hash.slice(1), 10);
+      show(isNaN(n) ? 0 : n);
+    }
+    function toggleOverview(force) {
+      var open = typeof force === "boolean" ? force : overview.hidden;
+      overview.hidden = !open;
+    }
+    function fullscreen() {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+    }
+
+    document.querySelectorAll("[data-go]").forEach(function (b) {
+      b.addEventListener("click", function () { show(current + Number(b.dataset.go)); });
+    });
+    document.querySelector("[data-overview]").addEventListener("click", function () { toggleOverview(); });
+    document.querySelector("[data-fullscreen]").addEventListener("click", fullscreen);
+    overview.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () { toggleOverview(false); });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      var k = e.key;
+      if (k === "ArrowRight" || k === "PageDown" || k === " ") { e.preventDefault(); show(current + 1); }
+      else if (k === "ArrowLeft" || k === "PageUp") { e.preventDefault(); show(current - 1); }
+      else if (k === "Home") show(0);
+      else if (k === "End") show(slides.length - 1);
+      else if (k === "f" || k === "F" || k === "а" || k === "А") fullscreen();
+      else if (k === "o" || k === "O" || k === "щ" || k === "Щ") toggleOverview();
+      else if (k === "Escape") toggleOverview(false);
+    });
+    var touchX = null;
+    document.addEventListener("touchstart", function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+    document.addEventListener("touchend", function (e) {
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 60) show(current + (dx < 0 ? 1 : -1));
+      touchX = null;
+    });
+    window.addEventListener("hashchange", fromHash);
+    fromHash();
+  </script>
+</body>
+</html>
