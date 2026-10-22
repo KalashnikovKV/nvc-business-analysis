@@ -1,7 +1,5 @@
 # Список источников и литературы
 
-Источники расположены в алфавитном порядке и оформлены по Чикагскому стилю (метод сносок и библиографии, 16-е изд.). Источников на кириллице нет. Ссылки в тексте даны постраничными сносками.
-
 1. Apple Inc. “Models with a LiDAR Scanner.” Apple Support. Accessed October 19, 2026. <https://support.apple.com/en-gb/guide/ipad/aside/ipad8a95fdc0/ipados>.
 2. Apple Inc. “RoomPlan.” Apple Developer. Accessed October 19, 2026. <https://developer.apple.com/augmented-reality/roomplan>.
 3. Curless, Brian, and Marc Levoy. “A Volumetric Method for Building Complex Models from Range Images.” In *Proceedings of the 23rd Annual Conference on Computer Graphics and Interactive Techniques (SIGGRAPH)*, 303–12. 1996.
