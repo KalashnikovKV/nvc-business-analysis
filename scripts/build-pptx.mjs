@@ -11,7 +11,7 @@ const data = JSON.parse(fs.readFileSync(input, "utf8"));
 const W = 10;
 const X = 0.5;
 const CW = W - 2 * X;
-const TOP = 1.9; // начало содержимого под заголовком
+const TOP = 1.75; // начало содержимого под заголовком
 const BOTTOM = 5.15; // граница над подписью раздела (она стоит на 5,2)
 
 const COLOR = {
@@ -38,7 +38,7 @@ pres.defineSlideMaster({
   slideNumber: { x: 9.0, y: 5.2, w: 0.5, h: 0.3, fontFace: FONT, fontSize: 10, color: COLOR.muted, align: "right" },
   objects: [{
     placeholder: {
-      options: { name: "title", type: "title", x: X, y: 0.72, w: CW, h: 1.0, fontFace: FONT, fontSize: 26, bold: true, color: COLOR.ink, align: "left", valign: "top", margin: 0 },
+      options: { name: "title", type: "title", x: X, y: 0.45, w: CW, h: 1.0, fontFace: FONT, fontSize: 26, bold: true, color: COLOR.ink, align: "left", valign: "top", margin: 0 },
       text: "",
     },
   }],
@@ -67,22 +67,6 @@ const labelled = (slide, label, value, x, y, w, h, o = {}) =>
     { text: label, options: { fontSize: 10, color: o.labelColor || COLOR.muted, breakLine: true } },
     { text: value, options: { fontSize: o.size || 15, bold: o.bold ?? true, color: o.color || COLOR.ink } },
   ], x + 0.08, y + 0.06, w - 0.16, h - 0.12, { name: o.name, paraSpaceAfter: 3 });
-
-function chain(slide, active) {
-  if (active === undefined || active === null) return;
-  let x = X;
-  data.chain.forEach((step, i) => {
-    const w = 0.22 + step.length * 0.085;
-    const on = i === active;
-    box(slide, x, 0.3, w, 0.28, on ? COLOR.teal : COLOR.white, { line: on ? COLOR.teal : COLOR.line, name: `chain-${i}` });
-    text(slide, step, x, 0.3, w, 0.28, { size: 10, color: on ? COLOR.white : COLOR.muted, align: "center", valign: "middle", margin: 0 });
-    x += w;
-    if (i < data.chain.length - 1) {
-      text(slide, "→", x, 0.3, 0.25, 0.28, { size: 10, color: COLOR.muted, align: "center", valign: "middle", margin: 0 });
-      x += 0.25;
-    }
-  });
-}
 
 // --- Блоки: каждый рисует себя с позиции y и возвращает занятую высоту --------
 
@@ -239,27 +223,6 @@ const blocks = {
     });
     return 3 * rh + 2 * 0.12;
   },
-  backup(slide, b, y) {
-    const gap = 0.25, w = (CW - gap) / 2, h = 1.0;
-    b.items.forEach(([label, value, href], i) => {
-      const x = X + (i % 2) * (w + gap), yy = y + Math.floor(i / 2) * (h + gap);
-      box(slide, x, yy, w, h, COLOR.white, { line: COLOR.line, name: `backup-${i}` });
-      text(slide, [
-        { text: label, options: { fontSize: 11, color: COLOR.teal, breakLine: true } },
-        { text: value, options: { fontSize: 18, bold: true, color: COLOR.ink, hyperlink: { url: data.siteUrl + href } } },
-      ], x + 0.1, yy + 0.08, w - 0.2, h - 0.16, {});
-    });
-    return 2 * h + gap;
-  },
-  qa(slide, b, y) {
-    const rowH = 0.85;
-    b.items.forEach(([q, a], i) => {
-      const yy = y + i * rowH;
-      text(slide, q, X, yy, 3.3, rowH - 0.05, { size: 14, bold: true });
-      text(slide, a, X + 3.4, yy, CW - 3.4, rowH - 0.05, { size: 14, color: "374151" });
-    });
-    return b.items.length * rowH;
-  },
 };
 
 // --- Слайды ------------------------------------------------------------------
@@ -273,36 +236,24 @@ function titleSlide(s) {
   text(slide, b.people.join("\n"), X, 3.9, CW, 0.8, { size: 14, color: "E2E8F0", margin: 0, paraSpaceAfter: 4 });
 }
 
-function contentSlide(s, section, title = s.title, blocksList = s.blocks) {
-  const slide = pres.addSlide({ masterName: "CONTENT", sectionTitle: section });
-  chain(slide, s.chain);
-  slide.addText(title, { placeholder: "title" });
-  let y = s.chain === undefined || s.chain === null ? 1.45 : TOP;
-  for (const b of blocksList) {
+function contentSlide(s) {
+  const slide = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Доклад" });
+  slide.addText(s.title, { placeholder: "title" });
+  let y = TOP;
+  for (const b of s.blocks) {
     const draw = blocks[b.type];
     if (!draw) throw new Error(`Нет отрисовки для блока ${b.type}`);
     y += draw(slide, b, y) + GAP;
   }
-  if (y - GAP > BOTTOM + 0.05) console.warn(`Слайд «${title}» выходит за границу: ${y.toFixed(2)}`);
+  if (y - GAP > BOTTOM + 0.05) console.warn(`Слайд «${s.title}» выходит за границу: ${y.toFixed(2)}`);
   text(slide, s.ref, X, 5.2, 8.2, 0.3, { size: 10, color: COLOR.muted, margin: 0, name: "section-ref" });
   return slide;
 }
 
 pres.addSection({ title: "Доклад" });
-let backupStarted = false;
 for (const s of data.slides) {
-  if (s.kind === "title") { titleSlide(s); continue; }
-  if (s.kind === "backup" && !backupStarted) { pres.addSection({ title: "После доклада" }); backupStarted = true; }
-  const section = s.kind === "backup" ? "После доклада" : "Доклад";
-  const qa = s.blocks.find((b) => b.type === "qa");
-  if (qa) {
-    // Семь ответов не помещаются крупным шрифтом на один слайд — делим на два.
-    const half = Math.ceil(qa.items.length / 2);
-    contentSlide(s, section, `${s.title} (1 из 2)`, [{ type: "qa", items: qa.items.slice(0, half) }]);
-    contentSlide(s, section, `${s.title} (2 из 2)`, [{ type: "qa", items: qa.items.slice(half) }]);
-    continue;
-  }
-  contentSlide(s, section);
+  if (s.kind === "title") titleSlide(s);
+  else contentSlide(s);
 }
 
 await pres.writeFile({ fileName: output });
