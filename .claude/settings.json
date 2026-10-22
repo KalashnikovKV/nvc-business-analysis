@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./node_modules/**)",
+      "Read(./**/*.pdf)"
+    ],
+    "allow": [
+      "Bash(npx markdownlint \"**/*.md\" --ignore node_modules --config .markdownlint.json)"
+    ]
+  }
+}
