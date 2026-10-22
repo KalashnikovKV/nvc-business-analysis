@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Заявления · NVC Maps</title>
+  <link rel="stylesheet" href="wireframes.css?v=11" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Бизнес-анализ</a>
+    <h1>Заявления</h1>
+    <nav>
+      <a href="d00-introduction.html">Введение</a>
+      <a href="d01-analysis.html">1. Аналитическая часть</a>
+      <a href="d02-requirements.html">2. Требования к системе</a>
+      <a href="d03-references.html">Список источников и литературы</a>
+      <a href="d04-backlog.html">Приложение 1. Бэклог</a>
+      <a href="d05-diagrams.html">Приложение 2. Диаграммы</a>
+      <a class="active" href="d06-statements.html">Заявления</a>
+    </nav>
+  </aside>
+  <main class="stage">
+    <article class="doc-board prose">
+      <div class="bar"><span>06</span><span>NVC Maps</span></div>
+      <div class="body">
+<h1>Заявления</h1>
+<h2>Использование искусственного интеллекта</h2>
+<p>Использование инструментов ИИ</p>
+<table>
+<thead>
+<tr>
+<th>Инструмент</th>
+<th>Для чего использован</th>
+<th>Как</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude (Anthropic), Claude Code</td>
+<td>Поиск и сравнение аналогов, сбор данных о рынке</td>
+<td>Веб-поиск по запросам автора; найденные цифры и описания проверены по ссылкам из списка литературы</td>
+</tr>
+<tr>
+<td>Claude (Anthropic), Claude Code</td>
+<td>Структурирование документа по требованиям к блоку бизнес-анализа</td>
+<td>Автор задавал структуру разделов и решения по продукту; модель предлагала формулировки, автор их проверял и правил</td>
+</tr>
+<tr>
+<td>Claude (Anthropic), Claude Code</td>
+<td>Черновики диаграмм, таблиц и критериев приёмки</td>
+<td>Модель готовила черновики по требованиям проекта; автор проверял соответствие продукту</td>
+</tr>
+<tr>
+<td>Claude (Anthropic), Claude Code</td>
+<td>Сборка документа</td>
+<td>Скрипты, которые собирают сайт, PDF и DOCX из исходных файлов</td>
+</tr>
+</tbody>
+</table>
+<p>Решения о продукте, границах релиза, приоритетах и выборе концепции принимал автор. Все факты из внешних источников сопровождаются ссылками.</p>
+      </div>
+    </article>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: "neutral" });</script>
+</body>
+</html>

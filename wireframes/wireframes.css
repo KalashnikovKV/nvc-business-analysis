@@ -550,3 +550,21 @@ button, input, select { font: inherit; }
 .phone.dark .map-card { background: #1c1c1e; border-color: #3a3d42; }
 .phone.dark .map-card p,
 .phone.dark .maps-empty p { color: #d1d5db; }
+
+/* Разделы бизнес-анализа: полный текст */
+.prose .body { font-size: 0.95rem; line-height: 1.55; color: #111827; }
+.prose h1 { font-size: 1.6rem; margin: 0 0 14px; letter-spacing: -0.02em; }
+.prose h2 { font-size: 1.25rem; margin: 28px 0 10px; }
+.prose h3 { font-size: 1.05rem; margin: 22px 0 8px; }
+.prose h4 { font-size: 0.98rem; margin: 18px 0 6px; }
+.prose p, .prose li { margin: 0 0 8px; }
+.prose ul, .prose ol { padding-left: 1.3rem; margin: 0 0 12px; }
+.prose a { color: #0f766e; overflow-wrap: anywhere; }
+.prose code { font-family: var(--mono); font-size: 0.85em; background: #f3f4f6; padding: 1px 4px; border-radius: 4px; }
+.prose table { display: block; overflow-x: auto; border-collapse: collapse; margin: 0 0 16px; font-size: 0.86rem; }
+.prose th, .prose td { border: 1px solid var(--line); padding: 6px 8px; vertical-align: top; text-align: left; }
+.prose th { background: #f9fafb; }
+.prose img { display: block; max-width: 100%; height: auto; margin: 10px 0 4px; border: 1px solid var(--line); border-radius: 10px; }
+.prose pre.mermaid { background: #fff; text-align: center; margin: 10px 0 18px; overflow-x: auto; }
+@media (max-width: 700px) { .prose .body { padding: 16px; } }
+.downloads { display: flex; flex-wrap: wrap; gap: 10px; }

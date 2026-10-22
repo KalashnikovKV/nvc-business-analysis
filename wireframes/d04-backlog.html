@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Приложение 1. Бэклог · NVC Maps</title>
+  <link rel="stylesheet" href="wireframes.css?v=11" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Бизнес-анализ</a>
+    <h1>Приложение 1. Бэклог</h1>
+    <nav>
+      <a href="d00-introduction.html">Введение</a>
+      <a href="d01-analysis.html">1. Аналитическая часть</a>
+      <a href="d02-requirements.html">2. Требования к системе</a>
+      <a href="d03-references.html">Список источников и литературы</a>
+      <a class="active" href="d04-backlog.html">Приложение 1. Бэклог</a>
+      <a href="d05-diagrams.html">Приложение 2. Диаграммы</a>
+      <a href="d06-statements.html">Заявления</a>
+    </nav>
+  </aside>
+  <main class="stage">
+    <article class="doc-board prose">
+      <div class="bar"><span>04</span><span>NVC Maps</span></div>
+      <div class="body">
+<h1>Приложение 1. Бэклог</h1>
+<p>Полная таблица эпиков и историй приведена в табл. П.1.1. Она собирается автоматически из раздела 2.5, поэтому совпадает с ним дословно.</p>
+<p>Табл. П.1.1. Бэклог: эпики и истории</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Эпик</th>
+<th>История</th>
+<th>Критерии приёмки</th>
+<th>MoSCoW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>US-1.1</td>
+<td>E1</td>
+<td><strong>Запись зоны.</strong> <strong>Как</strong> оператор съёмки, <strong>я хочу</strong> записать участок на телефоне с LiDAR, <strong>чтобы</strong> получить съёмку с глубиной в метрах.</td>
+<td>1) <strong>Дано</strong> телефон с LiDAR и открытая запись, <strong>когда</strong> оператор начинает запись, <strong>тогда</strong> на полу фиксируется зона 0,8 × 0,8 м. 2) <strong>Дано</strong> запись остановлена, <strong>когда</strong> съёмка сохраняется, <strong>тогда</strong> в ней есть видео, позы камеры, служебные данные и кадры глубины.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-1.2</td>
+<td>E1</td>
+<td><strong>Проверка записи до отправки.</strong> <strong>Как</strong> оператор съёмки, <strong>я хочу</strong> сразу узнать, годится ли запись, <strong>чтобы</strong> не отправлять брак и переснять на месте.</td>
+<td>1) <strong>Дано</strong> запись 10–30 с с путём камеры ≥ 0,28 м и поворотом ≥ 90°, <strong>когда</strong> проверка завершена, <strong>тогда</strong> показано «Готово» и кнопка «Отправить». 2) <strong>Дано</strong> запись короче 10 с, длиннее 30 с, без поз или без глубины, <strong>когда</strong> проверка завершена, <strong>тогда</strong> показана причина одной фразой и кнопка «Переснять». 3) <strong>Дано</strong> проверка не пройдена, <strong>когда</strong> оператор пытается отправить запись, <strong>тогда</strong> отправка недоступна.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-1.3</td>
+<td>E1</td>
+<td><strong>Подсказка обхода.</strong> <strong>Как</strong> оператор съёмки, <strong>я хочу</strong> видеть во время записи, сколько ещё обойти, <strong>чтобы</strong> снять участок с первого раза.</td>
+<td>1) <strong>Дано</strong> идёт запись, <strong>когда</strong> путь камеры меньше 0,28 м или поворот меньше 90°, <strong>тогда</strong> на экране видна подсказка, что обойти ещё.</td>
+<td>Should</td>
+</tr>
+<tr>
+<td>US-2.1</td>
+<td>E2</td>
+<td><strong>Отправка с телефона.</strong> <strong>Как</strong> оператор съёмки, <strong>я хочу</strong> отправить запись на сервер одной кнопкой, <strong>чтобы</strong> сборка началась без ручной команды.</td>
+<td>1) <strong>Дано</strong> проверка пройдена, <strong>когда</strong> оператор нажимает «Отправить», <strong>тогда</strong> создаётся задание со статусом «в очереди». 2) <strong>Дано</strong> отправка не удалась из-за сети, <strong>когда</strong> приходит ошибка, <strong>тогда</strong> причина показана текстом и отправку можно повторить.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-2.2</td>
+<td>E2</td>
+<td><strong>Загрузка из браузера.</strong> <strong>Как</strong> сборщик карты, <strong>я хочу</strong> загрузить сохранённую съёмку формой в браузере, <strong>чтобы</strong> собрать карту без телефона.</td>
+<td>1) <strong>Дано</strong> открыта форма загрузки, <strong>когда</strong> выбран файл без видео, поз или служебных данных, <strong>тогда</strong> до отправки показано, чего не хватает. 2) <strong>Дано</strong> состав съёмки полный, <strong>когда</strong> сборщик отправляет форму, <strong>тогда</strong> создаётся задание и открывается список заданий.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-2.3</td>
+<td>E2</td>
+<td><strong>Повторная отправка без второй сборки.</strong> <strong>Как</strong> сборщик карты, <strong>я хочу</strong>, чтобы повтор той же съёмки после обрыва связи не запускал вторую сборку, <strong>чтобы</strong> в списке не было дублей и задание не висело без статуса.</td>
+<td>1) <strong>Дано</strong> задание по съёмке уже создано, <strong>когда</strong> та же съёмка отправлена ещё раз, <strong>тогда</strong> возвращается текущее задание, вторая сборка не стартует. 2) <strong>Дано</strong> первое задание завершилось отказом, <strong>когда</strong> съёмка отправлена ещё раз, <strong>тогда</strong> виден этот отказ с причиной.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-2.4</td>
+<td>E2</td>
+<td><strong>Мои задания в браузере.</strong> <strong>Как</strong> сборщик карты, <strong>я хочу</strong> одной кнопкой с телефона открыть в браузере все свои задания, <strong>чтобы</strong> смотреть отчёты и карты на большом экране.</td>
+<td>1) <strong>Дано</strong> у пользователя есть задания, <strong>когда</strong> он нажимает «Открыть в браузере», <strong>тогда</strong> браузер открывает список всех его заданий с датой и статусом. 2) <strong>Дано</strong> одноразовая ссылка уже открыта или истекла, <strong>когда</strong> её открывают снова, <strong>тогда</strong> список не открывается, а телефон выдаёт новую ссылку. 3) <strong>Дано</strong> другой браузер без сессии, <strong>когда</strong> открывается адрес чужого задания, <strong>тогда</strong> карта и отчёт не показываются.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-2.5</td>
+<td>E2</td>
+<td><strong>Фильтр по статусу.</strong> <strong>Как</strong> сборщик карты, <strong>я хочу</strong> отфильтровать задания по статусу, <strong>чтобы</strong> быстро найти готовые карты и отказы.</td>
+<td>1) <strong>Дано</strong> открыт список заданий, <strong>когда</strong> выбран фильтр «готово», <strong>тогда</strong> видны только готовые задания.</td>
+<td>Should</td>
+</tr>
+<tr>
+<td>US-2.6</td>
+<td>E2</td>
+<td><strong>Удаление съёмки с телефона.</strong> <strong>Как</strong> оператор съёмки, <strong>я хочу</strong> удалить ненужную съёмку из «Моих карт», <strong>чтобы</strong> освободить память телефона.</td>
+<td>1) <strong>Дано</strong> карточка съёмки в «Моих картах», <strong>когда</strong> оператор подтверждает удаление, <strong>тогда</strong> файлы съёмки удаляются с телефона.</td>
+<td>Could</td>
+</tr>
+<tr>
+<td>US-3.1</td>
+<td>E3</td>
+<td><strong>Отчёт о сборке.</strong> <strong>Как</strong> сборщик карты, <strong>я хочу</strong> видеть в отчёте статус, способ построения и метрики, <strong>чтобы</strong> решать по цифрам, а не на глаз.</td>
+<td>1) <strong>Дано</strong> сборка завершена, <strong>когда</strong> сборщик открывает отчёт, <strong>тогда</strong> видны статус, способ построения, число треугольников визуала и опоры, размеры файлов. 2) <strong>Дано</strong> сборка успешна, <strong>когда</strong> открыт отчёт, <strong>тогда</strong> способ построения — слияние глубины LiDAR, а не заглушка.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-3.2</td>
+<td>E3</td>
+<td><strong>Отказ с причиной.</strong> <strong>Как</strong> сборщик карты, <strong>я хочу</strong> получить отказ с понятной причиной на непригодной съёмке, <strong>чтобы</strong> не принять брак за карту.</td>
+<td>1) <strong>Дано</strong> съёмка без корректных поз или с неудачной реконструкцией, <strong>когда</strong> сборка завершается, <strong>тогда</strong> статус — «отказ» и в отчёте текст причины. 2) <strong>Дано</strong> статус «отказ», <strong>когда</strong> сборщик открывает задание, <strong>тогда</strong> геометрия-заглушка не выдаётся и скачать пакет нельзя.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-3.3</td>
+<td>E3</td>
+<td><strong>Карта в игровом бюджете.</strong> <strong>Как</strong> разработчик игры, <strong>я хочу</strong> получать карту в пределах бюджета, <strong>чтобы</strong> не упрощать её вручную.</td>
+<td>1) <strong>Дано</strong> сборка успешна, <strong>когда</strong> пакет записан, <strong>тогда</strong> визуал ≤ 50 000 треугольников и ≤ 25 МБ. 2) <strong>Дано</strong> сборка успешна, <strong>когда</strong> пакет записан, <strong>тогда</strong> опора ≤ 25% граней визуала, ≥ 100 граней и ≤ 8 МБ.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-3.4</td>
+<td>E3</td>
+<td><strong>Сравнение повторной сборки.</strong> <strong>Как</strong> сборщик карты, <strong>я хочу</strong> сравнить повторную сборку той же съёмки с первой, <strong>чтобы</strong> убедиться, что результат воспроизводится.</td>
+<td>1) <strong>Дано</strong> две сборки одной съёмки, <strong>когда</strong> сборщик сравнивает отчёты, <strong>тогда</strong> способ построения совпадает, а число треугольников различается не больше чем на 15%.</td>
+<td>Should</td>
+</tr>
+<tr>
+<td>US-4.1</td>
+<td>E4</td>
+<td><strong>Ходьба по карте.</strong> <strong>Как</strong> сборщик карты, <strong>я хочу</strong> пройти по готовой карте персонажем в браузере, <strong>чтобы</strong> проверить проходимость без игрового движка.</td>
+<td>1) <strong>Дано</strong> сборка успешна, <strong>когда</strong> сборщик открывает просмотр, <strong>тогда</strong> персонаж стоит на опоре не меньше 5 с и не проваливается. 2) <strong>Дано</strong> открыт просмотр, <strong>когда</strong> сборщик ведёт персонажа от края до края, <strong>тогда</strong> персонаж проходит карту целиком.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-4.2</td>
+<td>E4</td>
+<td><strong>Кадр съёмки рядом с картой.</strong> <strong>Как</strong> сборщик карты, <strong>я хочу</strong> видеть рядом с моделью кадр съёмки, <strong>чтобы</strong> сравнить карту с реальным местом.</td>
+<td>1) <strong>Дано</strong> открыт просмотр, <strong>когда</strong> карта загружена, <strong>тогда</strong> рядом виден кадр съёмки с той же камеры.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-4.3</td>
+<td>E4</td>
+<td><strong>Рост персонажа при показе.</strong> <strong>Как</strong> сборщик карты, <strong>я хочу</strong> менять рост персонажа в просмотре, <strong>чтобы</strong> примерить карту под разные игры.</td>
+<td>1) <strong>Дано</strong> открыт просмотр, <strong>когда</strong> сборщик меняет рост персонажа, <strong>тогда</strong> персонаж меняется, а геометрия карты и файлы пакета — нет.</td>
+<td>Should</td>
+</tr>
+<tr>
+<td>US-5.1</td>
+<td>E5</td>
+<td><strong>Скачивание пакета.</strong> <strong>Как</strong> разработчик игры, <strong>я хочу</strong> скачать пакет из пяти файлов, <strong>чтобы</strong> открыть карту в своём движке.</td>
+<td>1) <strong>Дано</strong> сборка успешна, <strong>когда</strong> разработчик нажимает «Скачать», <strong>тогда</strong> он получает <code>map.glb</code>, <code>collision.glb</code>, <code>manifest.json</code>, <code>bounds.json</code>, <code>report.json</code>. 2) <strong>Дано</strong> пакет скачан, <strong>когда</strong> оба GLB открываются в просмотрщике glTF, <strong>тогда</strong> они открываются без ошибок.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-5.2</td>
+<td>E5</td>
+<td><strong>Настоящие размеры и описание пакета.</strong> <strong>Как</strong> разработчик игры, <strong>я хочу</strong> получать карту в метрах датчика с описанием осей, <strong>чтобы</strong> самому выставить масштаб персонажа.</td>
+<td>1) <strong>Дано</strong> пакет скачан, <strong>когда</strong> разработчик читает манифест, <strong>тогда</strong> там указаны метры, ось Y вверх и факт центрирования. 2) <strong>Дано</strong> пакет собран, <strong>когда</strong> сравниваются размеры карты и съёмки, <strong>тогда</strong> масштаб геометрии не менялся.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-5.3</td>
+<td>E5</td>
+<td><strong>Инструкция для Godot.</strong> <strong>Как</strong> разработчик игры, <strong>я хочу</strong> короткую инструкцию, как открыть пакет в Godot, <strong>чтобы</strong> не разбираться с импортом самому.</td>
+<td>1) <strong>Дано</strong> открыт отчёт, <strong>когда</strong> разработчик переходит по ссылке «Как открыть в Godot», <strong>тогда</strong> видны шаги импорта визуала и опоры.</td>
+<td>Should</td>
+</tr>
+<tr>
+<td>US-6.1</td>
+<td>E6</td>
+<td><strong>Тестовая ссылка на эталоны.</strong> <strong>Как</strong> команда сервиса, <strong>я хочу</strong> выпустить многоразовую ссылку на четыре эталонных задания, <strong>чтобы</strong> продукт можно было проверить без телефона с LiDAR.</td>
+<td>1) <strong>Дано</strong> выпущена тестовая ссылка, <strong>когда</strong> её открывают в любом браузере, <strong>тогда</strong> видны только четыре эталонных задания с отчётами и ходьбой. 2) <strong>Дано</strong> открыта тестовая ссылка, <strong>когда</strong> смотрят список, <strong>тогда</strong> личные задания пользователей не видны.</td>
+<td>Must</td>
+</tr>
+<tr>
+<td>US-6.2</td>
+<td>E6</td>
+<td><strong>Замена тестовой ссылки.</strong> <strong>Как</strong> команда сервиса, <strong>я хочу</strong> заменить тестовую ссылку, <strong>чтобы</strong> закрыть доступ по старой.</td>
+<td>1) <strong>Дано</strong> ссылка заменена, <strong>когда</strong> открывают старую, <strong>тогда</strong> задания не открываются.</td>
+<td>Must</td>
+</tr>
+</tbody>
+</table>
+      </div>
+    </article>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: "neutral" });</script>
+</body>
+</html>

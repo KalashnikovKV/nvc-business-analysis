@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Приложение 2. Диаграммы · NVC Maps</title>
+  <link rel="stylesheet" href="wireframes.css?v=11" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Бизнес-анализ</a>
+    <h1>Приложение 2. Диаграммы</h1>
+    <nav>
+      <a href="d00-introduction.html">Введение</a>
+      <a href="d01-analysis.html">1. Аналитическая часть</a>
+      <a href="d02-requirements.html">2. Требования к системе</a>
+      <a href="d03-references.html">Список источников и литературы</a>
+      <a href="d04-backlog.html">Приложение 1. Бэклог</a>
+      <a class="active" href="d05-diagrams.html">Приложение 2. Диаграммы</a>
+      <a href="d06-statements.html">Заявления</a>
+    </nav>
+  </aside>
+  <main class="stage">
+    <article class="doc-board prose">
+      <div class="bar"><span>05</span><span>NVC Maps</span></div>
+      <div class="body">
+<h1>Приложение 2. Диаграммы</h1>
+<pre class="mermaid">flowchart TD
+  S((Старт)) --&gt; A[Снять место в сканере]
+  A --&gt; B[Выгрузить плотную модель]
+  B --&gt; C[Почистить и упростить в Blender]
+  C --&gt; D[Построить опору для персонажа вручную]
+  D --&gt; E[Выставить размеры вручную]
+  E --&gt; F[Импортировать в движок]
+  F --&gt; G{Персонаж ходит?}
+  G -- Нет: брак съёмки --&gt; A
+  G -- Нет: брак опоры --&gt; D
+  G -- Да --&gt; H((Уровень готов))
+  classDef manual fill:#fde2e1,stroke:#d9534f,color:#111;
+  class C,D,E,G manual
+</pre>
+<p>Рис. П.2.1. Процесс AS-IS: уровень с реального места сегодня</p>
+<p>UML-диаграмма активности. Ручные шаги и поздняя проверка отмечены красным.</p>
+<pre class="mermaid">flowchart TD
+  S((Старт)) --&gt; A[Обойти зону телефоном 10–30 с]
+  A --&gt; B{Проверка записи на телефоне}
+  B -- Не годится: причина --&gt; A
+  B -- Годится --&gt; C[Отправить на сервер]
+  C --&gt; D[Сервер собирает карту и отчёт]
+  D --&gt; E{Сборка успешна?}
+  E -- Отказ с причиной --&gt; A
+  E -- Да --&gt; F[Пройти по карте в браузере]
+  F --&gt; G[Скачать пакет в движок]
+  G --&gt; H((Уровень готов))
+</pre>
+<p>Рис. П.2.2. Процесс TO-BE: уровень с NVC Maps</p>
+<pre class="mermaid">flowchart LR
+  Op([Оператор съёмки])
+  Col([Сборщик карты])
+  Dev([Разработчик игры])
+  Team([Команда сервиса])
+  subgraph NVC[Система NVC Maps]
+    App[Приложение съёмки]
+    API[Сервис приёма и заданий]
+    Worker[Конвейер сборки]
+    Web[Веб-клиент]
+  end
+  ARKit[[ARKit и LiDAR на iPhone]]
+  Host[[Хостинг: база и хранилище файлов]]
+  Engine[[Игровые движки: Godot, Unity, Unreal]]
+  Op --&gt; App
+  App &lt;--&gt; ARKit
+  App --&gt;|съёмка| API
+  Col --&gt; Web
+  Web --&gt;|статус, отчёт, карта| API
+  API --&gt; Worker
+  API &lt;--&gt; Host
+  Worker &lt;--&gt; Host
+  Dev --&gt;|скачивает пакет| Web
+  Dev --&gt; Engine
+  Team --&gt;|тестовая ссылка| API
+</pre>
+<p>Рис. П.2.3. Контекстная диаграмма</p>
+<pre class="mermaid">flowchart LR
+  Op([Оператор съёмки])
+  Col([Сборщик карты])
+  Dev([Разработчик игры])
+  Team([Команда сервиса])
+  Op --&gt; U1(Записать зону)
+  Op --&gt; U2(Проверить запись)
+  Op --&gt; U3(Отправить съёмку)
+  Col --&gt; U4(Загрузить съёмку из браузера)
+  Col --&gt; U5(Открыть свои задания)
+  Col --&gt; U6(Смотреть отчёт)
+  Col --&gt; U7(Пройти по карте)
+  Dev --&gt; U8(Скачать пакет)
+  Team --&gt; U9(Выпустить или заменить тестовую ссылку)
+</pre>
+<p>Рис. П.2.4. Диаграмма вариантов использования</p>
+<pre class="mermaid">%%{init: {&quot;themeVariables&quot;: {&quot;fontSize&quot;: &quot;20px&quot;}, &quot;sequence&quot;: {&quot;messageMargin&quot;: 22, &quot;boxMargin&quot;: 6, &quot;actorMargin&quot;: 40, &quot;messageFontSize&quot;: 20, &quot;actorFontSize&quot;: 20, &quot;noteFontSize&quot;: 18, &quot;mirrorActors&quot;: false}}}%%
+sequenceDiagram
+  actor Op as Оператор / сборщик
+  participant App as Приложение съёмки
+  participant API as Сервис приёма
+  participant W as Конвейер сборки
+  participant S as Хранилище
+  participant Web as Веб-клиент
+  Op-&gt;&gt;App: Записать зону и остановить
+  App-&gt;&gt;App: Проверить запись
+  alt Запись не годится
+    App--&gt;&gt;Op: Причина и «Переснять»
+  else Запись годится
+    Op-&gt;&gt;App: Отправить
+    App-&gt;&gt;API: Съёмка и ключ пользователя
+    API--&gt;&gt;App: Задание «в очереди»
+    API-&gt;&gt;W: Задание
+    W-&gt;&gt;S: Пакет из пяти файлов или отказ
+    W-&gt;&gt;API: Статус и метрики
+    Op-&gt;&gt;App: Открыть в браузере
+    App-&gt;&gt;API: Запрос одноразовой ссылки
+    API--&gt;&gt;App: Ссылка
+    App-&gt;&gt;Web: Открыть ссылку
+    Web-&gt;&gt;API: Обменять ссылку на сессию
+    API--&gt;&gt;Web: Список заданий пользователя
+    Op-&gt;&gt;Web: Открыть отчёт и просмотр
+    Web-&gt;&gt;S: Опора и кадр съёмки по короткой ссылке
+    Op-&gt;&gt;Web: Пройти по карте и скачать пакет
+  end
+</pre>
+<p>Рис. П.2.5. Системная диаграмма последовательности: UC-1 и UC-2</p>
+<pre class="mermaid">flowchart TD
+  S((Старт)) --&gt; A[Открыть «Сканировать»]
+  A --&gt; B[Рамка зоны 0,8 × 0,8 м]
+  B --&gt; C[Обход 10–30 с, стоп]
+  C --&gt; D{Проверка: длительность, путь, поворот, позы, глубина}
+  D -- Не пройдена --&gt; E[Причина и «Переснять»]
+  E --&gt; A
+  D -- Пройдена --&gt; F[Отправить]
+  F --&gt; G{Связь есть?}
+  G -- Обрыв --&gt; H[Отправить ещё раз]
+  H --&gt; I{Съёмка уже на сервере?}
+  I -- Да --&gt; J[Вернуть текущее задание]
+  I -- Нет --&gt; K[Создать задание]
+  G -- Да --&gt; K
+  J --&gt; Z((Задание в очереди))
+  K --&gt; Z
+</pre>
+<p>Рис. П.2.6. Диаграмма активности UC-1 с альтернативными потоками</p>
+      </div>
+    </article>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: "neutral" });</script>
+</body>
+</html>

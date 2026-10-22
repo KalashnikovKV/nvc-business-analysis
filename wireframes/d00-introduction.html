@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Введение · NVC Maps</title>
+  <link rel="stylesheet" href="wireframes.css?v=11" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Бизнес-анализ</a>
+    <h1>Введение</h1>
+    <nav>
+      <a class="active" href="d00-introduction.html">Введение</a>
+      <a href="d01-analysis.html">1. Аналитическая часть</a>
+      <a href="d02-requirements.html">2. Требования к системе</a>
+      <a href="d03-references.html">Список источников и литературы</a>
+      <a href="d04-backlog.html">Приложение 1. Бэклог</a>
+      <a href="d05-diagrams.html">Приложение 2. Диаграммы</a>
+      <a href="d06-statements.html">Заявления</a>
+    </nav>
+  </aside>
+  <main class="stage">
+    <article class="doc-board prose">
+      <div class="bar"><span>00</span><span>NVC Maps</span></div>
+      <div class="body">
+<h1>Введение</h1>
+<h2>Актуальность и проблема</h2>
+<p><strong>У кого проблема.</strong> У тех, кто делает небольшие игры и прототипы без 3D-художника. Это инди-разработчики и участники гейм-джемов, level-дизайнеры небольших студий, авторы настольных макетов и диорам, преподаватели и студенты геймдев-курсов. В 2025 году в Steam вышло 18–20 тысяч игр<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. В Fortnite за 2024 год число авторов карт выросло с 24 до 70 тысяч<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>. У Roblox к концу 2025 года в программе выплат было больше 35 тысяч авторов<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>.</p>
+<p><strong>В чём проблема.</strong> Человек хочет сделать уровень с реального места: угла стола, куска пола, макета. Телефон с датчиком глубины LiDAR снимает такое место в метрах<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>. Но приложения-сканеры отдают модель для просмотра, а не уровень<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>. По ней нельзя сразу пустить персонажа. Опору под ноги, упрощение модели, размеры и проверку проходимости делают вручную в 3D-редакторе и движке. Без навыков 3D-моделирования реальное место в прототип не попадает, а с навыками на него уходит много ручной работы. Плохая съёмка при этом выглядит как удачная: сканер выдаёт модель всегда, и брак становится виден только в движке.</p>
+<p><strong>Почему сейчас.</strong> LiDAR есть во всех iPhone Pro начиная с iPhone 12 Pro и в iPad Pro<sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup>. Формат glTF 2.0 открывают браузер и популярные игровые движки<sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup>. Число людей, которые делают игры и карты, растёт<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup>. Методы, на которых строится автоматическая сборка, — объёмное слияние глубины, построение поверхности и упрощение сетки — давно отработаны<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">9</a></sup>. Не хватает продукта, который соберёт их в путь «снял — прошёл по уровню».</p>
+<h2>Цель и задачи</h2>
+<p><strong>Цель.</strong> Сократить путь от съёмки реального участка до проходимого игрового уровня до одного обхода телефоном, без ручной доводки геометрии.</p>
+<p><strong>Задачи.</strong></p>
+<ol>
+<li>Описать, как уровень с реального места делают сейчас, и найти, где теряются время и данные (раздел 1.1).</li>
+<li>Проанализировать источники и аналоги и определить, чего не хватает существующим решениям (разделы 1.2–1.3).</li>
+<li>Сформулировать видение, бизнес-цели и измеримые KPI продукта (раздел 2.1).</li>
+<li>Описать функциональные и нефункциональные требования: эпики, user stories с критериями приёмки, сценарии, NFR (разделы 2.5–2.7).</li>
+<li>Определить правовые требования, риски и критерии оценки результата (разделы 2.8–2.10).</li>
+</ol>
+<h2>Объект и предмет</h2>
+<p><strong>Объект</strong> — процесс создания игрового уровня по реальному месту: от съёмки до первой проверки уровня в игровом движке.</p>
+<p><strong>Предмет</strong> — автоматизируемая часть этого процесса: проверка съёмки, сборка карты с отдельной опорой для персонажа, проверка проходимости в браузере и выдача пакета для движков.</p>
+<h2>Методы</h2>
+<p>Требования собраны так:</p>
+<ul>
+<li><strong>Анализ документов.</strong> Техническое задание и чертёж пайплайна проекта, спецификация glTF 2.0<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">11</a></sup>, документация ARKit и RoomPlan<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">12</a></sup>, регламент GDPR<sup id="fnref:12"><a class="footnote-ref" href="#fn:12">13</a></sup>, WCAG 2.1<sup id="fnref:13"><a class="footnote-ref" href="#fn:13">14</a></sup>.</li>
+<li><strong>Обзор литературы.</strong> Научные работы по реконструкции поверхности, упрощению сеток и превращению видео в интерактивные сцены<sup id="fnref:14"><a class="footnote-ref" href="#fn:14">15</a></sup>.</li>
+<li><strong>Бенчмаркинг аналогов.</strong> Сравнение девяти решений по открытым описаниям, документации и ценам<sup id="fnref:15"><a class="footnote-ref" href="#fn:15">16</a></sup> (раздел 1.3).</li>
+<li><strong>Прото-персона.</strong> Персона построена по результатам анализа документов и рынка. Интервью с пользователями не проводились; проверка персоны на реальных людях вынесена в риски (раздел 2.9).</li>
+</ul>
+<p>Техники описаны по BABOK v3<sup id="fnref:16"><a class="footnote-ref" href="#fn:16">10</a></sup>: анализ документов, бенчмаркинг и анализ рынка, моделирование процессов, user stories, приоритизация MoSCoW.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>MP1st, “Over 18,000 Games Released on Steam in 2025, but Half Have Fewer Than 10 Reviews,” 2026, accessed October 19, 2026, <a href="https://mp1st.com/news/18k-games-released-steam-2025-half-have-10-reviews">https://mp1st.com/news/18k-games-released-steam-2025-half-have-10-reviews</a>.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Epic Games, “Fortnite Ecosystem 2024 Year in Review: Celebrating Creators and Looking Ahead,” January 22, 2025, accessed October 19, 2026, <a href="https://www.fortnite.com/news/fortnite-ecosystem-2024-year-in-review-celebrating-creators-and-looking-ahead">https://www.fortnite.com/news/fortnite-ecosystem-2024-year-in-review-celebrating-creators-and-looking-ahead</a>.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Roblox Corporation, “Form 10-K for the Fiscal Year Ended December 31, 2025” (U.S. Securities and Exchange Commission, 2026), accessed October 19, 2026, <a href="https://www.sec.gov/Archives/edgar/data/1315098/000131509826000024/rblx-20251231.htm">https://www.sec.gov/Archives/edgar/data/1315098/000131509826000024/rblx-20251231.htm</a>.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Gregor Luetzenburg, Aart Kroon, and Anders A. Bjørk, “Evaluation of the Apple iPhone 12 Pro LiDAR for an Application in Geosciences,” <em>Scientific Reports</em> 11 (2021): art. 22221; Apple Inc., “Models with a LiDAR Scanner,” Apple Support, accessed October 19, 2026, <a href="https://support.apple.com/en-gb/guide/ipad/aside/ipad8a95fdc0/ipados">https://support.apple.com/en-gb/guide/ipad/aside/ipad8a95fdc0/ipados</a>.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>World Labs, “Marble: Export Mesh,” documentation, accessed October 19, 2026, <a href="https://docs.worldlabs.ai/marble/export/mesh">https://docs.worldlabs.ai/marble/export/mesh</a>; Niantic Spatial, “Scaniverse – 3D Scanner,” App Store, accessed October 19, 2026, <a href="https://apps.apple.com/us/app/-/id1541433223">https://apps.apple.com/us/app/-/id1541433223</a>; Polycam, “Export Gaussian Splats from Polycam to Unreal Engine,” Help Center, accessed October 19, 2026, <a href="https://learn.poly.cam/hc/en-us/articles/42506758152084">https://learn.poly.cam/hc/en-us/articles/42506758152084</a>; KIRI Innovations, “KIRI Engine Pricing,” accessed October 19, 2026, <a href="https://www.kiriengine.app/Pricing">https://www.kiriengine.app/Pricing</a>.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>Apple, “Models with a LiDAR Scanner.”&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>Khronos Group, “glTF 2.0 Specification,” 2021, accessed October 19, 2026, <a href="https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html">https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html</a>.&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>Epic Games, “Fortnite Ecosystem 2024 Year in Review”; Roblox Corporation, “Form 10-K 2025”; MP1st, “Over 18,000 Games Released on Steam in 2025.”&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p>Richard A. Newcombe et al., “KinectFusion: Real-Time Dense Surface Mapping and Tracking,” in <em>Proceedings of the 10th IEEE International Symposium on Mixed and Augmented Reality (ISMAR)</em> (2011), 127–36; Brian Curless and Marc Levoy, “A Volumetric Method for Building Complex Models from Range Images,” in <em>Proceedings of the 23rd Annual Conference on Computer Graphics and Interactive Techniques (SIGGRAPH)</em> (1996), 303–12; William E. Lorensen and Harvey E. Cline, “Marching Cubes: A High Resolution 3D Surface Construction Algorithm,” <em>ACM SIGGRAPH Computer Graphics</em> 21, no. 4 (1987): 163–69; Michael Garland and Paul S. Heckbert, “Surface Simplification Using Quadric Error Metrics,” in <em>Proceedings of the 24th Annual Conference on Computer Graphics and Interactive Techniques (SIGGRAPH)</em> (1997), 209–16.&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:16">
+<p>International Institute of Business Analysis, <em>A Guide to the Business Analysis Body of Knowledge (BABOK Guide)</em>, version 3 (Toronto: IIBA, 2015).&#160;<a class="footnote-backref" href="#fnref:16" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p>Khronos Group, “glTF 2.0 Specification.”&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p>Apple Inc., “RoomPlan,” Apple Developer, accessed October 19, 2026, <a href="https://developer.apple.com/augmented-reality/roomplan">https://developer.apple.com/augmented-reality/roomplan</a>.&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p>European Parliament and Council of the European Union, “Regulation (EU) 2016/679 (General Data Protection Regulation),” <em>Official Journal of the European Union</em> L 119 (May 4, 2016): 1–88.&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:13">
+<p>W3C, “Web Content Accessibility Guidelines (WCAG) 2.1,” W3C Recommendation, June 5, 2018, accessed October 19, 2026, <a href="https://www.w3.org/TR/WCAG21/">https://www.w3.org/TR/WCAG21/</a>.&#160;<a class="footnote-backref" href="#fnref:13" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:14">
+<p>Hongchi Xia et al., “Video2Game: Real-Time Interactive Realistic and Browser-Compatible Environment from a Single Video,” in <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</em> (2024), 4578–88; Newcombe et al., “KinectFusion”; Curless and Levoy, “Volumetric Method”; Lorensen and Cline, “Marching Cubes”; Garland and Heckbert, “Surface Simplification”; Bernhard Kerbl et al., “3D Gaussian Splatting for Real-Time Radiance Field Rendering,” <em>ACM Transactions on Graphics</em> 42, no. 4 (2023): art. 139; Luetzenburg, Kroon, and Bjørk, “Evaluation of the Apple iPhone 12 Pro LiDAR”; Lihe Yang et al., “Depth Anything V2,” in <em>Advances in Neural Information Processing Systems (NeurIPS)</em> (2024); Qian-Yi Zhou, Jaesik Park, and Vladlen Koltun, “Open3D: A Modern Library for 3D Data Processing,” preprint, arXiv:1801.09847, 2018.&#160;<a class="footnote-backref" href="#fnref:14" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+<li id="fn:15">
+<p>Xia et al., “Video2Game”; World Labs, “Marble: Export Mesh”; Niantic Spatial, “Scaniverse”; Polycam, “Export Gaussian Splats”; KIRI Innovations, “KIRI Engine Pricing”; Apple, “RoomPlan.”&#160;<a class="footnote-backref" href="#fnref:15" title="Jump back to footnote 16 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+      </div>
+    </article>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: "neutral" });</script>
+</body>
+</html>

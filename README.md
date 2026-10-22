@@ -9,13 +9,23 @@
 
 | Раздел | Файл |
 |--------|------|
-| Резюме, проблема, цели, критерии успеха | [01-summary-problem-goals.md](01-summary-problem-goals.md) |
-| Стейкхолдеры, границы, допущения, альтернативы | [02-stakeholders-scope-alternatives.md](02-stakeholders-scope-alternatives.md) |
-| Персоны, сценарии, use cases | [03-personas-scenarios-usecases.md](03-personas-scenarios-usecases.md) |
-| User stories и приоритеты | [04-user-stories-moscow.md](04-user-stories-moscow.md) |
-| Экраны и стиль | [05-screens-style-usability.md](05-screens-style-usability.md) |
-| Нефункциональные требования, риски, готовность | [06-nfr-risks-readiness.md](06-nfr-risks-readiness.md) |
+| Введение: проблема, цель и задачи, объект и предмет, методы | [00-introduction.md](00-introduction.md) |
+| Глава 1. Аналитическая часть: AS-IS и TO-BE, источники, аналоги, выводы | [01-analytical-part.md](01-analytical-part.md) |
+| Глава 2. Требования: видение и KPI, стейкхолдеры, границы, концепция, истории, сценарии, NFR, право, риски | [02-system-requirements.md](02-system-requirements.md) |
+| Список источников и литературы (Chicago, генерируется из `references.json`) | [03-references.md](03-references.md) |
+| Приложение 1. Бэклог (генерируется из 2.5) | [04-appendix-a-backlog.md](04-appendix-a-backlog.md) |
+| Приложение 2. Диаграммы | [05-appendix-b-diagrams.md](05-appendix-b-diagrams.md) |
+| Заявления: ИИ, вклад, согласие организации | [06-statements.md](06-statements.md) |
 | Сайт с разделами и экранами | [wireframes/index.html](wireframes/index.html) · [на сайте](https://kalashnikovkv.github.io/nvc-business-analysis/) |
-| Весь анализ одним файлом | [NVC-Maps-бизнес-анализ.md](NVC-Maps-бизнес-анализ.md) |
+| Весь анализ одним файлом | [NVC-Maps-бизнес-анализ.md](NVC-Maps-бизнес-анализ.md) · [PDF](wireframes/NVC-Maps-бизнес-анализ.pdf) · [DOCX для эксперта](wireframes/BA_Kalashnikov_Kirill.docx) |
+
+## Сборка
+
+```bash
+python3 scripts/build-ba.py          # приложение 1, сводный файл, сайт, DOCX и PDF
+python3 scripts/build-ba.py shots    # скриншоты макетов (после правки экранов)
+```
+
+Нужны Python с пакетами `markdown` и `Pillow`, Node.js (`npm install`, mermaid-cli через npx), Google Chrome, LibreOffice и poppler.
 
 **Репозитории:** [`nvc-capture`](../nvc-capture) — съёмка; [`neuralVideoCartography`](../neuralVideoCartography) — сборка карты; сервис и веб-клиент — загрузка, статус, ходьба по карте.

@@ -19,20 +19,24 @@ jobs:
           for f in \
             README.md \
             BA-METHOD.md \
-            01-summary-problem-goals.md \
-            02-stakeholders-scope-alternatives.md \
-            03-personas-scenarios-usecases.md \
-            04-user-stories-moscow.md \
-            05-screens-style-usability.md \
-            06-nfr-risks-readiness.md \
+            00-introduction.md \
+            01-analytical-part.md \
+            02-system-requirements.md \
+            03-references.md \
+            04-appendix-a-backlog.md \
+            05-appendix-b-diagrams.md \
+            06-statements.md \
             wireframes/index.html \
             wireframes/wireframes.css \
-            wireframes/d01-summary.html \
-            wireframes/d02-stakeholders.html \
-            wireframes/d03-personas.html \
-            wireframes/d04-stories.html \
-            wireframes/d05-screens.html \
-            wireframes/d06-nfr.html \
+            wireframes/d00-introduction.html \
+            wireframes/d01-analysis.html \
+            wireframes/d02-requirements.html \
+            wireframes/d03-references.html \
+            wireframes/d04-backlog.html \
+            wireframes/d05-diagrams.html \
+            wireframes/d06-statements.html \
+            wireframes/BA_Kalashnikov_Kirill.docx \
+            wireframes/shots/key-stories.png \
             wireframes/m1-record.html \
             wireframes/m2-preflight.html \
             wireframes/m3-error.html \

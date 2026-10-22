@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>1. Аналитическая часть · NVC Maps</title>
+  <link rel="stylesheet" href="wireframes.css?v=11" />
+</head>
+<body class="page">
+  <aside class="side">
+    <a class="back" href="index.html">← Бизнес-анализ</a>
+    <h1>1. Аналитическая часть</h1>
+    <nav>
+      <a href="d00-introduction.html">Введение</a>
+      <a class="active" href="d01-analysis.html">1. Аналитическая часть</a>
+      <a href="d02-requirements.html">2. Требования к системе</a>
+      <a href="d03-references.html">Список источников и литературы</a>
+      <a href="d04-backlog.html">Приложение 1. Бэклог</a>
+      <a href="d05-diagrams.html">Приложение 2. Диаграммы</a>
+      <a href="d06-statements.html">Заявления</a>
+    </nav>
+  </aside>
+  <main class="stage">
+    <article class="doc-board prose">
+      <div class="bar"><span>01</span><span>NVC Maps</span></div>
+      <div class="body">
+<h1>1. Аналитическая часть</h1>
+<h2>1.1. Текущее состояние</h2>
+<h3>Как задачу решают сейчас (AS-IS)</h3>
+<p>Готового пути «снял место — получил уровень» нет. Человек собирает его сам из нескольких инструментов. Процесс показан на диаграмме активности (рис. П.2.1).</p>
+<p>Шаги, участники и потери текущего процесса приведены в табл. 1.1.</p>
+<p>Табл. 1.1. Шаги текущего процесса и потери</p>
+<table>
+<thead>
+<tr>
+<th>Шаг</th>
+<th>Кто</th>
+<th>Инструмент</th>
+<th>Где теряются время и данные</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Снять место</td>
+<td>Автор уровня</td>
+<td>Сканер на телефоне: Polycam, Scaniverse, KIRI Engine</td>
+<td>Приложение не говорит, годится ли съёмка для уровня. Оно оценивает только картинку</td>
+</tr>
+<tr>
+<td>2. Выгрузить модель</td>
+<td>Автор уровня</td>
+<td>Экспорт OBJ, FBX или GLB, часть форматов только в платном тарифе<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">33</a></sup></td>
+<td>Плотная модель на сотни тысяч треугольников, с мусором по краям</td>
+</tr>
+<tr>
+<td>3. Почистить и упростить</td>
+<td>Автор уровня или 3D-художник</td>
+<td>Blender</td>
+<td>Ручная работа, нужны навыки. Размеры легко сбить при экспорте</td>
+</tr>
+<tr>
+<td>4. Сделать опору для персонажа</td>
+<td>То же</td>
+<td>Blender или движок</td>
+<td>Отдельная упрощённая модель руками. Сплат не держит персонажа, опору всё равно строят отдельно<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">34</a></sup></td>
+</tr>
+<tr>
+<td>5. Импортировать в движок и пройти</td>
+<td>Разработчик</td>
+<td>Godot, Unity, Unreal</td>
+<td>Проходимость видна только здесь. Ошибку на шаге 1 или 4 находят в самом конце</td>
+</tr>
+<tr>
+<td>6. Переделать</td>
+<td>Все</td>
+<td>Все инструменты</td>
+<td>Повторить тот же результат нельзя: каждый шаг ручной</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Кто участвует.</strong> Чаще всего один человек: инди-разработчик, level-дизайнер, автор макета или студент. В студии шаги 3–4 может делать 3D-художник, тогда добавляется передача файлов между людьми.</p>
+<p><strong>Где теряется время.</strong> Шаги 3–4: ручная чистка, упрощение и сборка опоры. Шаги 5–6: брак съёмки обнаруживают последним, и цикл повторяется с начала.</p>
+<p><strong>Где теряются данные.</strong> Размеры в метрах, которые измерил датчик, пропадают при экспорте и ручном масштабировании. Сведения о том, как снимали (путь камеры, глубина), в модель не попадают. Объяснить, почему уровень получился плохим, потом нельзя.</p>
+<h3>Условный пример</h3>
+<p>Персона Аня (раздел 2.2) участвует в гейм-джеме на 48 часов. Тема — «маленький мир», и она хочет сделать уровень из своего письменного стола с книгами и кружкой. Она снимает стол в Polycam и получает красивую модель на несколько сотен тысяч треугольников. Godot импортирует её, но персонаж проваливается: у модели нет отдельной опоры, а края стола рваные. Аня открывает Blender, вручную чистит края, упрощает модель и строит из кубов невидимую опору. При экспорте размеры сбиваются, и персонаж оказывается ростом с кружку. После второй попытки выясняется, что одна книга не попала в съёмку: Аня снимала слишком быстро. На уровень уходит полдня из 48 часов джема, и в итоге она заменяет стол кубами.</p>
+<p>Этот пример показывает три потери: время на ручную доводку, поздно найденный брак съёмки и сбитые размеры. Именно их закрывает продукт.</p>
+<h3>Как будет (TO-BE)</h3>
+<p>Человек обходит участок телефоном 10–30 секунд. Приложение сразу проверяет запись и либо отправляет её на сервер, либо просит переснять с понятной причиной. Сервер сам собирает карту: видимую модель, отдельную лёгкую опору и отчёт, сохраняя размеры датчика. Человек проходит по карте в браузере и скачивает пакет в движок. Ручные шаги 3–4 и поздняя проверка 5 исчезают (рис. П.2.2).</p>
+<h2>1.2. Обзор источников</h2>
+<p>Использованы 24 источника, из них 9 научных. Ссылки оформлены по Чикагскому стилю (сноски и библиография, 16-е изд.). Источники разбиты на четыре группы: методы реконструкции, представление сцены, стандарты и правила, рынок и аналоги.</p>
+<p><strong>Методы реконструкции.</strong> Классический путь от глубины к поверхности описан в работах Курлесса и Левоя<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">1</a></sup> и в KinectFusion<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">2</a></sup>: карты глубины с известным положением камеры накапливаются в объёмной сетке, из которой поверхность извлекается алгоритмом marching cubes<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">3</a></sup>. Метод устойчив к шуму отдельного кадра, но полностью зависит от точности поз: ошибка траектории размазывает поверхность. Отсюда два решения продукта. Позы камеры обязательны, и без них сборка честно отказывает. Участок съёмки маленький, чтобы накопленная ошибка траектории не успевала вырасти. Упрощение по квадрикам<sup id="fnref:6"><a class="footnote-ref" href="#fn:6">4</a></sup> позволяет уменьшить сетку до заданного числа треугольников с контролируемой потерей формы — это основа жёстких бюджетов визуала и опоры.</p>
+<p><strong>Точность датчика.</strong> Оценка LiDAR iPhone 12 Pro<sup id="fnref:7"><a class="footnote-ref" href="#fn:7">5</a></sup> показывает, что датчик даёт сантиметровую точность на объектах в пределах нескольких метров, а на больших сценах ошибка растёт. Это подтверждает выбор небольшой зоны около 80×80 см и съёмки с небольшой высоты. Монокулярные модели глубины вроде Depth Anything V2<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">6</a></sup> восстанавливают форму по одному кадру, но не дают надёжных метров, поэтому годятся только как запасной выключенный режим.</p>
+<p><strong>Представление сцены.</strong> Gaussian splatting<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">7</a></sup> дал фотореалистичный просмотр сцен в реальном времени, и сканеры быстро его подхватили<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">8</a></sup>. Но у сплата нет поверхности, по которой может пройти персонаж: даже в инструкциях Polycam для Unreal коллизия берётся из отдельной модели<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">9</a></sup>. Video2Game<sup id="fnref:12"><a class="footnote-ref" href="#fn:12">10</a></sup> — самая близкая к продукту работа: видео превращается в сцену с коллизиями, которая работает в браузере. Однако она требует обучения нейронного представления для каждой сцены и остаётся исследовательским конвейером, а не сервисом. Вывод для продукта: красивая картинка и пригодная для игры опора — разные задачи, и продукт решает вторую.</p>
+<p><strong>Стандарты и правила.</strong> glTF 2.0<sup id="fnref:13"><a class="footnote-ref" href="#fn:13">11</a></sup> задаёт метры как единицу и ось Y вверх и читается браузером и движками — это делает пакет переносимым без конвертации. GDPR<sup id="fnref:14"><a class="footnote-ref" href="#fn:14">12</a></sup> требует правового основания, минимизации данных и права на удаление: съёмка помещения может случайно захватить людей. WCAG 2.1<sup id="fnref:15"><a class="footnote-ref" href="#fn:15">13</a></sup> задаёт измеримый уровень доступности веб-клиента. Техники выявления требований взяты из BABOK v3<sup id="fnref:16"><a class="footnote-ref" href="#fn:16">14</a></sup>.</p>
+<p>Что из каждой группы источников следует для требований главы 2, показано в табл. 1.2.</p>
+<p>Табл. 1.2. Выводы из источников для требований</p>
+<table>
+<thead>
+<tr>
+<th>Источники</th>
+<th>Что из них следует</th>
+<th>Где в требованиях</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Слияние глубины<sup id="fnref:17"><a class="footnote-ref" href="#fn:17">35</a></sup>, Open3D<sup id="fnref:18"><a class="footnote-ref" href="#fn:18">36</a></sup></td>
+<td>Карты глубины с известными позами сливаются в поверхность; без поз результат не собрать. Готовые реализации открыты (MIT)</td>
+<td>Позы обязательны, иначе отказ: US-3.2; лицензии: 2.8</td>
+</tr>
+<tr>
+<td>Marching cubes<sup id="fnref:19"><a class="footnote-ref" href="#fn:19">37</a></sup>, упрощение по квадрикам<sup id="fnref:20"><a class="footnote-ref" href="#fn:20">38</a></sup></td>
+<td>Поверхность строится автоматически, число треугольников можно жёстко ограничить</td>
+<td>Бюджет карты: KPI-4, US-3.3</td>
+</tr>
+<tr>
+<td>LiDAR iPhone 12 Pro<sup id="fnref:21"><a class="footnote-ref" href="#fn:21">39</a></sup>, устройства<sup id="fnref:22"><a class="footnote-ref" href="#fn:22">40</a></sup></td>
+<td>Сантиметровая точность на небольшом участке; глубина есть только на Pro-устройствах Apple</td>
+<td>Зона 80×80 см, платформа iOS: 2.3</td>
+</tr>
+<tr>
+<td>Gaussian splatting<sup id="fnref:23"><a class="footnote-ref" href="#fn:23">41</a></sup>, сплаты в движках<sup id="fnref:24"><a class="footnote-ref" href="#fn:24">42</a></sup></td>
+<td>У сплата нет физической поверхности; коллизию добавляют отдельной моделью</td>
+<td>Отдельная опора: US-5.1; сплаты вне релиза</td>
+</tr>
+<tr>
+<td>Depth Anything V2<sup id="fnref:25"><a class="footnote-ref" href="#fn:25">43</a></sup></td>
+<td>Глубина по одному кадру даёт форму, но не надёжные метры</td>
+<td>Сборка без LiDAR — выключенный режим: 2.3</td>
+</tr>
+<tr>
+<td>Video2Game<sup id="fnref:26"><a class="footnote-ref" href="#fn:26">44</a></sup></td>
+<td>Видео превращается в интерактивную сцену с коллизией, но ценой обучения сцены; это исследование, а не продукт</td>
+<td>Ходьба в браузере: US-4.1; без обучения нейросети на каждую сцену</td>
+</tr>
+<tr>
+<td>glTF 2.0<sup id="fnref:27"><a class="footnote-ref" href="#fn:27">45</a></sup>, RoomPlan<sup id="fnref:28"><a class="footnote-ref" href="#fn:28">46</a></sup></td>
+<td>Открытый формат с метрами и осью Y вверх; RoomPlan даёт план, а не поверхность</td>
+<td>Пакет GLB и манифест: US-5.2</td>
+</tr>
+<tr>
+<td>GDPR<sup id="fnref:29"><a class="footnote-ref" href="#fn:29">47</a></sup>, WCAG 2.1<sup id="fnref:30"><a class="footnote-ref" href="#fn:30">48</a></sup>, BABOK<sup id="fnref:31"><a class="footnote-ref" href="#fn:31">49</a></sup></td>
+<td>Правовое основание, минимизация, удаление; доступность AA; техники выявления требований</td>
+<td>2.8, NFR-9; методы во введении</td>
+</tr>
+<tr>
+<td>Рынок<sup id="fnref:32"><a class="footnote-ref" href="#fn:32">50</a></sup>, аналоги<sup id="fnref:33"><a class="footnote-ref" href="#fn:33">51</a></sup></td>
+<td>Авторов игр много и больше с каждым годом; сканеры отдают модель, а не уровень</td>
+<td>Сегменты: 2.2; аналоги: 1.3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Вывод.</strong> Технологии сборки поверхности и упрощения зрелые<sup id="fnref:34"><a class="footnote-ref" href="#fn:34">15</a></sup>. Датчик телефона точен на небольшом участке<sup id="fnref:35"><a class="footnote-ref" href="#fn:35">16</a></sup>. Новизна продукта не в алгоритмах, а в том, чтобы связать их в проверяемый путь от съёмки до проходимого уровня с честным отказом.</p>
+<h2>1.3. Анализ аналогов</h2>
+<p>Рассмотрены девять решений. Коммерческие: Polycam<sup id="fnref:36"><a class="footnote-ref" href="#fn:36">17</a></sup> (подписка около 27 $ в месяц), Scaniverse<sup id="fnref:37"><a class="footnote-ref" href="#fn:37">18</a></sup> (Niantic Spatial), KIRI Engine<sup id="fnref:38"><a class="footnote-ref" href="#fn:38">19</a></sup> (50–80 $ в год), RealityScan<sup id="fnref:39"><a class="footnote-ref" href="#fn:39">20</a></sup> (Epic Games, выгрузка через Sketchfab в Unreal), Luma<sup id="fnref:40"><a class="footnote-ref" href="#fn:40">21</a></sup> (сплаты, плагин Unreal), World Labs Marble<sup id="fnref:41"><a class="footnote-ref" href="#fn:41">22</a></sup> (генерирует 3D-мир из текста, фото или видео и отдаёт опору в GLB), а также API Apple RoomPlan<sup id="fnref:42"><a class="footnote-ref" href="#fn:42">23</a></sup>, который строит план комнаты из стен и мебели. Открытые: научный Video2Game<sup id="fnref:43"><a class="footnote-ref" href="#fn:43">24</a></sup> с открытым кодом и ручной путь на COLMAP, Open3D<sup id="fnref:44"><a class="footnote-ref" href="#fn:44">25</a></sup> и Blender.</p>
+<p><strong>Polycam</strong> — самый популярный сканер с LiDAR и фотограмметрией. Сильная сторона — качество модели и широкий выбор форматов. Для уровня из него нужна ручная доводка: опоры нет, модель плотная, часть форматов только в платном тарифе.</p>
+<p><strong>Scaniverse</strong> — бесплатный сканер Niantic Spatial с мешами и сплатами. В 2026 году добавил пакет для симуляторов роботов, где модель строится из сплата<sup id="fnref:45"><a class="footnote-ref" href="#fn:45">26</a></sup>. Это шаг к «пригодной для симуляции» сцене, но не к лёгкому игровому уровню.</p>
+<p><strong>KIRI Engine</strong> ориентирован на художников: ретопология, PBR-материалы, экспорт в Blender и Unreal. Результат — ассет, а не проходимый участок.</p>
+<p><strong>RealityScan</strong> от Epic Games ведёт модель в экосистему Unreal через Sketchfab<sup id="fnref:46"><a class="footnote-ref" href="#fn:46">27</a></sup>. Он снимает объекты, а не участки, и привязан к одному движку.</p>
+<p><strong>Luma</strong> делает фотореалистичные сплаты и плагин для Unreal<sup id="fnref:47"><a class="footnote-ref" href="#fn:47">28</a></sup>. По сплату нельзя ходить, а размеры не привязаны к метрам.</p>
+<p><strong>World Labs Marble</strong> ближе всего по выходу: отдаёт отдельную опору в GLB<sup id="fnref:48"><a class="footnote-ref" href="#fn:48">29</a></sup>. Но мир генерируется моделью, а не измеряется, опора тяжёлая (100–200 тыс. треугольников), проверки ходьбой и отказа нет.</p>
+<p><strong>Apple RoomPlan</strong> строит план помещения из стен, дверей и мебели<sup id="fnref:49"><a class="footnote-ref" href="#fn:49">30</a></sup>. Это схема комнаты, а не поверхность стола или макета, и только в помещении.</p>
+<p><strong>Video2Game</strong> доказывает, что путь «видео → проходимая сцена» возможен<sup id="fnref:50"><a class="footnote-ref" href="#fn:50">31</a></sup>, но требует обучения на каждую сцену и не является продуктом.</p>
+<p><strong>Ручной путь</strong> на COLMAP, Open3D<sup id="fnref:51"><a class="footnote-ref" href="#fn:51">32</a></sup> и Blender даёт полный контроль, но требует навыков и времени и не повторяется одной командой.</p>
+<h3>Сравнение по критериям</h3>
+<p>Результаты сравнения сведены в табл. 1.3.</p>
+<p>Табл. 1.3. Сравнение аналогов по критериям</p>
+<table>
+<thead>
+<tr>
+<th>Критерий</th>
+<th>Polycam, Scaniverse, KIRI</th>
+<th>RealityScan</th>
+<th>Luma</th>
+<th>Marble</th>
+<th>Video2Game</th>
+<th>NVC Maps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Съёмка реального места телефоном</td>
+<td>Да</td>
+<td>Да</td>
+<td>Да</td>
+<td>Частично: фото или видео на вход</td>
+<td>Видео, не телефон</td>
+<td>Да</td>
+</tr>
+<tr>
+<td>Настоящие размеры в метрах</td>
+<td>Да, с LiDAR</td>
+<td>Частично</td>
+<td>Нет</td>
+<td>Нет</td>
+<td>Нет</td>
+<td>Да, с LiDAR</td>
+</tr>
+<tr>
+<td>Отдельная лёгкая опора для персонажа</td>
+<td>Нет</td>
+<td>Нет</td>
+<td>Нет</td>
+<td>Да, 100–200 тыс. треугольников<sup id="fnref:52"><a class="footnote-ref" href="#fn:52">52</a></sup></td>
+<td>Да</td>
+<td>Да, ≤ 25% от визуала</td>
+</tr>
+<tr>
+<td>Бюджет треугольников для игры</td>
+<td>Вручную</td>
+<td>Вручную</td>
+<td>—</td>
+<td>Нет</td>
+<td>Нет</td>
+<td>Да, ≤ 50 000</td>
+</tr>
+<tr>
+<td>Проверка ходьбой до движка</td>
+<td>Нет</td>
+<td>Нет</td>
+<td>Только просмотр</td>
+<td>Частично</td>
+<td>Да</td>
+<td>Да, в браузере</td>
+</tr>
+<tr>
+<td>Отказ на плохой съёмке с причиной</td>
+<td>Нет</td>
+<td>Нет</td>
+<td>Нет</td>
+<td>Нет</td>
+<td>Нет</td>
+<td>Да</td>
+</tr>
+<tr>
+<td>Повторяемость сборки</td>
+<td>Не заявлена</td>
+<td>Не заявлена</td>
+<td>Не заявлена</td>
+<td>Не заявлена</td>
+<td>Не заявлена</td>
+<td>Да, ±15%</td>
+</tr>
+<tr>
+<td>Открытый формат для любых движков</td>
+<td>Много форматов</td>
+<td>Через Sketchfab</td>
+<td>Плагин Unreal</td>
+<td>GLB</td>
+<td>Свой демо-движок</td>
+<td>GLB и манифест</td>
+</tr>
+<tr>
+<td>Красота картинки</td>
+<td>Сильная сторона</td>
+<td>Сильная сторона</td>
+<td>Сильная сторона</td>
+<td>Сильная сторона</td>
+<td>Средняя</td>
+<td>Слабая сторона релиза</td>
+</tr>
+</tbody>
+</table>
+<h3>Чего не хватает</h3>
+<ol>
+<li><strong>Опоры для персонажа в метрах.</strong> Сканеры отдают только видимую модель. Marble отдаёт опору, но мир сгенерирован моделью и его размеры не настоящие.</li>
+<li><strong>Проверки проходимости до движка.</strong> Кроме исследовательского Video2Game, никто не даёт пройти по результату до импорта.</li>
+<li><strong>Честного отказа.</strong> Ни одно решение не говорит «эта съёмка не годится для уровня» и почему.</li>
+<li><strong>Повторяемости и лёгкого пакета.</strong> Результат нельзя пересобрать тем же способом и уложить в игровой бюджет без ручной работы.</li>
+</ol>
+<p><strong>Где аналоги сильнее.</strong> Качество картинки, текстуры, размер сцены (комната, улица), поддержка Android. Продукт сознательно уступает им здесь и выигрывает в пригодности результата для игры.</p>
+<h2>1.4. Выводы по главе</h2>
+<p>Выявленные проблемы и то, что должно уметь новое решение, сведены в табл. 1.4.</p>
+<p>Табл. 1.4. Проблемы и их связь с эпиками и KPI</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Проблема</th>
+<th>Что должно уметь новое решение</th>
+<th>Эпик</th>
+<th>KPI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>П1</td>
+<td>Плохая съёмка выглядит как удачная, брак находят в движке</td>
+<td>Проверить запись на телефоне и отказать с причиной</td>
+<td>E1, E3</td>
+<td>KPI-3</td>
+</tr>
+<tr>
+<td>П2</td>
+<td>Опору для персонажа и упрощение делают руками</td>
+<td>Собрать видимую модель и лёгкую опору автоматически</td>
+<td>E3, E5</td>
+<td>KPI-1, KPI-4</td>
+</tr>
+<tr>
+<td>П3</td>
+<td>Проходимость видна только в движке</td>
+<td>Дать пройти по карте в браузере</td>
+<td>E4</td>
+<td>KPI-1, KPI-2</td>
+</tr>
+<tr>
+<td>П4</td>
+<td>Размеры датчика теряются по дороге</td>
+<td>Сохранить метры и записать единицы и оси в манифест</td>
+<td>E5</td>
+<td>KPI-1</td>
+</tr>
+<tr>
+<td>П5</td>
+<td>Путь от съёмки до уровня долгий и не повторяется</td>
+<td>Принять съёмку, собрать карту на сервере, показать статус</td>
+<td>E2, E3</td>
+<td>KPI-2</td>
+</tr>
+<tr>
+<td>П6</td>
+<td>Без телефона с LiDAR продукт не проверить</td>
+<td>Открыть эталонные задания по тестовой ссылке</td>
+<td>E6</td>
+<td>KPI-1, KPI-3</td>
+</tr>
+</tbody>
+</table>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:3">
+<p>Brian Curless and Marc Levoy, “A Volumetric Method for Building Complex Models from Range Images,” in <em>Proceedings of the 23rd Annual Conference on Computer Graphics and Interactive Techniques (SIGGRAPH)</em> (1996), 303–12.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Richard A. Newcombe et al., “KinectFusion: Real-Time Dense Surface Mapping and Tracking,” in <em>Proceedings of the 10th IEEE International Symposium on Mixed and Augmented Reality (ISMAR)</em> (2011), 127–36.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>William E. Lorensen and Harvey E. Cline, “Marching Cubes: A High Resolution 3D Surface Construction Algorithm,” <em>ACM SIGGRAPH Computer Graphics</em> 21, no. 4 (1987): 163–69.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>Michael Garland and Paul S. Heckbert, “Surface Simplification Using Quadric Error Metrics,” in <em>Proceedings of the 24th Annual Conference on Computer Graphics and Interactive Techniques (SIGGRAPH)</em> (1997), 209–16.&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>Gregor Luetzenburg, Aart Kroon, and Anders A. Bjørk, “Evaluation of the Apple iPhone 12 Pro LiDAR for an Application in Geosciences,” <em>Scientific Reports</em> 11 (2021): art. 22221.&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>Lihe Yang et al., “Depth Anything V2,” in <em>Advances in Neural Information Processing Systems (NeurIPS)</em> (2024).&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p>Bernhard Kerbl et al., “3D Gaussian Splatting for Real-Time Radiance Field Rendering,” <em>ACM Transactions on Graphics</em> 42, no. 4 (2023): art. 139.&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p>Niantic Spatial, “Scaniverse – 3D Scanner,” App Store, accessed October 19, 2026, <a href="https://apps.apple.com/us/app/-/id1541433223">https://apps.apple.com/us/app/-/id1541433223</a>; Polycam, “Export Gaussian Splats”; Luma AI, “Luma Unreal Engine Plugin,” documentation, accessed October 19, 2026, <a href="https://lumaai.notion.site/Luma-Unreal-Engine-Plugin-0-4-8005919d93444c008982346185e933a1">https://lumaai.notion.site/Luma-Unreal-Engine-Plugin-0-4-8005919d93444c008982346185e933a1</a>.&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p>Polycam, “Export Gaussian Splats.”&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p>Hongchi Xia et al., “Video2Game: Real-Time Interactive Realistic and Browser-Compatible Environment from a Single Video,” in <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</em> (2024), 4578–88.&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:13">
+<p>Khronos Group, “glTF 2.0 Specification,” 2021, accessed October 19, 2026, <a href="https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html">https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html</a>.&#160;<a class="footnote-backref" href="#fnref:13" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:14">
+<p>European Parliament and Council of the European Union, “Regulation (EU) 2016/679 (General Data Protection Regulation),” <em>Official Journal of the European Union</em> L 119 (May 4, 2016): 1–88.&#160;<a class="footnote-backref" href="#fnref:14" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:15">
+<p>W3C, “Web Content Accessibility Guidelines (WCAG) 2.1,” W3C Recommendation, June 5, 2018, accessed October 19, 2026, <a href="https://www.w3.org/TR/WCAG21/">https://www.w3.org/TR/WCAG21/</a>.&#160;<a class="footnote-backref" href="#fnref:15" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:16">
+<p>International Institute of Business Analysis, <em>A Guide to the Business Analysis Body of Knowledge (BABOK Guide)</em>, version 3 (Toronto: IIBA, 2015).&#160;<a class="footnote-backref" href="#fnref:16" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:34">
+<p>Newcombe et al., “KinectFusion”; Curless and Levoy, “Volumetric Method”; Lorensen and Cline, “Marching Cubes”; Garland and Heckbert, “Surface Simplification”; Zhou, Park, and Koltun, “Open3D.”&#160;<a class="footnote-backref" href="#fnref:34" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+<li id="fn:35">
+<p>Luetzenburg, Kroon, and Bjørk, “Evaluation of the Apple iPhone 12 Pro LiDAR.”&#160;<a class="footnote-backref" href="#fnref:35" title="Jump back to footnote 16 in the text">&#8617;</a></p>
+</li>
+<li id="fn:36">
+<p>Polycam, “Export Gaussian Splats.”&#160;<a class="footnote-backref" href="#fnref:36" title="Jump back to footnote 17 in the text">&#8617;</a></p>
+</li>
+<li id="fn:37">
+<p>Niantic Spatial, “Scaniverse.”&#160;<a class="footnote-backref" href="#fnref:37" title="Jump back to footnote 18 in the text">&#8617;</a></p>
+</li>
+<li id="fn:38">
+<p>KIRI Innovations, “KIRI Engine Pricing.”&#160;<a class="footnote-backref" href="#fnref:38" title="Jump back to footnote 19 in the text">&#8617;</a></p>
+</li>
+<li id="fn:39">
+<p>Epic Games, “RealityScan iOS App.”&#160;<a class="footnote-backref" href="#fnref:39" title="Jump back to footnote 20 in the text">&#8617;</a></p>
+</li>
+<li id="fn:40">
+<p>Luma AI, “Luma Unreal Engine Plugin.”&#160;<a class="footnote-backref" href="#fnref:40" title="Jump back to footnote 21 in the text">&#8617;</a></p>
+</li>
+<li id="fn:41">
+<p>World Labs, “Marble: Export Mesh.”&#160;<a class="footnote-backref" href="#fnref:41" title="Jump back to footnote 22 in the text">&#8617;</a></p>
+</li>
+<li id="fn:42">
+<p>Apple, “RoomPlan.”&#160;<a class="footnote-backref" href="#fnref:42" title="Jump back to footnote 23 in the text">&#8617;</a></p>
+</li>
+<li id="fn:43">
+<p>Xia et al., “Video2Game.”&#160;<a class="footnote-backref" href="#fnref:43" title="Jump back to footnote 24 in the text">&#8617;</a></p>
+</li>
+<li id="fn:44">
+<p>Zhou, Park, and Koltun, “Open3D.”&#160;<a class="footnote-backref" href="#fnref:44" title="Jump back to footnote 25 in the text">&#8617;</a></p>
+</li>
+<li id="fn:45">
+<p>Niantic Spatial, “Scaniverse.”&#160;<a class="footnote-backref" href="#fnref:45" title="Jump back to footnote 26 in the text">&#8617;</a></p>
+</li>
+<li id="fn:46">
+<p>Epic Games, “RealityScan iOS App.”&#160;<a class="footnote-backref" href="#fnref:46" title="Jump back to footnote 27 in the text">&#8617;</a></p>
+</li>
+<li id="fn:47">
+<p>Luma AI, “Luma Unreal Engine Plugin.”&#160;<a class="footnote-backref" href="#fnref:47" title="Jump back to footnote 28 in the text">&#8617;</a></p>
+</li>
+<li id="fn:48">
+<p>World Labs, “Marble: Export Mesh.”&#160;<a class="footnote-backref" href="#fnref:48" title="Jump back to footnote 29 in the text">&#8617;</a></p>
+</li>
+<li id="fn:49">
+<p>Apple, “RoomPlan.”&#160;<a class="footnote-backref" href="#fnref:49" title="Jump back to footnote 30 in the text">&#8617;</a></p>
+</li>
+<li id="fn:50">
+<p>Xia et al., “Video2Game.”&#160;<a class="footnote-backref" href="#fnref:50" title="Jump back to footnote 31 in the text">&#8617;</a></p>
+</li>
+<li id="fn:51">
+<p>Zhou, Park, and Koltun, “Open3D.”&#160;<a class="footnote-backref" href="#fnref:51" title="Jump back to footnote 32 in the text">&#8617;</a></p>
+</li>
+<li id="fn:1">
+<p>KIRI Innovations, “KIRI Engine Pricing,” accessed October 19, 2026, <a href="https://www.kiriengine.app/Pricing">https://www.kiriengine.app/Pricing</a>.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 33 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Polycam, “Export Gaussian Splats from Polycam to Unreal Engine,” Help Center, accessed October 19, 2026, <a href="https://learn.poly.cam/hc/en-us/articles/42506758152084">https://learn.poly.cam/hc/en-us/articles/42506758152084</a>.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 34 in the text">&#8617;</a></p>
+</li>
+<li id="fn:17">
+<p>Newcombe et al., “KinectFusion”; Curless and Levoy, “Volumetric Method.”&#160;<a class="footnote-backref" href="#fnref:17" title="Jump back to footnote 35 in the text">&#8617;</a></p>
+</li>
+<li id="fn:18">
+<p>Qian-Yi Zhou, Jaesik Park, and Vladlen Koltun, “Open3D: A Modern Library for 3D Data Processing,” preprint, arXiv:1801.09847, 2018.&#160;<a class="footnote-backref" href="#fnref:18" title="Jump back to footnote 36 in the text">&#8617;</a></p>
+</li>
+<li id="fn:19">
+<p>Lorensen and Cline, “Marching Cubes.”&#160;<a class="footnote-backref" href="#fnref:19" title="Jump back to footnote 37 in the text">&#8617;</a></p>
+</li>
+<li id="fn:20">
+<p>Garland and Heckbert, “Surface Simplification.”&#160;<a class="footnote-backref" href="#fnref:20" title="Jump back to footnote 38 in the text">&#8617;</a></p>
+</li>
+<li id="fn:21">
+<p>Luetzenburg, Kroon, and Bjørk, “Evaluation of the Apple iPhone 12 Pro LiDAR.”&#160;<a class="footnote-backref" href="#fnref:21" title="Jump back to footnote 39 in the text">&#8617;</a></p>
+</li>
+<li id="fn:22">
+<p>Apple Inc., “Models with a LiDAR Scanner,” Apple Support, accessed October 19, 2026, <a href="https://support.apple.com/en-gb/guide/ipad/aside/ipad8a95fdc0/ipados">https://support.apple.com/en-gb/guide/ipad/aside/ipad8a95fdc0/ipados</a>.&#160;<a class="footnote-backref" href="#fnref:22" title="Jump back to footnote 40 in the text">&#8617;</a></p>
+</li>
+<li id="fn:23">
+<p>Kerbl et al., “3D Gaussian Splatting.”&#160;<a class="footnote-backref" href="#fnref:23" title="Jump back to footnote 41 in the text">&#8617;</a></p>
+</li>
+<li id="fn:24">
+<p>Polycam, “Export Gaussian Splats”; Luma AI, “Luma Unreal Engine Plugin.”&#160;<a class="footnote-backref" href="#fnref:24" title="Jump back to footnote 42 in the text">&#8617;</a></p>
+</li>
+<li id="fn:25">
+<p>Yang et al., “Depth Anything V2.”&#160;<a class="footnote-backref" href="#fnref:25" title="Jump back to footnote 43 in the text">&#8617;</a></p>
+</li>
+<li id="fn:26">
+<p>Xia et al., “Video2Game.”&#160;<a class="footnote-backref" href="#fnref:26" title="Jump back to footnote 44 in the text">&#8617;</a></p>
+</li>
+<li id="fn:27">
+<p>Khronos Group, “glTF 2.0 Specification.”&#160;<a class="footnote-backref" href="#fnref:27" title="Jump back to footnote 45 in the text">&#8617;</a></p>
+</li>
+<li id="fn:28">
+<p>Apple Inc., “RoomPlan,” Apple Developer, accessed October 19, 2026, <a href="https://developer.apple.com/augmented-reality/roomplan">https://developer.apple.com/augmented-reality/roomplan</a>.&#160;<a class="footnote-backref" href="#fnref:28" title="Jump back to footnote 46 in the text">&#8617;</a></p>
+</li>
+<li id="fn:29">
+<p>GDPR.&#160;<a class="footnote-backref" href="#fnref:29" title="Jump back to footnote 47 in the text">&#8617;</a></p>
+</li>
+<li id="fn:30">
+<p>W3C, “WCAG 2.1.”&#160;<a class="footnote-backref" href="#fnref:30" title="Jump back to footnote 48 in the text">&#8617;</a></p>
+</li>
+<li id="fn:31">
+<p>IIBA, <em>BABOK Guide</em>.&#160;<a class="footnote-backref" href="#fnref:31" title="Jump back to footnote 49 in the text">&#8617;</a></p>
+</li>
+<li id="fn:32">
+<p>Epic Games, “Fortnite Ecosystem 2024 Year in Review: Celebrating Creators and Looking Ahead,” January 22, 2025, accessed October 19, 2026, <a href="https://www.fortnite.com/news/fortnite-ecosystem-2024-year-in-review-celebrating-creators-and-looking-ahead">https://www.fortnite.com/news/fortnite-ecosystem-2024-year-in-review-celebrating-creators-and-looking-ahead</a>; Roblox Corporation, “Form 10-K for the Fiscal Year Ended December 31, 2025” (U.S. Securities and Exchange Commission, 2026), accessed October 19, 2026, <a href="https://www.sec.gov/Archives/edgar/data/1315098/000131509826000024/rblx-20251231.htm">https://www.sec.gov/Archives/edgar/data/1315098/000131509826000024/rblx-20251231.htm</a>; MP1st, “Over 18,000 Games Released on Steam in 2025, but Half Have Fewer Than 10 Reviews,” 2026, accessed October 19, 2026, <a href="https://mp1st.com/news/18k-games-released-steam-2025-half-have-10-reviews">https://mp1st.com/news/18k-games-released-steam-2025-half-have-10-reviews</a>.&#160;<a class="footnote-backref" href="#fnref:32" title="Jump back to footnote 50 in the text">&#8617;</a></p>
+</li>
+<li id="fn:33">
+<p>World Labs, “Marble: Export Mesh,” documentation, accessed October 19, 2026, <a href="https://docs.worldlabs.ai/marble/export/mesh">https://docs.worldlabs.ai/marble/export/mesh</a>; Niantic Spatial, “Scaniverse”; Polycam, “Export Gaussian Splats”; KIRI Innovations, “KIRI Engine Pricing”; Epic Games, “Epic Games Releases Free RealityScan iOS App for 3D Scanning,” December 2022, accessed October 19, 2026, <a href="https://www.epicgames.com/site/en-US/news/epic-games-releases-free-realityscan-ios-app-for-3d-scanning">https://www.epicgames.com/site/en-US/news/epic-games-releases-free-realityscan-ios-app-for-3d-scanning</a>; Luma AI, “Luma Unreal Engine Plugin.”&#160;<a class="footnote-backref" href="#fnref:33" title="Jump back to footnote 51 in the text">&#8617;</a></p>
+</li>
+<li id="fn:52">
+<p>World Labs, “Marble: Export Mesh.”&#160;<a class="footnote-backref" href="#fnref:52" title="Jump back to footnote 52 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+      </div>
+    </article>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: "neutral" });</script>
+</body>
+</html>
