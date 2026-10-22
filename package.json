@@ -1,0 +1,12 @@
+{
+  "name": "nvc-business-analysis",
+  "private": true,
+  "description": "Сборка DOCX блока бизнес-анализа",
+  "scripts": {
+    "docx": "node scripts/build-docx.mjs"
+  },
+  "devDependencies": {
+    "docx": "9.5.1",
+    "marked": "15.0.12"
+  }
+}
