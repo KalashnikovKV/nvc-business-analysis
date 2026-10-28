@@ -6,9 +6,10 @@
   summary  — сводный Markdown из всех разделов
   shots    — скриншоты макетов для раздела 2.5
   site     — страницы разделов на сайте
-  docx     — DOCX для эксперта (титул, оглавление, диаграммы картинками)
+  docx     — DOCX на двух языках: английский для эксперта, русский — копия
 
-Без аргументов выполняются backlog, summary, site и docx.
+Русские разделы лежат в корне, английские — в en/ с теми же именами файлов.
+Сайт и сводный файл собираются из русских разделов.
 DOCX рисует scripts/build-docx.mjs (npm install), PDF для сайта — его рендер в LibreOffice.
 """
 
@@ -31,7 +32,6 @@ SITE = ROOT / "wireframes"
 SHOTS = SITE / "shots"
 CACHE = ROOT / ".build"
 SUMMARY = ROOT / "NVC-Maps-бизнес-анализ.md"
-DOCX = SITE / "BA_Kalashnikov_Kirill.docx"
 CHROME = Path("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 MERMAID_CLI = "@mermaid-js/mermaid-cli@11.12.0"
 MERMAID_JS = "https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js"
@@ -46,19 +46,68 @@ SECTIONS = [
     ("06-statements.md", "d06-statements.html", "Заявления"),
 ]
 
-# Титульный лист по образцу ЕГУ (Правила оформления письменных работ, прил. 1).
-# Пропуски «____» заполняются перед сдачей.
-TITLE = {
-    "topic_ru": "Система создания игровых 3D-карт по видеозаписи",
-    "topic_en": "A System for Creating 3D Game Maps from Video",
-    "department": "____________________",
-    "program": "(название программы) ____________________",
-    "author_caps": "КИРИЛЛ КАЛАШНИКОВ",
-    "course": "___",
-    "supervisor": "доц., канд. техн. наук С. В. Авдейчик",
-    "type": "индивидуальный",
-    "block": "Блок бизнес-анализа: введение, глава 1, глава 2",
-    "year": "2026",
+SOURCES = [src for src, _, _ in SECTIONS]
+
+# Титульный лист по образцу ЕГУ (Правила оформления письменных работ, прил. 1, П. 1.3 и П. 1.4).
+# Пропуски «____» заполняются перед сдачей. Строки: текст, полужирный, выравнивание, отступ после.
+TITLE_RU = [
+    ("ЕВРОПЕЙСКИЙ ГУМАНИТАРНЫЙ УНИВЕРСИТЕТ", True, "center", 0),
+    ("Академический департамент ____________________", False, "center", 0),
+    ("(название программы) ____________________", False, "center", 1200),
+    ("КИРИЛЛ КАЛАШНИКОВ", True, "center", 0),
+    ("Студент ___ курса", False, "center", 2000),
+    ("СИСТЕМА СОЗДАНИЯ ИГРОВЫХ 3D-КАРТ ПО ВИДЕОЗАПИСИ", True, "center", 0),
+    ("A SYSTEM FOR CREATING 3D GAME MAPS FROM VIDEO", False, "center", 600),
+    ("БАКАЛАВРСКИЙ ПРОЕКТ", True, "center", 0),
+    ("Блок бизнес-анализа: введение, глава 1, глава 2", False, "center", 0),
+    ("Тип проекта: индивидуальный", False, "center", 2000),
+    ("Руководитель: доц., канд. техн. наук С. В. Авдейчик", False, "right", 2400),
+    ("Вильнюс, 2026", False, "center", 0),
+]
+TITLE_EN = [
+    ("EUROPEAN HUMANITIES UNIVERSITY", True, "center", 0),
+    ("Academic Department of ____________________", False, "center", 0),
+    ("Study programme ____________________", False, "center", 1200),
+    ("KIRILL KALASHNIKOV", True, "center", 0),
+    ("___ year student", False, "center", 2000),
+    ("A SYSTEM FOR CREATING 3D GAME MAPS FROM VIDEO", True, "center", 600),
+    ("BACHELOR PROJECT", True, "center", 0),
+    ("Business analysis block: Introduction, Chapter 1, Chapter 2", False, "center", 0),
+    ("Project type: individual", False, "center", 2000),
+    ("Supervisor: Assoc. Prof., Cand. Sc. (Eng.) S. V. Avdeychik", False, "right", 2400),
+    ("Vilnius, 2026", False, "center", 0),
+]
+
+# Всё, что зависит от языка документа.
+LANGS = {
+    "en": {
+        "dir": ROOT / "en",
+        "docx": SITE / "BA_Kalashnikov_Kirill.docx",
+        "pdf": SITE / "BA_Kalashnikov_Kirill.pdf",
+        "title": TITLE_EN,
+        "labels": {"toc": "TABLE OF CONTENTS", "table": "Table", "figure": "Image",
+                   "appendix": "Appendix", "appendixUpper": "APPENDIX", "lang": "en-GB"},
+        "references": "List of References",
+        "backlog": ["# Appendix 1. Backlog", "",
+                    "The full table of epics and stories is given in Table A.1.1.", "",
+                    "Table A.1.1. Backlog: epics and stories", "",
+                    "| ID | Epic | Story | Acceptance criteria | MoSCoW |",
+                    "|----|------|-------|---------------------|--------|"],
+    },
+    "ru": {
+        "dir": ROOT,
+        "docx": SITE / "BA_Kalashnikov_Kirill_RU.docx",
+        "pdf": SITE / "NVC-Maps-бизнес-анализ.pdf",
+        "title": TITLE_RU,
+        "labels": {"toc": "СОДЕРЖАНИЕ", "table": "Табл.", "figure": "Рис.",
+                   "appendix": "Приложение", "appendixUpper": "ПРИЛОЖЕНИЕ", "lang": "ru-RU"},
+        "references": "Список источников и литературы",
+        "backlog": ["# Приложение 1. Бэклог", "",
+                    "Полная таблица эпиков и историй приведена в табл. П.1.1.", "",
+                    "Табл. П.1.1. Бэклог: эпики и истории", "",
+                    "| ID | Эпик | История | Критерии приёмки | MoSCoW |",
+                    "|----|------|---------|------------------|--------|"],
+    },
 }
 
 SHOT_PAGES = {
@@ -84,12 +133,15 @@ def cite_keys(match: re.Match) -> list[str]:
     return [k.strip().lstrip("@") for k in match.group(1).split(";")]
 
 
-def citation_order() -> dict[str, int]:
+def citation_order(lang: str = "ru") -> dict[str, int]:
     """Номер каждого источника — по первому упоминанию в разделах по порядку."""
     refs = load_refs()
     order: dict[str, int] = {}
-    for src, _, _ in SECTIONS:
-        for m in CITE.finditer((ROOT / src).read_text()):
+    for src in SOURCES:
+        path = LANGS[lang]["dir"] / src
+        if not path.is_file():  # 03 и 04 генерируются и ссылок не содержат
+            continue
+        for m in CITE.finditer(path.read_text()):
             for key in cite_keys(m):
                 if key not in refs:
                     raise SystemExit(f"Нет источника {key} в references.json")
@@ -122,12 +174,13 @@ def cite_markdown(text: str, order: dict[str, int], escape: bool = False) -> str
 
 def build_references() -> None:
     refs = load_refs()
-    order = citation_order()
-    out = ["# Список источников и литературы", ""]
-    for key, n in sorted(order.items(), key=lambda kv: kv[1]):
-        out += [f"\\[{n}\\] {refs[key]['ieee']}", ""]
-    (ROOT / "03-references.md").write_text("\n".join(out))
-    print("references:", len(order))
+    for lang, cfg in LANGS.items():
+        order = citation_order(lang)
+        out = [f"# {cfg['references']}", ""]
+        for key, n in sorted(order.items(), key=lambda kv: kv[1]):
+            out += [f"\\[{n}\\] {refs[key]['ieee']}", ""]
+        (cfg["dir"] / "03-references.md").write_text("\n".join(out))
+        print(f"references ({lang}):", len(order))
 
 
 # --- Приложение 1 -----------------------------------------------------------
@@ -137,30 +190,21 @@ EPIC = re.compile(r"^### (E\d+)\. (.+)$")
 
 
 def build_backlog() -> None:
-    lines = (ROOT / "02-system-requirements.md").read_text().splitlines()
-    rows, epic = [], None
-    for line in lines:
-        if m := EPIC.match(line):
-            epic = m.group(1)
-        elif m := STORY_ROW.match(line):
-            rows.append({"id": m.group(1), "epic": epic, "story": m.group(2),
-                         "ac": m.group(3), "priority": m.group(4)})
-
-    out = [
-        "# Приложение 1. Бэклог",
-        "",
-        "Полная таблица эпиков и историй приведена в табл. П.1.1.",
-        "",
-        "Табл. П.1.1. Бэклог: эпики и истории",
-        "",
-        "| ID | Эпик | История | Критерии приёмки | MoSCoW |",
-        "|----|------|---------|------------------|--------|",
-    ]
-    for s in rows:
-        out.append(f"| {s['id']} | {s['epic']} | {s['story']} | {s['ac']} | {s['priority']} |")
-    out.append("")
-    (ROOT / "04-appendix-a-backlog.md").write_text("\n".join(out))
-    print("backlog:", len(rows), "stories")
+    for lang, cfg in LANGS.items():
+        lines = (cfg["dir"] / "02-system-requirements.md").read_text().splitlines()
+        rows, epic = [], None
+        for line in lines:
+            if m := EPIC.match(line):
+                epic = m.group(1)
+            elif m := STORY_ROW.match(line):
+                rows.append({"id": m.group(1), "epic": epic, "story": m.group(2),
+                             "ac": m.group(3), "priority": m.group(4)})
+        out = list(cfg["backlog"])
+        for s in rows:
+            out.append(f"| {s['id']} | {s['epic']} | {s['story']} | {s['ac']} | {s['priority']} |")
+        out.append("")
+        (cfg["dir"] / "04-appendix-a-backlog.md").write_text("\n".join(out))
+        print(f"backlog ({lang}):", len(rows), "stories")
 
 
 # --- Сводный Markdown -------------------------------------------------------
@@ -203,7 +247,8 @@ def build_shots() -> None:
         )
         crop_shot(out)
         print("shot:", out.name)
-    combine_shots()
+    combine_shots(KEY_SHOTS, "", "key-stories.png")
+    build_shots_en()
 
 
 KEY_SHOTS = [
@@ -212,9 +257,75 @@ KEY_SHOTS = [
     ("b3-report", "US-3.1 · Отчёт"),
     ("b4-viewer", "US-4.1 · Ходьба по карте"),
 ]
+KEY_SHOTS_EN = [
+    ("m2-preflight", "US-1.2 · Recording check"),
+    ("b2-jobs", "US-2.3 · My jobs"),
+    ("b3-report", "US-3.1 · Report"),
+    ("b4-viewer", "US-4.1 · Walking the map"),
+]
+
+# Тексты макетов ключевых историй для английского документа.
+MOCKUP_EN = {
+    "Съёмка прошла проверку. Съёмка уходит на сервер, карты открываются в браузере.":
+        "The capture passed the check. It goes to the server; maps open in the browser.",
+    "Карта готова": "Map ready", "Тёмная": "Dark", "Светлая": "Light",
+    "Длительность": "Duration", "22 с": "22 s", "Кадры позы": "Pose frames", "Глубина": "Depth",
+    "Пол": "Floor", "найден": "found", "Отправить съёмку": "Send capture",
+    "Открыть в браузере": "Open in browser",
+    "Загрузка": "Upload", "Задания": "Jobs", "Мои задания": "My jobs",
+    "То же видео с теми же параметрами сборки даёт ту же карту.":
+        "The same video with the same build settings gives the same map.",
+    "Все": "All", "В очереди": "Queued", "Собирается": "Building", "Готово": "Ready", "Отказ": "Rejected",
+    "Создано": "Created", "Статус": "Status", "Способ построения": "Reconstruction method",
+    "готово": "ready", "слияние глубины LiDAR": "LiDAR depth fusion", "Отчёт": "Report", "Карта": "Map",
+    "собирается": "building", "отказ": "rejected", "Причина": "Reason", "в очереди": "queued",
+    "Отчёт · job_8f2a": "Report · job_8f2a",
+    "Зона по умолчанию 80×80 см · размеры датчика, масштаб не менялся":
+        "Default zone 80×80 cm · sensor scale, not rescaled",
+    "Карта собрана · способ построения: слияние глубины LiDAR":
+        "Map built · reconstruction method: LiDAR depth fusion",
+    "Видимая модель": "Visual mesh", "до 50 000 треугольников": "up to 50,000 triangles",
+    "Опора": "Collision mesh", "до 25% от видимой модели": "up to 25% of the visual mesh",
+    "Файл видимой модели": "Visual mesh file", "4,2 МБ": "4.2 MB", "до 25 МБ": "up to 25 MB",
+    "Файл опоры": "Collision mesh file", "0,9 МБ": "0.9 MB", "до 8 МБ": "up to 8 MB",
+    "Зона": "Zone", "0,80 м": "0.80 m", "как снял датчик": "as measured by the sensor",
+    "Открыть карту": "Open map", "Скачать пакет (5 файлов)": "Download package (5 files)",
+    "К списку": "Back to list",
+    "Карта · проверка опоры": "Map · collision check",
+    "Управление — WASD или стрелки. Персонаж должен простоять на поверхности не меньше 5 секунд и пройти карту от края до края.":
+        "Controls: WASD or arrow keys. The character must stand on the surface for at least 5 seconds and cross the map from edge to edge.",
+    "опора": "collision", "на поверхности · 0:07": "on surface · 0:07",
+    "размер только для показа": "size for display only",
+    "Исходный кадр · та же камера": "Source frame · same camera",
+    "Хорошая карта похожа на кадр съёмки. Масштаб под игру выбирает разработчик, который импортирует пакет.":
+        "A good map looks like the capture frame. The game scale is chosen by the developer who imports the package.",
+    "Размер персонажа (показ)": "Character size (display)", "Назад к отчёту": "Back to report",
+}
 
 
-def combine_shots() -> None:
+def build_shots_en() -> None:
+    """Те же макеты с английскими надписями — для рисунка 2.1 английского документа."""
+    with tempfile.TemporaryDirectory(prefix="nvc-mock-en-") as tmp:
+        folder = Path(tmp)
+        shutil.copyfile(SITE / "wireframes.css", folder / "wireframes.css")
+        for name, (w, h) in SHOT_PAGES.items():
+            text = (SITE / f"{name}.html").read_text()
+            text = re.sub(r">([^<>]+)<", lambda m: ">" + MOCKUP_EN.get(" ".join(m.group(1).split()), m.group(1)) + "<", text)
+            page = folder / f"{name}.html"
+            page.write_text(text)
+            out = SHOTS / f"{name}-en.png"
+            subprocess.run(
+                [str(CHROME), "--headless", "--disable-gpu", "--hide-scrollbars",
+                 f"--window-size={w},{h}", "--force-device-scale-factor=1",
+                 "--virtual-time-budget=5000", f"--screenshot={out}", page.as_uri()],
+                check=True, capture_output=True,
+            )
+            crop_shot(out)
+            print("shot:", out.name)
+    combine_shots(KEY_SHOTS_EN, "-en", "key-stories-en.png")
+
+
+def combine_shots(items: list, suffix: str, name: str) -> None:
     """Собрать макеты ключевых историй в один рисунок 2 × 2."""
     from PIL import Image, ImageDraw, ImageFont
 
@@ -225,15 +336,15 @@ def combine_shots() -> None:
         font = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial Bold.ttf", 30)
     except OSError:
         font = ImageFont.load_default()
-    for i, (name, label) in enumerate(KEY_SHOTS):
-        im = Image.open(SHOTS / f"{name}.png").convert("RGB")
+    for i, (shot, label) in enumerate(items):
+        im = Image.open(SHOTS / f"{shot}{suffix}.png").convert("RGB")
         im.thumbnail((cell_w, cell_h))
         x = gap + (i % 2) * (cell_w + gap)
         y = gap + (i // 2) * (cell_h + label_h + gap)
         draw.text((x, y), label, fill="#111827", font=font)
         sheet.paste(im, (x + (cell_w - im.width) // 2, y + label_h))
-    sheet.save(SHOTS / "key-stories.png")
-    print("shot: key-stories.png")
+    sheet.save(SHOTS / name)
+    print("shot:", name)
 
 
 def crop_shot(path: Path) -> None:
@@ -364,22 +475,25 @@ def render_mermaid(code: str) -> Path:
 SOFFICE = Path("/Applications/LibreOffice.app/Contents/MacOS/soffice")
 
 
-def docx_headings() -> list[tuple[int, str, str]]:
+def docx_headings(lang: str) -> list[tuple[int, str, str]]:
     """Заголовки 1–2 уровня в порядке документа — для оглавления."""
+    cfg = LANGS[lang]
+    label = cfg["labels"]
     out = []
-    for src, _, _ in SECTIONS:
+    for src in SOURCES:
         in_code = False
-        for line in (ROOT / src).read_text().splitlines():
+        for line in (cfg["dir"] / src).read_text().splitlines():
             if line.startswith("```"):
                 in_code = not in_code
             m = re.match(r"^(#{1,2}) (.+)$", line)
             if m and not in_code:
                 text = re.sub(r"\\(.)", r"\1", m.group(2)).replace("**", "")
                 level = len(m.group(1))
-                appendix = re.match(r"^Приложение (\d+)\. (.+)$", text)
+                appendix = re.match(rf"^{label['appendix']} (\d+)\. (.+)$", text)
                 if appendix:
                     # В тексте: «ПРИЛОЖЕНИЕ N» справа и заголовок ниже; в оглавлении — одной строкой.
-                    out.append((1, f"ПРИЛОЖЕНИЕ {appendix.group(1)}. {appendix.group(2)}", f"ПРИЛОЖЕНИЕ {appendix.group(1)}"))
+                    upper = f"{label['appendixUpper']} {appendix.group(1)}"
+                    out.append((1, f"{upper}. {appendix.group(2)}", upper))
                 else:
                     shown = text.upper() if level == 1 else text
                     out.append((level, shown, shown))
@@ -400,10 +514,10 @@ def pdf_pages(pdf: Path) -> list[str]:
     return [re.sub(r"\s+", " ", p) for p in text.split("\f")]
 
 
-def heading_pages(pdf: Path, headings: list[tuple[int, str, str]]) -> list[int]:
+def heading_pages(pdf: Path, headings: list[tuple[int, str, str]], toc: str) -> list[int]:
     pages = pdf_pages(pdf)
     # Страницы титула и оглавления пропускаем: оглавление тоже содержит заголовки.
-    start = max(i for i, p in enumerate(pages) if "СОДЕРЖАНИЕ" in p) + 1
+    start = max(i for i, p in enumerate(pages) if toc in p) + 1
     result, i = [], start
     for _, _, text in headings:
         key = re.sub(r"\s+", " ", text)[:40]
@@ -443,36 +557,41 @@ def fill_toc(docx: Path, headings: list[tuple[int, str, str]], pages: list[int])
 def build_docx() -> None:
     if not SOFFICE.is_file():
         raise SystemExit("Нужен LibreOffice: brew install --cask libreoffice")
-    sources = [src for src, _, _ in SECTIONS]
-    for src in sources:
-        for code in re.findall(r"```mermaid\n(.*?)```\n", (ROOT / src).read_text(), flags=re.DOTALL):
+    for lang, cfg in LANGS.items():
+        build_docx_lang(lang, cfg)
+
+
+def build_docx_lang(lang: str, cfg: dict) -> None:
+    out = cfg["docx"]
+    for src in SOURCES:
+        for code in re.findall(r"```mermaid\n(.*?)```\n", (cfg["dir"] / src).read_text(), flags=re.DOTALL):
             render_mermaid(code)
     CACHE.mkdir(exist_ok=True)
-    spec = CACHE / "docx-input.json"
+    spec = CACHE / f"docx-input-{lang}.json"
     spec.write_text(json.dumps({
-        "root": str(ROOT), "out": str(DOCX), "sections": sources,
-        "title": {**TITLE, "author_en": "Kirill Kalashnikov"},
-        "citations": citation_order(),
+        "root": str(ROOT), "dir": str(cfg["dir"]), "out": str(out), "sections": SOURCES,
+        "titleLines": cfg["title"], "labels": cfg["labels"], "author": "Kirill Kalashnikov",
+        "docTitle": "A System for Creating 3D Game Maps from Video",
+        "citations": citation_order(lang),
     }, ensure_ascii=False))
     subprocess.run(["node", str(ROOT / "scripts" / "build-docx.mjs"), str(spec)], check=True)
 
-    headings = docx_headings()
+    toc = cfg["labels"]["toc"]
+    headings = docx_headings(lang)
     with tempfile.TemporaryDirectory(prefix="nvc-ba-docx-") as tmp:
         folder = Path(tmp)
         # Проход 1: строки с условными номерами, чтобы оглавление заняло своё место.
-        fill_toc(DOCX, headings, ["00"] * len(headings))
-        pages = heading_pages(docx_to_pdf(DOCX, folder), headings)
+        fill_toc(out, headings, ["00"] * len(headings))
+        pages = heading_pages(docx_to_pdf(out, folder), headings, toc)
         # Проход 2: настоящие номера страниц.
-        fill_toc(DOCX, headings, pages)
-        final = docx_to_pdf(DOCX, folder)
-        check = heading_pages(final, headings)
+        fill_toc(out, headings, pages)
+        check = heading_pages(docx_to_pdf(out, folder), headings, toc)
         if check != pages:
-            fill_toc(DOCX, headings, check)
-        preview = docx_to_pdf(DOCX, folder)
-        shutil.copyfile(preview, CACHE / "docx-preview.pdf")
-        # PDF на сайте — тот же документ, что и DOCX.
-        shutil.copyfile(preview, SITE / "NVC-Maps-бизнес-анализ.pdf")
-    print("docx:", DOCX.name, DOCX.stat().st_size, "· превью:", CACHE / "docx-preview.pdf")
+            fill_toc(out, headings, check)
+        preview = docx_to_pdf(out, folder)
+        shutil.copyfile(preview, CACHE / f"docx-preview-{lang}.pdf")
+        shutil.copyfile(preview, cfg["pdf"])
+    print(f"docx ({lang}):", out.name, out.stat().st_size, "· превью:", CACHE / f"docx-preview-{lang}.pdf")
 
 
 STEPS = {

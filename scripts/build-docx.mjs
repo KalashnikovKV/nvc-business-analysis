@@ -13,7 +13,13 @@ import {
 } from "docx";
 
 const input = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
-const ROOT = input.root;
+const ROOT = input.root; // корень репозитория: картинки и кэш диаграмм
+const DIR = input.dir; // папка разделов этого языка
+const L = input.labels; // служебные надписи языка
+const esc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const CAPTION = new RegExp(`^(${esc(L.table)}|${esc(L.figure)}) `);
+const TABLE_CAPTION = new RegExp(`^${esc(L.table)} `);
+const APPENDIX = new RegExp(`^${esc(L.appendix)} (\\d+)\\. (.+)$`);
 
 // A4, поля по правилам ЕГУ: слева 25 мм, справа 10 мм, сверху и снизу 20 мм.
 const PAGE = { width: 11906, height: 16838 };
@@ -235,14 +241,14 @@ function blocks(tokens, opts = {}) {
     switch (t.type) {
       case "heading": {
         // Приложение по правилам ЕГУ: «ПРИЛОЖЕНИЕ N» в правом верхнем углу, под ним содержательный заголовок.
-        const appendix = t.depth === 1 && plain(t.tokens).match(/^Приложение (\d+)\. (.+)$/);
+        const appendix = t.depth === 1 && plain(t.tokens).match(APPENDIX);
         if (appendix) {
           out.push(new Paragraph({
             heading: HeadingLevel.HEADING_1,
             alignment: AlignmentType.RIGHT,
             pageBreakBefore: !(opts.noBreakFirst && firstHeading),
             spacing: { before: 0, after: 120 },
-            children: [new TextRun({ text: `ПРИЛОЖЕНИЕ ${appendix[1]}` })],
+            children: [new TextRun({ text: `${L.appendixUpper} ${appendix[1]}` })],
           }));
           out.push(new Paragraph({
             alignment: AlignmentType.CENTER,
@@ -267,9 +273,9 @@ function blocks(tokens, opts = {}) {
         if (img) {
           const file = path.join(ROOT, decodeURI(img.href));
           out.push(...imageParagraphs(file, decode(img.text)));
-        } else if (/^(Табл\.|Рис\.) /.test(t.text) || (nextBlock(i)?.type === "table" && !/[.:]$/.test(t.text.trim()))) {
+        } else if (CAPTION.test(t.text) || (nextBlock(i)?.type === "table" && !/[.:]$/.test(t.text.trim()))) {
           // Подпись: заголовок таблицы — над таблицей, «Рис.» — под рисунком.
-          const above = !t.text.startsWith("Рис.");
+          const above = !t.text.startsWith(L.figure + " ");
           out.push(new Paragraph({
             alignment: AlignmentType.CENTER,
             keepNext: above,
@@ -278,7 +284,7 @@ function blocks(tokens, opts = {}) {
           }));
         } else {
           // Фраза со ссылкой на таблицу не отрывается от её подписи.
-          const beforeCaption = nextBlock(i)?.type === "paragraph" && /^Табл\. /.test(nextBlock(i).text);
+          const beforeCaption = nextBlock(i)?.type === "paragraph" && TABLE_CAPTION.test(nextBlock(i).text);
           // Записи списка литературы с длинными ссылками — по левому краю, без растянутых пробелов.
           const reference = /^\[\d+\]/.test(plain(t.tokens));
           out.push(new Paragraph({
@@ -314,26 +320,13 @@ function blocks(tokens, opts = {}) {
 
 // --- Титул и оглавление ------------------------------------------------------
 
-function titlePage(t) {
-  const p = (text, opts = {}) => new Paragraph({
-    alignment: opts.align || AlignmentType.CENTER,
-    spacing: { before: opts.before || 0, after: opts.after ?? 0, line: 360 },
-    children: [new TextRun({ text, bold: opts.bold })],
-  });
-  return [
-    p("ЕВРОПЕЙСКИЙ ГУМАНИТАРНЫЙ УНИВЕРСИТЕТ", { bold: true }),
-    p(`Академический департамент ${t.department}`),
-    p(t.program, { after: 1200 }),
-    p(t.author_caps, { bold: true }),
-    p(`Студент ${t.course} курса`, { after: 2000 }),
-    p(t.topic_ru.toUpperCase(), { bold: true }),
-    p(t.topic_en.toUpperCase(), { after: 600 }),
-    p("БАКАЛАВРСКИЙ ПРОЕКТ", { bold: true }),
-    p(t.block),
-    p(`Тип проекта: ${t.type}`, { after: 2000 }),
-    p(`Руководитель: ${t.supervisor}`, { align: AlignmentType.RIGHT, after: 2400 }),
-    p(`Вильнюс, ${t.year}`),
-  ];
+function titlePage(lines) {
+  const align = { center: AlignmentType.CENTER, right: AlignmentType.RIGHT };
+  return lines.map(([text, bold, where, after]) => new Paragraph({
+    alignment: align[where],
+    spacing: { before: 0, after, line: 360 },
+    children: [new TextRun({ text, bold })],
+  }));
 }
 
 function tocBlock() {
@@ -341,7 +334,7 @@ function tocBlock() {
     alignment: AlignmentType.CENTER,
     pageBreakBefore: true,
     spacing: { before: 240, after: 240 },
-    children: [new TextRun({ text: "СОДЕРЖАНИЕ", bold: true })],
+    children: [new TextRun({ text: L.toc, bold: true })],
   });
   return [heading, new TableOfContents("Содержание", { hyperlink: true, headingStyleRange: "1-2" })];
 }
@@ -376,10 +369,10 @@ function pushSection(children, landscape = false) {
   });
 }
 
-let current = [...titlePage(input.title), ...tocBlock()];
+let current = [...titlePage(input.titleLines), ...tocBlock()];
 let startsSection = false;
 for (const file of input.sections) {
-  const tokens = marked.lexer(withCitations(fs.readFileSync(path.join(ROOT, file), "utf8")));
+  const tokens = marked.lexer(withCitations(fs.readFileSync(path.join(DIR, file), "utf8")));
   const hasDiagrams = tokens.some((x) => x.type === "code" && x.lang === "mermaid");
   if (!hasDiagrams) {
     // Широкие таблицы между <!-- landscape --> и <!-- /landscape --> — на альбомной странице.
@@ -423,7 +416,10 @@ for (const file of input.sections) {
     const code = group.find((x) => x.type === "code" && x.lang === "mermaid");
     const size = code ? pngSize(diagramFile(code.text)) : { w: 1, h: 1 };
     const landscape = size.w / size.h > 1.15;
-    const box = landscape ? { maxW: LAND_W, maxH: LAND_H } : { maxW: MAX_IMG_W, maxH: MAX_IMG_H };
+    // Место под заголовок приложения и абзацы пояснения: ~1 строка ≈ 36 px.
+    const extra = group.filter((x) => x.type === "heading" || x.type === "paragraph")
+      .reduce((n, x) => n + (x.type === "heading" ? 3 : Math.ceil((x.text || "").length / 85) + 1), 0);
+    const box = landscape ? { maxW: LAND_W, maxH: LAND_H - extra * 18 } : { maxW: MAX_IMG_W, maxH: MAX_IMG_H - extra * 36 };
     if (current.length) {
       pushSection(current, false);
       current = [];
@@ -435,8 +431,8 @@ for (const file of input.sections) {
 pushSection(current, false);
 
 const doc = new Document({
-  creator: input.title.author_en,
-  title: input.title.topic_en,
+  creator: input.author,
+  title: input.docTitle,
   styles: {
     default: { document: { run: { font: FONT, size: BODY_SIZE }, paragraph: { spacing: { after: 120, line: 360 } } } },
     paragraphStyles: [

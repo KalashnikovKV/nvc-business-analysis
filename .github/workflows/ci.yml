@@ -36,6 +36,16 @@ jobs:
             wireframes/d05-diagrams.html \
             wireframes/d06-statements.html \
             wireframes/BA_Kalashnikov_Kirill.docx \
+            wireframes/BA_Kalashnikov_Kirill.pdf \
+            wireframes/BA_Kalashnikov_Kirill_RU.docx \
+            en/00-introduction.md \
+            en/01-analytical-part.md \
+            en/02-system-requirements.md \
+            en/03-references.md \
+            en/04-appendix-a-backlog.md \
+            en/05-appendix-b-diagrams.md \
+            en/06-statements.md \
+            wireframes/shots/key-stories-en.png \
             wireframes/shots/key-stories.png \
             wireframes/deck.html \
             wireframes/prep.html \

@@ -19,7 +19,8 @@
 | Сайт с разделами и экранами | [wireframes/index.html](wireframes/index.html) · [на сайте](https://kalashnikovkv.github.io/nvc-business-analysis/) |
 | Презентация для защиты: титул и 8 слайдов | [wireframes/deck.html](wireframes/deck.html) · [PowerPoint](wireframes/NVC-Maps-защита.pptx) |
 | Подготовка к защите: ответы на вопросы комиссии, материалы после доклада | [wireframes/prep.html](wireframes/prep.html) |
-| Весь анализ одним файлом | [NVC-Maps-бизнес-анализ.md](NVC-Maps-бизнес-анализ.md) · [PDF](wireframes/NVC-Maps-бизнес-анализ.pdf) · [DOCX для эксперта](wireframes/BA_Kalashnikov_Kirill.docx) |
+| Английская версия для эксперта (те же разделы) | [en/](en/) · [DOCX](wireframes/BA_Kalashnikov_Kirill.docx) · [PDF](wireframes/BA_Kalashnikov_Kirill.pdf) |
+| Весь анализ одним файлом | [NVC-Maps-бизнес-анализ.md](NVC-Maps-бизнес-анализ.md) · [PDF](wireframes/NVC-Maps-бизнес-анализ.pdf) · [DOCX](wireframes/BA_Kalashnikov_Kirill_RU.docx) |
 
 ## Сборка
 
