@@ -7,7 +7,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { marked } from "marked";
 import {
-  AlignmentType, BorderStyle, Document, ExternalHyperlink, FootnoteReferenceRun, Header, HeadingLevel, ImageRun,
+  AlignmentType, BorderStyle, Document, ExternalHyperlink, Header, HeadingLevel, ImageRun,
   LevelFormat, Packer, PageNumber, PageOrientation, Paragraph, ShadingType, Table, TableCell, TableLayoutType,
   TableOfContents, TableRow, TabStopType, TextRun, WidthType,
 } from "docx";
@@ -19,6 +19,7 @@ const ROOT = input.root;
 const PAGE = { width: 11906, height: 16838 };
 const MARGIN = { top: 1134, right: 567, bottom: 1134, left: 1417 };
 const TEXT_WIDTH = PAGE.width - MARGIN.left - MARGIN.right; // 9922 DXA
+const LAND_TEXT_WIDTH = PAGE.height - MARGIN.left - MARGIN.right; // 14854 DXA на альбомной странице
 const INDENT = 709; // абзацный отступ 1,25 см
 const CAPTION_SIZE = 22; // подписи к таблицам и рисункам — 11 pt
 const FONT = "Times New Roman";
@@ -31,50 +32,34 @@ const decode = (s) =>
   s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"').replace(/&#39;/g, "'");
 
-// --- Сноски (Чикагский стиль, 16-е изд.) ------------------------------------
-// [@key; @key] в тексте → сноска внизу страницы: первая ссылка на источник полная, дальше краткая.
+// --- Ссылки на источники (IEEE) ---------------------------------------------
+// [@key; @key] в тексте → номера по порядку первого упоминания: [3], [5] или [2]–[4].
 
-const REFS = Object.fromEntries(
-  JSON.parse(fs.readFileSync(path.join(ROOT, "references.json"), "utf8")).map((r) => [r.key, r]),
-);
-const seenRefs = new Set();
-const footnotes = {};
-let footnoteCount = 0;
+const CITATIONS = input.citations;
 
-function chicagoJoin(parts) {
-  const clean = parts.map((p) => {
-    p = p.replace(/\.+$/, "");
-    return p.endsWith(".”") ? p.slice(0, -2) + "”" : p;
-  });
-  const text = clean.join("; ");
-  return text.endsWith("”") ? text.slice(0, -1) + ".”" : text + ".";
+function citeLabel(nums) {
+  nums = [...new Set(nums)].sort((a, b) => a - b);
+  const groups = [];
+  let start = 0;
+  for (let i = 1; i <= nums.length; i++) {
+    if (i === nums.length || nums[i] !== nums[i - 1] + 1) {
+      const run = nums.slice(start, i);
+      groups.push(run.length >= 3 ? `[${run[0]}]–[${run.at(-1)}]` : run.map((n) => `[${n}]`).join(", "));
+      start = i;
+    }
+  }
+  return groups.join(", ");
 }
 
-function noteRuns(text) {
-  // *курсив* внутри библиографического описания.
-  return text.split(/(\*[^*]+\*)/).filter(Boolean).map((s) =>
-    s.startsWith("*") ? new TextRun({ text: s.slice(1, -1), italics: true, size: 20 }) : new TextRun({ text: s, size: 20 }));
-}
-
-function withFootnotes(markdown) {
-  return markdown.replace(/[ \u00a0]*\[@([^\]]+)\]/g, (_, list) => {
+function withCitations(markdown) {
+  return markdown.replace(/\[@([^\]]+)\]/g, (_, list) => {
     const keys = list.split(";").map((k) => k.trim().replace(/^@/, ""));
-    const parts = keys.map((k) => {
-      if (!REFS[k]) throw new Error(`Нет источника ${k} в references.json`);
-      const part = seenRefs.has(k) ? REFS[k].short : REFS[k].note;
-      seenRefs.add(k);
-      return part;
+    const nums = keys.map((k) => {
+      if (!CITATIONS[k]) throw new Error(`Нет номера для источника ${k}`);
+      return CITATIONS[k];
     });
-    const id = ++footnoteCount;
-    footnotes[id] = { children: [new Paragraph({ spacing: { after: 0, line: 240 }, alignment: AlignmentType.LEFT, children: noteRuns(" " + chicagoJoin(parts)) })] };
-    return `⁅${id}⁆`;
-  });
-}
-
-function textRuns(text, style) {
-  return text.split(/(⁅\d+⁆)/).filter(Boolean).map((s) => {
-    const m = s.match(/^⁅(\d+)⁆$/);
-    return m ? new FootnoteReferenceRun(Number(m[1])) : new TextRun({ ...style, text: s });
+    // Квадратные скобки экранируются, чтобы marked не принял номер за ссылку.
+    return citeLabel(nums).replace(/\[/g, "\\[").replace(/\]/g, "\\]");
   });
 }
 
@@ -104,7 +89,7 @@ function inline(tokens, style = {}) {
         break;
       case "text":
         if (t.tokens && t.tokens.length) runs.push(...inline(t.tokens, style));
-        else runs.push(...textRuns(decode(t.text), style));
+        else runs.push(new TextRun({ ...style, text: decode(t.text) }));
         break;
       case "escape":
         runs.push(new TextRun({ ...style, text: decode(t.text) }));
@@ -161,7 +146,7 @@ function diagramFile(code) {
 
 // --- Таблицы -----------------------------------------------------------------
 
-function columnWidths(header, rows) {
+function columnWidths(header, rows, textWidth = TEXT_WIDTH) {
   const n = header.length;
   const CHAR = 125; // ширина символа 10 pt (полужирный в заголовке) в DXA с запасом
   const cols = [...Array(n)].map((_, i) => {
@@ -176,13 +161,13 @@ function columnWidths(header, rows) {
   });
   // Короткие столбцы (ID, оценки, приоритет) — по самому длинному значению.
   const base = cols.map((c) => (c.max <= 14 ? Math.max(c.min, (c.max + 3) * CHAR) : c.min));
-  const free = Math.max(0, TEXT_WIDTH - base.reduce((a, b) => a + b, 0));
+  const free = Math.max(0, textWidth - base.reduce((a, b) => a + b, 0));
   const weights = cols.map((c) => (c.max <= 14 ? 0 : Math.pow(Math.max(c.mean, 8), 0.75)));
   const wsum = weights.reduce((a, b) => a + b, 0) || 1;
   let widths = base.map((b, i) => b + Math.round((free * weights[i]) / wsum));
   const total = widths.reduce((a, b) => a + b, 0);
-  if (total !== TEXT_WIDTH) widths = widths.map((w) => Math.floor((w * TEXT_WIDTH) / total));
-  widths[widths.length - 1] += TEXT_WIDTH - widths.reduce((a, b) => a + b, 0);
+  if (total !== textWidth) widths = widths.map((w) => Math.floor((w * textWidth) / total));
+  widths[widths.length - 1] += textWidth - widths.reduce((a, b) => a + b, 0);
   return widths;
 }
 
@@ -204,14 +189,14 @@ function cell(tokens, width, headerRow) {
   });
 }
 
-function table(t) {
+function table(t, textWidth = TEXT_WIDTH) {
   const widths = columnWidths(t.header, t.rows);
   const rows = [
     new TableRow({ tableHeader: true, cantSplit: true, children: t.header.map((c, i) => cell(c.tokens, widths[i], true)) }),
     ...t.rows.map((r) => new TableRow({ cantSplit: true, children: r.map((c, i) => cell(c.tokens, widths[i], false)) })),
   ];
   return [
-    new Table({ width: { size: TEXT_WIDTH, type: WidthType.DXA }, columnWidths: widths, layout: TableLayoutType.FIXED, rows }),
+    new Table({ width: { size: textWidth, type: WidthType.DXA }, columnWidths: widths, layout: TableLayoutType.FIXED, rows }),
     new Paragraph({ spacing: { before: 0, after: 120, line: 240 }, children: [] }),
   ];
 }
@@ -309,7 +294,7 @@ function blocks(tokens, opts = {}) {
         out.push(...list(t));
         break;
       case "table":
-        out.push(...table(t));
+        out.push(...table(t, opts.textWidth));
         break;
       case "code":
         if (t.lang === "mermaid") out.push(...imageParagraphs(diagramFile(t.text), null, opts.maxW, opts.maxH));
@@ -394,11 +379,33 @@ function pushSection(children, landscape = false) {
 let current = [...titlePage(input.title), ...tocBlock()];
 let startsSection = false;
 for (const file of input.sections) {
-  const tokens = marked.lexer(withFootnotes(fs.readFileSync(path.join(ROOT, file), "utf8")));
+  const tokens = marked.lexer(withCitations(fs.readFileSync(path.join(ROOT, file), "utf8")));
   const hasDiagrams = tokens.some((x) => x.type === "code" && x.lang === "mermaid");
   if (!hasDiagrams) {
-    current.push(...blocks(tokens, { noBreakFirst: startsSection }));
-    startsSection = false;
+    // Широкие таблицы между <!-- landscape --> и <!-- /landscape --> — на альбомной странице.
+    let segment = [];
+    let wide = false;
+    const flush = () => {
+      if (!segment.length) return;
+      if (wide) {
+        pushSection(current, false);
+        pushSection(blocks(segment, { textWidth: LAND_TEXT_WIDTH }), true);
+        current = [];
+      } else {
+        current.push(...blocks(segment, { noBreakFirst: startsSection }));
+        startsSection = false;
+      }
+      segment = [];
+    };
+    for (const tk of tokens) {
+      if (tk.type === "html" && /<!--\s*\/?landscape\s*-->/.test(tk.raw)) {
+        flush();
+        wide = !/\/landscape/.test(tk.raw);
+        continue;
+      }
+      segment.push(tk);
+    }
+    flush();
     continue;
   }
   // Приложение с диаграммами: каждая диаграмма на своей странице, широкие — в альбомной ориентации.
@@ -428,7 +435,6 @@ for (const file of input.sections) {
 pushSection(current, false);
 
 const doc = new Document({
-  footnotes,
   creator: input.title.author_en,
   title: input.title.topic_en,
   styles: {

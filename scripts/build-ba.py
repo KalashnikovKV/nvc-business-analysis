@@ -69,73 +69,65 @@ SHOT_PAGES = {
 }
 
 
-# --- Источники и сноски (Чикагский стиль, 16-е изд.) -------------------------
+# --- Источники и ссылки (IEEE) -------------------------------------------------
+# В тексте источник указывается ключом: [@key] или [@a; @b]. Сборка нумерует источники
+# по порядку первого упоминания и подставляет номера в квадратных скобках: [3], [3], [5], [2]–[4].
 
-CITE = re.compile(r"[ \u00a0]*\[@([^\]]+)\]")
+CITE = re.compile(r"\[@([^\]]+)\]")
 
 
 def load_refs() -> dict:
     return {r["key"]: r for r in json.loads((ROOT / "references.json").read_text())}
 
 
-def bib_sort_key(entry: str) -> tuple:
-    text = entry.lstrip("“\"*").lower()
-    # Сначала кириллица, затем латиница (правила ЕГУ, п. 2.5).
-    return (0 if re.match(r"[а-яё]", text) else 1, text)
+def cite_keys(match: re.Match) -> list[str]:
+    return [k.strip().lstrip("@") for k in match.group(1).split(";")]
+
+
+def citation_order() -> dict[str, int]:
+    """Номер каждого источника — по первому упоминанию в разделах по порядку."""
+    refs = load_refs()
+    order: dict[str, int] = {}
+    for src, _, _ in SECTIONS:
+        for m in CITE.finditer((ROOT / src).read_text()):
+            for key in cite_keys(m):
+                if key not in refs:
+                    raise SystemExit(f"Нет источника {key} в references.json")
+                order.setdefault(key, len(order) + 1)
+    missing = set(refs) - set(order)
+    if missing:
+        raise SystemExit(f"Источники ни разу не процитированы: {sorted(missing)}")
+    return order
+
+
+def cite_label(nums: list[int]) -> str:
+    """[1], [3] для отдельных номеров, [2]–[5] для трёх и больше подряд."""
+    nums = sorted(set(nums))
+    groups, start = [], 0
+    for i in range(1, len(nums) + 1):
+        if i == len(nums) or nums[i] != nums[i - 1] + 1:
+            run = nums[start:i]
+            groups.append(f"[{run[0]}]–[{run[-1]}]" if len(run) >= 3 else ", ".join(f"[{n}]" for n in run))
+            start = i
+    return ", ".join(groups)
+
+
+def cite_markdown(text: str, order: dict[str, int], escape: bool = False) -> str:
+    """Заменить [@key] на номера IEEE. escape — для Markdown, где [n] надо экранировать."""
+    def repl(m: re.Match) -> str:
+        label = cite_label([order[k] for k in cite_keys(m)])
+        return label.replace("[", "\\[").replace("]", "\\]") if escape else label
+    return CITE.sub(repl, text)
 
 
 def build_references() -> None:
     refs = load_refs()
-    entries = sorted((r["bib"] for r in refs.values()), key=bib_sort_key)
-    linked = [re.sub(r"(https?://\S+?)(\.?)$", r"<\1>\2", e) for e in entries]
-    out = [
-        "# Список источников и литературы",
-        "",
-        *[f"{i}. {e}" for i, e in enumerate(linked, 1)],
-        "",
-    ]
+    order = citation_order()
+    out = ["# Список источников и литературы", ""]
+    for key, n in sorted(order.items(), key=lambda kv: kv[1]):
+        out += [f"\\[{n}\\] {refs[key]['ieee']}", ""]
     (ROOT / "03-references.md").write_text("\n".join(out))
-    print("references:", len(entries))
-
-
-def chicago_join(parts: list[str]) -> str:
-    """Склеить несколько ссылок в одну сноску: «A; B.» — точка внутри кавычек."""
-    clean = []
-    for p in parts:
-        p = p.rstrip(".")
-        if p.endswith(".”"):
-            p = p[:-2] + "”"
-        clean.append(p)
-    text = "; ".join(clean)
-    return text[:-1] + ".”" if text.endswith("”") else text + "."
-
-
-class Notes:
-    """Сноски по Чикагскому стилю: первая ссылка на источник — полная, дальше — краткая."""
-
-    def __init__(self) -> None:
-        self.refs = load_refs()
-        self.seen: set[str] = set()
-        self.defs: list[str] = []
-
-    def note(self, keys: list[str]) -> str:
-        parts = []
-        for key in keys:
-            ref = self.refs[key]
-            parts.append(ref["short"] if key in self.seen else ref["note"])
-            self.seen.add(key)
-        return chicago_join(parts)
-
-    def markdown(self, text: str) -> str:
-        """Заменить [@key; @key] на сноски Markdown [^n]."""
-        def repl(m: re.Match) -> str:
-            keys = [k.strip().lstrip("@") for k in m.group(1).split(";")]
-            self.defs.append(re.sub(r"(https?://[^\s<>]+?)(?=[.,;]?(?:\s|$))", r"<\1>", self.note(keys)))
-            return f"[^{len(self.defs)}]"
-        return CITE.sub(repl, text)
-
-    def definitions(self) -> str:
-        return "\n".join(f"[^{i}]: {d}" for i, d in enumerate(self.defs, 1))
+    print("references:", len(order))
 
 
 # --- Приложение 1 -----------------------------------------------------------
@@ -187,12 +179,12 @@ SUMMARY_HEADER = """# Бизнес-анализ: система создания
 
 def build_summary() -> None:
     parts = []
-    notes = Notes()
+    order = citation_order()
     for src, _, _ in SECTIONS:
-        text = notes.markdown((ROOT / src).read_text())
+        text = cite_markdown((ROOT / src).read_text(), order, escape=True)
         parts.append(re.sub(r"(?m)^(#+) ", r"#\1 ", text).rstrip() + "\n")
     body = "\n---\n\n".join(parts)
-    SUMMARY.write_text(SUMMARY_HEADER + "---\n\n" + body + "\n---\n\n" + notes.definitions() + "\n")
+    SUMMARY.write_text(SUMMARY_HEADER + "---\n\n" + body)
     print("summary:", SUMMARY.name)
 
 
@@ -216,7 +208,7 @@ def build_shots() -> None:
 
 KEY_SHOTS = [
     ("m2-preflight", "US-1.2 · Проверка записи"),
-    ("b2-jobs", "US-2.4 · Мои задания"),
+    ("b2-jobs", "US-2.3 · Мои задания"),
     ("b3-report", "US-3.1 · Отчёт"),
     ("b4-viewer", "US-4.1 · Ходьба по карте"),
 ]
@@ -314,16 +306,14 @@ def md_to_html(text: str) -> str:
 def build_site() -> None:
     for old in ["d01-summary", "d02-stakeholders", "d03-personas", "d04-stories", "d05-screens", "d06-nfr"]:
         (SITE / f"{old}.html").unlink(missing_ok=True)
+    order = citation_order()
     for src, page, title in SECTIONS:
         active = ' class="active"'
         nav = "\n".join(
             f'      <a{active if p == page else ""} href="{p}">{t}</a>'
             for _, p, t in SECTIONS
         )
-        notes = Notes()
-        text = notes.markdown((ROOT / src).read_text())
-        if notes.defs:
-            text += "\n\n" + notes.definitions() + "\n"
+        text = cite_markdown((ROOT / src).read_text(), order, escape=True)
         body = md_to_html(text)
         body = body.replace('src="wireframes/', 'src="')
         for heading, anchor in ANCHORS.items():
@@ -462,6 +452,7 @@ def build_docx() -> None:
     spec.write_text(json.dumps({
         "root": str(ROOT), "out": str(DOCX), "sections": sources,
         "title": {**TITLE, "author_en": "Kirill Kalashnikov"},
+        "citations": citation_order(),
     }, ensure_ascii=False))
     subprocess.run(["node", str(ROOT / "scripts" / "build-docx.mjs"), str(spec)], check=True)
 

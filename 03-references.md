@@ -1,26 +1,67 @@
 # Список источников и литературы
 
-1. Apple Inc. “Models with a LiDAR Scanner.” Apple Support. Accessed October 19, 2026. <https://support.apple.com/en-gb/guide/ipad/aside/ipad8a95fdc0/ipados>.
-2. Apple Inc. “RoomPlan.” Apple Developer. Accessed October 19, 2026. <https://developer.apple.com/augmented-reality/roomplan>.
-3. Curless, Brian, and Marc Levoy. “A Volumetric Method for Building Complex Models from Range Images.” In *Proceedings of the 23rd Annual Conference on Computer Graphics and Interactive Techniques (SIGGRAPH)*, 303–12. 1996.
-4. Epic Games. “Epic Games Releases Free RealityScan iOS App for 3D Scanning.” December 2022. Accessed October 19, 2026. <https://www.epicgames.com/site/en-US/news/epic-games-releases-free-realityscan-ios-app-for-3d-scanning>.
-5. Epic Games. “Fortnite Ecosystem 2024 Year in Review: Celebrating Creators and Looking Ahead.” January 22, 2025. Accessed October 19, 2026. <https://www.fortnite.com/news/fortnite-ecosystem-2024-year-in-review-celebrating-creators-and-looking-ahead>.
-6. European Parliament and Council of the European Union. “Regulation (EU) 2016/679 on the Protection of Natural Persons with Regard to the Processing of Personal Data (General Data Protection Regulation).” *Official Journal of the European Union* L 119 (May 4, 2016): 1–88.
-7. Garland, Michael, and Paul S. Heckbert. “Surface Simplification Using Quadric Error Metrics.” In *Proceedings of the 24th Annual Conference on Computer Graphics and Interactive Techniques (SIGGRAPH)*, 209–16. 1997.
-8. International Institute of Business Analysis. *A Guide to the Business Analysis Body of Knowledge (BABOK Guide)*. Version 3. Toronto: IIBA, 2015.
-9. Kerbl, Bernhard, Georgios Kopanas, Thomas Leimkühler, and George Drettakis. “3D Gaussian Splatting for Real-Time Radiance Field Rendering.” *ACM Transactions on Graphics* 42, no. 4 (2023): art. 139.
-10. Khronos Group. “glTF 2.0 Specification.” 2021. Accessed October 19, 2026. <https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html>.
-11. KIRI Innovations. “KIRI Engine Pricing.” Accessed October 19, 2026. <https://www.kiriengine.app/Pricing>.
-12. Lorensen, William E., and Harvey E. Cline. “Marching Cubes: A High Resolution 3D Surface Construction Algorithm.” *ACM SIGGRAPH Computer Graphics* 21, no. 4 (1987): 163–69.
-13. Luetzenburg, Gregor, Aart Kroon, and Anders A. Bjørk. “Evaluation of the Apple iPhone 12 Pro LiDAR for an Application in Geosciences.” *Scientific Reports* 11 (2021): art. 22221.
-14. Luma AI. “Luma Unreal Engine Plugin.” Documentation. Accessed October 19, 2026. <https://lumaai.notion.site/Luma-Unreal-Engine-Plugin-0-4-8005919d93444c008982346185e933a1>.
-15. MP1st. “Over 18,000 Games Released on Steam in 2025, but Half Have Fewer Than 10 Reviews.” 2026. Accessed October 19, 2026. <https://mp1st.com/news/18k-games-released-steam-2025-half-have-10-reviews>.
-16. Newcombe, Richard A., Shahram Izadi, Otmar Hilliges, David Molyneaux, David Kim, Andrew J. Davison, Pushmeet Kohli, Jamie Shotton, Steve Hodges, and Andrew Fitzgibbon. “KinectFusion: Real-Time Dense Surface Mapping and Tracking.” In *Proceedings of the 10th IEEE International Symposium on Mixed and Augmented Reality (ISMAR)*, 127–36. 2011.
-17. Niantic Spatial. “Scaniverse – 3D Scanner.” App Store. Accessed October 19, 2026. <https://apps.apple.com/us/app/-/id1541433223>.
-18. Polycam. “Export Gaussian Splats from Polycam to Unreal Engine.” Help Center. Accessed October 19, 2026. <https://learn.poly.cam/hc/en-us/articles/42506758152084>.
-19. Roblox Corporation. “Form 10-K for the Fiscal Year Ended December 31, 2025.” U.S. Securities and Exchange Commission, 2026. Accessed October 19, 2026. <https://www.sec.gov/Archives/edgar/data/1315098/000131509826000024/rblx-20251231.htm>.
-20. W3C. “Web Content Accessibility Guidelines (WCAG) 2.1.” W3C Recommendation, June 5, 2018. Accessed October 19, 2026. <https://www.w3.org/TR/WCAG21/>.
-21. World Labs. “Marble: Export Mesh.” Documentation. Accessed October 19, 2026. <https://docs.worldlabs.ai/marble/export/mesh>.
-22. Xia, Hongchi, Zhi-Hao Lin, Wei-Chiu Ma, and Shenlong Wang. “Video2Game: Real-Time Interactive Realistic and Browser-Compatible Environment from a Single Video.” In *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, 4578–88. 2024.
-23. Yang, Lihe, Bingyi Kang, Zilong Huang, Zhen Zhao, Xiaogang Xu, Jiashi Feng, and Hengshuang Zhao. “Depth Anything V2.” In *Advances in Neural Information Processing Systems (NeurIPS)*. 2024.
-24. Zhou, Qian-Yi, Jaesik Park, and Vladlen Koltun. “Open3D: A Modern Library for 3D Data Processing.” Preprint, arXiv:1801.09847, 2018.
+\[1\] MP1st, "Over 18,000 games released on Steam in 2025, but half have fewer than 10 reviews," 2026. [Online]. Available: <https://mp1st.com/news/18k-games-released-steam-2025-half-have-10-reviews>
+
+\[2\] Epic Games, "Fortnite ecosystem 2024 year in review: Celebrating creators and looking ahead," Jan. 2025. [Online]. Available: <https://www.fortnite.com/news/fortnite-ecosystem-2024-year-in-review-celebrating-creators-and-looking-ahead>
+
+\[3\] Roblox Corporation, "Form 10-K for the fiscal year ended December 31, 2025," U.S. Securities and Exchange Commission, 2026. [Online]. Available: <https://www.sec.gov/Archives/edgar/data/1315098/000131509826000024/rblx-20251231.htm>
+
+\[4\] G. Luetzenburg, A. Kroon, and A. A. Bjørk, "Evaluation of the Apple iPhone 12 Pro LiDAR for an application in geosciences," *Scientific Reports*, vol. 11, Art. no. 22221, 2021.
+
+\[5\] Apple Inc., "Models with a LiDAR Scanner," Apple Support, 2026. [Online]. Available: <https://support.apple.com/en-gb/guide/ipad/aside/ipad8a95fdc0/ipados>
+
+\[6\] Niantic Spatial, "Scaniverse – 3D Scanner," App Store, 2026. [Online]. Available: <https://apps.apple.com/us/app/-/id1541433223>
+
+\[7\] Polycam, "Export Gaussian splats from Polycam to Unreal Engine," help center, 2026. [Online]. Available: <https://learn.poly.cam/hc/en-us/articles/42506758152084>
+
+\[8\] KIRI Innovations, "KIRI Engine pricing," 2026. [Online]. Available: <https://www.kiriengine.app/Pricing>
+
+\[9\] Epic Games, "Epic Games releases free RealityScan iOS app for 3D scanning," Dec. 2022. [Online]. Available: <https://www.epicgames.com/site/en-US/news/epic-games-releases-free-realityscan-ios-app-for-3d-scanning>
+
+\[10\] RoomSketcher, "Does my phone or tablet have LiDAR?," help center, 2026. [Online]. Available: <https://help.roomsketcher.com/hc/en-us/articles/29949063142045>
+
+\[11\] Khronos Group, "glTF 2.0 specification," 2021. [Online]. Available: <https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html>
+
+\[12\] R. A. Newcombe *et al.*, "KinectFusion: Real-time dense surface mapping and tracking," in *Proc. 10th IEEE Int. Symp. Mixed and Augmented Reality (ISMAR)*, 2011, pp. 127–136.
+
+\[13\] B. Curless and M. Levoy, "A volumetric method for building complex models from range images," in *Proc. 23rd Annu. Conf. Computer Graphics and Interactive Techniques (SIGGRAPH)*, 1996, pp. 303–312.
+
+\[14\] W. E. Lorensen and H. E. Cline, "Marching cubes: A high resolution 3D surface construction algorithm," *ACM SIGGRAPH Computer Graphics*, vol. 21, no. 4, pp. 163–169, 1987.
+
+\[15\] M. Garland and P. S. Heckbert, "Surface simplification using quadric error metrics," in *Proc. 24th Annu. Conf. Computer Graphics and Interactive Techniques (SIGGRAPH)*, 1997, pp. 209–216.
+
+\[16\] Apple Inc., "RoomPlan," Apple Developer, 2026. [Online]. Available: <https://developer.apple.com/augmented-reality/roomplan>
+
+\[17\] European Parliament and Council, "Regulation (EU) 2016/679 (General Data Protection Regulation)," *Official Journal of the European Union*, L 119, 2016.
+
+\[18\] W3C, "Web Content Accessibility Guidelines (WCAG) 2.1," W3C Recommendation, 2018. [Online]. Available: <https://www.w3.org/TR/WCAG21/>
+
+\[19\] H. Xia, Z.-H. Lin, W.-C. Ma, and S. Wang, "Video2Game: Real-time interactive realistic and browser-compatible environment from a single video," in *Proc. IEEE/CVF Conf. Computer Vision and Pattern Recognition (CVPR)*, 2024, pp. 4578–4588.
+
+\[20\] B. Kerbl, G. Kopanas, T. Leimkühler, and G. Drettakis, "3D Gaussian splatting for real-time radiance field rendering," *ACM Trans. Graphics*, vol. 42, no. 4, Art. no. 139, 2023.
+
+\[21\] L. Yang *et al.*, "Depth Anything V2," in *Advances in Neural Information Processing Systems (NeurIPS)*, 2024.
+
+\[22\] Q.-Y. Zhou, J. Park, and V. Koltun, "Open3D: A modern library for 3D data processing," arXiv:1801.09847, 2018.
+
+\[23\] Luma AI, "Luma Unreal Engine plugin," documentation, 2026. [Online]. Available: <https://lumaai.notion.site/Luma-Unreal-Engine-Plugin-0-4-8005919d93444c008982346185e933a1>
+
+\[24\] World Labs, "Marble: Export mesh," documentation, 2026. [Online]. Available: <https://docs.worldlabs.ai/marble/export/mesh>
+
+\[25\] International Institute of Business Analysis, *A Guide to the Business Analysis Body of Knowledge (BABOK Guide)*, v3. Toronto, Canada: IIBA, 2015.
+
+\[26\] SkyeBrowse, "Polycam review: A fast 3D scanner that hits a ceiling quickly," Mar. 2026. [Online]. Available: <https://www.skyebrowse.com/news/posts/polycam-review>
+
+\[27\] J. L. Schönberger and J.-M. Frahm, "Structure-from-motion revisited," in *Proc. IEEE Conf. Computer Vision and Pattern Recognition (CVPR)*, 2016, pp. 4104–4113.
+
+\[28\] Radiance Fields, "Scaniverse adds USDZ export to splats," Jul. 2026. [Online]. Available: <https://radiancefields.com/scaniverse-adds-usdz-export-to-splats>
+
+\[29\] Apple Inc., "ARKit," Apple Developer Documentation, 2026. [Online]. Available: <https://developer.apple.com/documentation/arkit>
+
+\[30\] M. Dawson-Haggerty *et al.*, "trimesh," GitHub repository, 2026. [Online]. Available: <https://github.com/mikedh/trimesh>
+
+\[31\] PyTorch Foundation, "PyTorch," GitHub repository, 2026. [Online]. Available: <https://github.com/pytorch/pytorch>
+
+\[32\] L. Yang *et al.*, "Depth Anything V2," GitHub repository, 2024. [Online]. Available: <https://github.com/DepthAnything/Depth-Anything-V2>
+
+\[33\] Apple Inc., "App Store Review Guidelines," 2026. [Online]. Available: <https://developer.apple.com/app-store/review/guidelines/>
