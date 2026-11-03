@@ -11,6 +11,7 @@
     <a class="back" href="index.html">← Бизнес-анализ</a>
     <h1>2. Требования к системе</h1>
     <nav>
+      <a href="d00a-abbreviations.html">Список сокращений</a>
       <a href="d00-introduction.html">Введение</a>
       <a href="d01-analysis.html">1. Аналитическая часть</a>
       <a class="active" href="d02-requirements.html">2. Требования к системе</a>
@@ -250,7 +251,7 @@
 </tr>
 <tr>
 <td>Устройства</td>
-<td>Для съёмки нужен iPhone Pro или iPad Pro с LiDAR [5], [10]; симулятор и браузер глубину не дают</td>
+<td>Для съёмки нужен iPhone Pro или iPad Pro с LiDAR<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">10</a></sup>; симулятор и браузер глубину не дают</td>
 <td>Без устройства продукт проверяют по четырём эталонным съёмкам и тестовой ссылке</td>
 </tr>
 <tr>
@@ -260,7 +261,7 @@
 </tr>
 <tr>
 <td>API и платформа</td>
-<td>Глубина и позы — только через ARKit на устройстве [29]; формат карты — glTF 2.0 [11]</td>
+<td>Глубина и позы — только через ARKit на устройстве<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">11</a></sup>; формат карты — glTF 2.0<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">12</a></sup></td>
 <td>Платформа релиза — iOS; пакет в GLB</td>
 </tr>
 <tr>
@@ -832,7 +833,7 @@
 <td>NFR-9</td>
 <td>Удобство</td>
 <td>Веб-клиент</td>
-<td>Соответствие WCAG 2.1 AA [18]: контраст текста ≥ 4,5 : 1, все формы проходятся с клавиатуры</td>
+<td>Соответствие WCAG 2.1 AA<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">13</a></sup>: контраст текста ≥ 4,5 : 1, все формы проходятся с клавиатуры</td>
 <td>US-2.2, US-2.3</td>
 </tr>
 <tr>
@@ -853,7 +854,7 @@
 <tr>
 <th>Данные</th>
 <th>Почему могут быть персональными</th>
-<th>Основание по GDPR [17]</th>
+<th>Основание по GDPR<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">14</a></sup></th>
 <th>Требование</th>
 </tr>
 </thead>
@@ -880,19 +881,19 @@
 </table>
 <ul>
 <li><strong>Минимизация и сроки.</strong> Съёмки и пакеты хранятся ≤ 90 дней с последнего открытия, затем удаляются.</li>
-<li><strong>Право на удаление (ст. 17).</strong> Пользователь может запросить удаление своих заданий по почте, указанной на сайте. Запрос исполняется ≤ 30 дней по номеру задания: GDPR даёт на ответ один месяц [17]. Отдельной панели для этого нет (2.3).</li>
+<li><strong>Право на удаление (ст. 17).</strong> Пользователь может запросить удаление своих заданий по почте, указанной на сайте. Запрос исполняется ≤ 30 дней по номеру задания: GDPR даёт на ответ один месяц<sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup>. Отдельной панели для этого нет (2.3).</li>
 <li><strong>Прозрачность (ст. 13).</strong> В приложении и на сайте есть короткое уведомление: какие данные собираются, зачем, сколько хранятся и как удалить.</li>
 <li><strong>Владелец места.</strong> Пользователь подтверждает, что снимает своё место или место с разрешения владельца.</li>
 </ul>
 <h3>Согласие участников интервью</h3>
 <p>Интервью и опросы в работе не проводились (введение, «Методы»). Согласие участников не требуется. Если интервью будут проведены для проверки персон (R6), участники подписывают согласие на запись и обработку ответов.</p>
 <h3>Лицензии</h3>
-<p>Open3D [22] и trimesh [30] — MIT, PyTorch [31] — BSD-3-Clause: используются с сохранением уведомлений об авторском праве. Из моделей Depth Anything V2 используется только Small под Apache-2.0 [32]; более крупные модели с некоммерческой лицензией не используются. glTF 2.0 [11] — открытый стандарт без отчислений. Эталонные съёмки сделаны автором, права третьих лиц не затрагиваются.</p>
+<p>Open3D<sup id="fnref:7"><a class="footnote-ref" href="#fn:7">1</a></sup> и trimesh<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">2</a></sup> — MIT, PyTorch<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">3</a></sup> — BSD-3-Clause: используются с сохранением уведомлений об авторском праве. Из моделей Depth Anything V2 используется только Small под Apache-2.0<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">4</a></sup>; более крупные модели с некоммерческой лицензией не используются. glTF 2.0<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">5</a></sup> — открытый стандарт без отчислений. Эталонные съёмки сделаны автором, права третьих лиц не затрагиваются.</p>
 <h3>Стандарты</h3>
 <ul>
-<li><strong>WCAG 2.1 AA</strong> [18] для веб-клиента (NFR-9).</li>
-<li><strong>glTF 2.0</strong> [11] для пакета карты (US-5.1, US-5.2).</li>
-<li><strong>App Store Review Guidelines</strong> [33]: понятное описание, зачем приложению камера.</li>
+<li><strong>WCAG 2.1 AA</strong><sup id="fnref:12"><a class="footnote-ref" href="#fn:12">7</a></sup> для веб-клиента (NFR-9).</li>
+<li><strong>glTF 2.0</strong><sup id="fnref:13"><a class="footnote-ref" href="#fn:13">8</a></sup> для пакета карты (US-5.1, US-5.2).</li>
+<li><strong>App Store Review Guidelines</strong><sup id="fnref:14"><a class="footnote-ref" href="#fn:14">9</a></sup>: понятное описание, зачем приложению камера.</li>
 </ul>
 <h2 id="risks">2.9. Риски</h2>
 <p>Риски проекта оценены в табл. 2.18.</p>
@@ -915,7 +916,7 @@
 <td>M</td>
 <td>H</td>
 <td>Небольшая зона, обязательные позы и глубина, отказ вместо произвольной геометрии</td>
-<td>Качество LiDAR [4], алгоритмы слияния [12], [13]</td>
+<td>Качество LiDAR<sup id="fnref:15"><a class="footnote-ref" href="#fn:15">15</a></sup>, алгоритмы слияния<sup id="fnref:16"><a class="footnote-ref" href="#fn:16">16</a></sup></td>
 </tr>
 <tr>
 <td>R2</td>
@@ -947,7 +948,7 @@
 <td>L</td>
 <td>H</td>
 <td>Правила съёмки, срок хранения 90 дней, удаление по запросу</td>
-<td>Требования 2.8, GDPR [17]</td>
+<td>Требования 2.8, GDPR<sup id="fnref:17"><a class="footnote-ref" href="#fn:17">17</a></sup></td>
 </tr>
 <tr>
 <td>R6</td>
@@ -978,6 +979,62 @@
 <li><strong>KPI-4:</strong> видимая модель ≤ 50 000 треугольников, опора ≤ 25% и ≥ 100 граней, файлы в пределах NFR-3 (US-3.3).</li>
 </ul>
 <p>Релиз не принимается, если успех получен подстановкой заглушки, карта доводится вручную после сборки, геометрия масштабируется, персонаж проваливается сквозь опору или непригодная съёмка завершилась успехом.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:7">
+<p>Qian-Yi Zhou, Jaesik Park, and Vladlen Koltun, “Open3D: A Modern Library for 3D Data Processing,” preprint, arXiv:1801.09847, 2018.&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>Michael Dawson-Haggerty et al., “trimesh,” GitHub repository, accessed October 28, 2026, <a href="https://github.com/mikedh/trimesh">https://github.com/mikedh/trimesh</a>.&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p>PyTorch Foundation, “PyTorch,” GitHub repository, accessed October 28, 2026, <a href="https://github.com/pytorch/pytorch">https://github.com/pytorch/pytorch</a>.&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p>Lihe Yang et al., “Depth Anything V2,” GitHub repository, accessed October 28, 2026, <a href="https://github.com/DepthAnything/Depth-Anything-V2">https://github.com/DepthAnything/Depth-Anything-V2</a>.&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p>Khronos Group, “glTF 2.0 Specification.”&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>Ibid.&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p>W3C, “WCAG 2.1.”&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:13">
+<p>Khronos Group, “glTF 2.0 Specification.”&#160;<a class="footnote-backref" href="#fnref:13" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:14">
+<p>Apple Inc., “App Store Review Guidelines,” accessed October 28, 2026, <a href="https://developer.apple.com/app-store/review/guidelines/">https://developer.apple.com/app-store/review/guidelines/</a>.&#160;<a class="footnote-backref" href="#fnref:14" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:1">
+<p>Apple Inc., “Models with a LiDAR Scanner,” Apple Support, accessed October 19, 2026, <a href="https://support.apple.com/en-gb/guide/ipad/aside/ipad8a95fdc0/ipados">https://support.apple.com/en-gb/guide/ipad/aside/ipad8a95fdc0/ipados</a>; RoomSketcher, “Does My Phone or Tablet Have LiDAR?,” Help Center, accessed October 28, 2026, <a href="https://help.roomsketcher.com/hc/en-us/articles/29949063142045">https://help.roomsketcher.com/hc/en-us/articles/29949063142045</a>.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Apple Inc., “ARKit,” Apple Developer Documentation, accessed October 28, 2026, <a href="https://developer.apple.com/documentation/arkit">https://developer.apple.com/documentation/arkit</a>.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Khronos Group, “glTF 2.0 Specification,” 2021, accessed October 19, 2026, <a href="https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html">https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html</a>.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>W3C, “Web Content Accessibility Guidelines (WCAG) 2.1,” W3C Recommendation, June 5, 2018, accessed October 19, 2026, <a href="https://www.w3.org/TR/WCAG21/">https://www.w3.org/TR/WCAG21/</a>.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>European Parliament and Council of the European Union, “Regulation (EU) 2016/679 (General Data Protection Regulation),” <em>Official Journal of the European Union</em> L 119 (May 4, 2016): 1–88.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:15">
+<p>Gregor Luetzenburg, Aart Kroon, and Anders A. Bjørk, “Evaluation of the Apple iPhone 12 Pro LiDAR for an Application in Geosciences,” <em>Scientific Reports</em> 11 (2021): art. 22221.&#160;<a class="footnote-backref" href="#fnref:15" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+<li id="fn:16">
+<p>Richard A. Newcombe et al., “KinectFusion: Real-Time Dense Surface Mapping and Tracking,” in <em>Proceedings of the 10th IEEE International Symposium on Mixed and Augmented Reality (ISMAR)</em> (2011), 127–36; Brian Curless and Marc Levoy, “A Volumetric Method for Building Complex Models from Range Images,” in <em>Proceedings of the 23rd Annual Conference on Computer Graphics and Interactive Techniques (SIGGRAPH)</em> (1996), 303–12.&#160;<a class="footnote-backref" href="#fnref:16" title="Jump back to footnote 16 in the text">&#8617;</a></p>
+</li>
+<li id="fn:17">
+<p>European Parliament and Council, “General Data Protection Regulation.”&#160;<a class="footnote-backref" href="#fnref:17" title="Jump back to footnote 17 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
       </div>
     </article>
   </main>

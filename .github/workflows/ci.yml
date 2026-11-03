@@ -19,6 +19,7 @@ jobs:
           for f in \
             README.md \
             BA-METHOD.md \
+            00a-abbreviations.md \
             00-introduction.md \
             01-analytical-part.md \
             02-system-requirements.md \
@@ -38,7 +39,9 @@ jobs:
             wireframes/BA_Kalashnikov_Kirill.docx \
             wireframes/BA_Kalashnikov_Kirill.pdf \
             wireframes/BA_Kalashnikov_Kirill_RU.docx \
+            en/00a-abbreviations.md \
             en/00-introduction.md \
+            scripts/build-declaration.mjs \
             en/01-analytical-part.md \
             en/02-system-requirements.md \
             en/03-references.md \

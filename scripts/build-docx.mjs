@@ -7,7 +7,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { marked } from "marked";
 import {
-  AlignmentType, BorderStyle, Document, ExternalHyperlink, Header, HeadingLevel, ImageRun,
+  AlignmentType, BorderStyle, Document, ExternalHyperlink, FootnoteReferenceRun, Header, HeadingLevel, ImageRun,
   LevelFormat, Packer, PageNumber, PageOrientation, Paragraph, ShadingType, Table, TableCell, TableLayoutType,
   TableOfContents, TableRow, TabStopType, TextRun, WidthType,
 } from "docx";
@@ -20,6 +20,8 @@ const esc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const CAPTION = new RegExp(`^(${esc(L.table)}|${esc(L.figure)}) `);
 const TABLE_CAPTION = new RegExp(`^${esc(L.table)} `);
 const APPENDIX = new RegExp(`^${esc(L.appendix)} (\\d+)\\. (.+)$`);
+// «Табл. 1.2. Название» → [«Табл. 1.2», «Название»].
+const TABLE_SPLIT = new RegExp(`^(${esc(L.table)} [A-ZА-Я]?\\.?[\\d.]*\\d)\\. (.+)$`);
 
 // A4, поля по правилам ЕГУ: слева 25 мм, справа 10 мм, сверху и снизу 20 мм.
 const PAGE = { width: 11906, height: 16838 };
@@ -38,34 +40,60 @@ const decode = (s) =>
   s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"').replace(/&#39;/g, "'");
 
-// --- Ссылки на источники (IEEE) ---------------------------------------------
-// [@key; @key] в тексте → номера по порядку первого упоминания: [3], [5] или [2]–[4].
+// --- Сноски (Chicago, 16-е изд.) ---------------------------------------------
+// [@key; @key] в тексте → сноска внизу страницы: первая ссылка на источник полная,
+// повторная — краткая, подряд та же в одном абзаце — «Ibid.» (Правила ЕГУ, п. 3).
 
-const CITATIONS = input.citations;
+const REFS = Object.fromEntries(input.refs.map((r) => [r.key, r]));
+const seenRefs = new Set();
+const footnotes = {};
+let footnoteCount = 0;
+let lastKeys = "";
 
-function citeLabel(nums) {
-  nums = [...new Set(nums)].sort((a, b) => a - b);
-  const groups = [];
-  let start = 0;
-  for (let i = 1; i <= nums.length; i++) {
-    if (i === nums.length || nums[i] !== nums[i - 1] + 1) {
-      const run = nums.slice(start, i);
-      groups.push(run.length >= 3 ? `[${run[0]}]–[${run.at(-1)}]` : run.map((n) => `[${n}]`).join(", "));
-      start = i;
-    }
-  }
-  return groups.join(", ");
+function chicagoJoin(parts) {
+  const clean = parts.map((x) => {
+    x = x.replace(/\.+$/, "");
+    return x.endsWith(".”") ? x.slice(0, -2) + "”" : x;
+  });
+  const text = clean.join("; ");
+  return text.endsWith("”") ? text.slice(0, -1) + ".”" : text + ".";
+}
+
+function noteRuns(text) {
+  // *курсив* внутри библиографического описания; сноски — Times New Roman 10 pt.
+  return text.split(/(\*[^*]+\*)/).filter(Boolean).map((x) =>
+    x.startsWith("*") ? new TextRun({ text: x.slice(1, -1), italics: true, size: 20 }) : new TextRun({ text: x, size: 20 }));
 }
 
 function withCitations(markdown) {
-  return markdown.replace(/\[@([^\]]+)\]/g, (_, list) => {
-    const keys = list.split(";").map((k) => k.trim().replace(/^@/, ""));
-    const nums = keys.map((k) => {
-      if (!CITATIONS[k]) throw new Error(`Нет номера для источника ${k}`);
-      return CITATIONS[k];
+  // Абзацы разделяются пустой строкой: «Ibid.» допустимо только внутри одного абзаца.
+  return markdown.split(/\n\n/).map((block) => {
+    lastKeys = "";
+    return block.replace(/[ \u00a0]*\[@([^\]]+)\]/g, (_, list) => {
+      const keys = list.split(";").map((k) => k.trim().replace(/^@/, ""));
+      let text;
+      if (keys.length === 1 && keys.join(";") === lastKeys) {
+        text = "Ibid.";
+      } else {
+        text = chicagoJoin(keys.map((k) => {
+          if (!REFS[k]) throw new Error(`Нет источника ${k} в references.json`);
+          const part = seenRefs.has(k) ? REFS[k].short : REFS[k].note;
+          seenRefs.add(k);
+          return part;
+        }));
+      }
+      lastKeys = keys.join(";");
+      const id = ++footnoteCount;
+      footnotes[id] = { children: [new Paragraph({ spacing: { after: 0, line: 240 }, alignment: AlignmentType.LEFT, children: noteRuns(" " + text) })] };
+      return `⁅${id}⁆`;
     });
-    // Квадратные скобки экранируются, чтобы marked не принял номер за ссылку.
-    return citeLabel(nums).replace(/\[/g, "\\[").replace(/\]/g, "\\]");
+  }).join("\n\n");
+}
+
+function textRuns(text, style) {
+  return text.split(/(⁅\d+⁆)/).filter(Boolean).map((x) => {
+    const m = x.match(/^⁅(\d+)⁆$/);
+    return m ? new FootnoteReferenceRun(Number(m[1])) : new TextRun({ ...style, text: x });
   });
 }
 
@@ -95,7 +123,7 @@ function inline(tokens, style = {}) {
         break;
       case "text":
         if (t.tokens && t.tokens.length) runs.push(...inline(t.tokens, style));
-        else runs.push(new TextRun({ ...style, text: decode(t.text) }));
+        else runs.push(...textRuns(decode(t.text), style));
         break;
       case "escape":
         runs.push(new TextRun({ ...style, text: decode(t.text) }));
@@ -259,11 +287,20 @@ function blocks(tokens, opts = {}) {
           firstHeading = false;
           break;
         }
+        let headingText = plain(t.tokens);
+        if (t.depth === 2) {
+          const num = headingText.match(/^(\d+\.\d+)\. /);
+          sectionNo = num ? num[1] : null;
+          pointNo = 0;
+        } else if (t.depth === 3 && sectionNo) {
+          headingText = `${sectionNo}.${++pointNo}. ${headingText}`;
+        }
         out.push(new Paragraph({
           heading: HEADINGS[t.depth] || HeadingLevel.HEADING_4,
           pageBreakBefore: t.depth === 1 && !(opts.noBreakFirst && firstHeading),
           // Заголовки разделов и структурных частей — прописными (правила ЕГУ).
-          children: t.depth === 1 ? [new TextRun({ text: plain(t.tokens).toUpperCase() })] : inline(t.tokens),
+          children: t.depth === 1 ? [new TextRun({ text: headingText.toUpperCase() })]
+            : t.depth === 3 && sectionNo ? [new TextRun({ text: headingText })] : inline(t.tokens),
         }));
         firstHeading = false;
         break;
@@ -276,12 +313,28 @@ function blocks(tokens, opts = {}) {
         } else if (CAPTION.test(t.text) || (nextBlock(i)?.type === "table" && !/[.:]$/.test(t.text.trim()))) {
           // Подпись: заголовок таблицы — над таблицей, «Рис.» — под рисунком.
           const above = !t.text.startsWith(L.figure + " ");
-          out.push(new Paragraph({
-            alignment: AlignmentType.CENTER,
-            keepNext: above,
-            spacing: { before: above ? 120 : 0, after: above ? 60 : 240, line: 240 },
-            children: inline(t.tokens, { size: CAPTION_SIZE }),
-          }));
+          const tableCaption = plain(t.tokens).match(TABLE_SPLIT);
+          if (tableCaption) {
+            out.push(new Paragraph({
+              alignment: AlignmentType.RIGHT,
+              keepNext: true,
+              spacing: { before: 120, after: 0, line: 240 },
+              children: [new TextRun({ text: tableCaption[1], size: CAPTION_SIZE })],
+            }));
+            out.push(new Paragraph({
+              alignment: AlignmentType.CENTER,
+              keepNext: true,
+              spacing: { before: 0, after: 60, line: 240 },
+              children: [new TextRun({ text: tableCaption[2], size: CAPTION_SIZE })],
+            }));
+          } else {
+            out.push(new Paragraph({
+              alignment: AlignmentType.CENTER,
+              keepNext: above,
+              spacing: { before: above ? 120 : 0, after: above ? 60 : 240, line: 240 },
+              children: inline(t.tokens, { size: CAPTION_SIZE }),
+            }));
+          }
         } else {
           // Фраза со ссылкой на таблицу не отрывается от её подписи.
           const beforeCaption = nextBlock(i)?.type === "paragraph" && TABLE_CAPTION.test(nextBlock(i).text);
@@ -329,6 +382,33 @@ function titlePage(lines) {
   }));
 }
 
+// Аннотация по правилам ЕГУ (прил. 3): имя автора, название, ключевые слова курсивом, текст.
+// Отдельная страница после титула, в содержание не входит.
+function annotationBlock(a) {
+  if (!a) return [];
+  const blocks = [];
+  a.forEach((one, k) => {
+    const center = (text, opts = {}) => new Paragraph({
+      alignment: AlignmentType.CENTER,
+      pageBreakBefore: opts.page,
+      spacing: { before: opts.before || 0, after: opts.after ?? 120 },
+      children: [new TextRun({ text, bold: opts.bold })],
+    });
+    blocks.push(center(one.heading, { page: true, bold: true, after: 360 }));
+    blocks.push(center(one.author, { after: 120 }));
+    blocks.push(center(one.title, { bold: true, after: 360 }));
+    blocks.push(new Paragraph({
+      alignment: AlignmentType.JUSTIFIED,
+      spacing: { after: 240 },
+      children: [new TextRun({ text: one.keywordsLabel + ": " }), new TextRun({ text: one.keywords, italics: true })],
+    }));
+    for (const para of one.text) {
+      blocks.push(new Paragraph({ alignment: AlignmentType.JUSTIFIED, indent: { firstLine: INDENT }, children: [new TextRun({ text: para })] }));
+    }
+  });
+  return blocks;
+}
+
 function tocBlock() {
   const heading = new Paragraph({
     alignment: AlignmentType.CENTER,
@@ -369,7 +449,9 @@ function pushSection(children, landscape = false) {
   });
 }
 
-let current = [...titlePage(input.titleLines), ...tocBlock()];
+let sectionNo = null;
+let pointNo = 0;
+let current = [...titlePage(input.titleLines), ...annotationBlock(input.annotation), ...tocBlock()];
 let startsSection = false;
 for (const file of input.sections) {
   const tokens = marked.lexer(withCitations(fs.readFileSync(path.join(DIR, file), "utf8")));
@@ -431,6 +513,7 @@ for (const file of input.sections) {
 pushSection(current, false);
 
 const doc = new Document({
+  footnotes,
   creator: input.author,
   title: input.docTitle,
   styles: {

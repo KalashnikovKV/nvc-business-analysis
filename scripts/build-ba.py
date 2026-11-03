@@ -37,6 +37,7 @@ MERMAID_CLI = "@mermaid-js/mermaid-cli@11.12.0"
 MERMAID_JS = "https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js"
 
 SECTIONS = [
+    ("00a-abbreviations.md", "d00a-abbreviations.html", "Список сокращений"),
     ("00-introduction.md", "d00-introduction.html", "Введение"),
     ("01-analytical-part.md", "d01-analysis.html", "1. Аналитическая часть"),
     ("02-system-requirements.md", "d02-requirements.html", "2. Требования к системе"),
@@ -52,8 +53,8 @@ SOURCES = [src for src, _, _ in SECTIONS]
 # Пропуски «____» заполняются перед сдачей. Строки: текст, полужирный, выравнивание, отступ после.
 TITLE_RU = [
     ("ЕВРОПЕЙСКИЙ ГУМАНИТАРНЫЙ УНИВЕРСИТЕТ", True, "center", 0),
-    ("Академический департамент ____________________", False, "center", 0),
-    ("(название программы) ____________________", False, "center", 1200),
+    ("Академический департамент информатики", False, "center", 0),
+    ("Информатика", False, "center", 1200),
     ("КИРИЛЛ КАЛАШНИКОВ", True, "center", 0),
     ("Студент ___ курса", False, "center", 2000),
     ("СИСТЕМА СОЗДАНИЯ ИГРОВЫХ 3D-КАРТ ПО ВИДЕОЗАПИСИ", True, "center", 0),
@@ -66,8 +67,8 @@ TITLE_RU = [
 ]
 TITLE_EN = [
     ("EUROPEAN HUMANITIES UNIVERSITY", True, "center", 0),
-    ("Academic Department of ____________________", False, "center", 0),
-    ("Study programme ____________________", False, "center", 1200),
+    ("Academic Department of Informatics", False, "center", 0),
+    ("Informatics", False, "center", 1200),
     ("KIRILL KALASHNIKOV", True, "center", 0),
     ("___ year student", False, "center", 2000),
     ("A SYSTEM FOR CREATING 3D GAME MAPS FROM VIDEO", True, "center", 600),
@@ -78,6 +79,52 @@ TITLE_EN = [
     ("Vilnius, 2026", False, "center", 0),
 ]
 
+# Аннотации по правилам ЕГУ (прил. 3): для английской работы — на английском,
+# для русской — на русском и английском. До 2000 знаков, до 5 ключевых слов.
+ANNOTATION_EN = {
+    "heading": "ABSTRACT",
+    "author": "Kirill Kalashnikov",
+    "title": "A System for Creating 3D Game Maps from Video",
+    "keywordsLabel": "Keywords",
+    "keywords": "game level, LiDAR capture, collision mesh, requirements analysis, user stories",
+    "text": [
+        "The object of the project is the process of creating a game level from a real place, from capture to the "
+        "first check in a game engine; the subject is its automatable part: checking the capture, building the map "
+        "with a separate collision mesh, checking walkability in the browser and delivering the package for engines. "
+        "The goal is to shorten the path from capturing a real area to a walkable level to a single walk-around "
+        "with a phone, without manual geometry fixing.",
+        "The objectives are to find where time and data are lost in the current workflow, to determine what "
+        "existing scanners lack, to set measurable success indicators, to describe user actions, system checks and "
+        "rejection rules, and to define the reference captures used to accept the result.",
+        "The requirements were gathered through document analysis, a literature review and benchmarking of nine "
+        "analogs. The analysis showed that scanners deliver a model for viewing but do not provide a collision mesh "
+        "in metres, a walkability check or a rejection of an unsuitable capture. The requirements fix four KPIs, "
+        "six epics, 20 user stories with acceptance criteria, nine rejection reasons with thresholds, ten "
+        "non-functional requirements, legal requirements and seven risks.",
+    ],
+}
+ANNOTATION_RU = {
+    "heading": "АННОТАЦИЯ",
+    "author": "Кирилл Калашников",
+    "title": "Система создания игровых 3D-карт по видеозаписи",
+    "keywordsLabel": "Ключевые слова",
+    "keywords": "игровой уровень, съёмка LiDAR, опора для персонажа, анализ требований, пользовательские истории",
+    "text": [
+        "Объект проекта — процесс создания игрового уровня по реальному месту: от съёмки до первой проверки в "
+        "игровом движке; предмет — его автоматизируемая часть: проверка съёмки, сборка карты с отдельной опорой "
+        "для персонажа, проверка проходимости в браузере и выдача пакета для движков. Цель — сократить путь от "
+        "съёмки реального участка до проходимого уровня до одного обхода телефоном, без ручной доводки геометрии.",
+        "Задачи: выявить, где в нынешнем пути теряются время и данные; определить, чего не хватает существующим "
+        "сканерам; задать измеримые показатели успеха; описать действия пользователя, проверки системы и правила "
+        "отказа; определить эталонные съёмки для приёмки результата.",
+        "Требования собраны анализом документов, обзором литературы и сравнением девяти аналогов. Анализ показал, "
+        "что сканеры отдают модель для просмотра, но не дают опору в метрах, проверку проходимости и отказ на "
+        "непригодной съёмке. В требованиях зафиксированы четыре KPI, шесть эпиков, 20 историй с критериями "
+        "приёмки, девять причин отказа с порогами, десять нефункциональных требований, правовые требования и "
+        "семь рисков.",
+    ],
+}
+
 # Всё, что зависит от языка документа.
 LANGS = {
     "en": {
@@ -85,6 +132,8 @@ LANGS = {
         "docx": SITE / "BA_Kalashnikov_Kirill.docx",
         "pdf": SITE / "BA_Kalashnikov_Kirill.pdf",
         "title": TITLE_EN,
+        "annotation": [ANNOTATION_EN],
+        "declaration": "en",
         "labels": {"toc": "TABLE OF CONTENTS", "table": "Table", "figure": "Image",
                    "appendix": "Appendix", "appendixUpper": "APPENDIX", "lang": "en-GB"},
         "references": "List of References",
@@ -99,6 +148,8 @@ LANGS = {
         "docx": SITE / "BA_Kalashnikov_Kirill_RU.docx",
         "pdf": SITE / "NVC-Maps-бизнес-анализ.pdf",
         "title": TITLE_RU,
+        "annotation": [ANNOTATION_RU, ANNOTATION_EN],
+        "declaration": "ru",
         "labels": {"toc": "СОДЕРЖАНИЕ", "table": "Табл.", "figure": "Рис.",
                    "appendix": "Приложение", "appendixUpper": "ПРИЛОЖЕНИЕ", "lang": "ru-RU"},
         "references": "Список источников и литературы",
@@ -118,11 +169,12 @@ SHOT_PAGES = {
 }
 
 
-# --- Источники и ссылки (IEEE) -------------------------------------------------
-# В тексте источник указывается ключом: [@key] или [@a; @b]. Сборка нумерует источники
-# по порядку первого упоминания и подставляет номера в квадратных скобках: [3], [3], [5], [2]–[4].
+# --- Источники и сноски (Chicago, 16-е изд., метод сносок и библиографии) ------
+# В тексте источник указывается ключом: [@key] или [@a; @b]. Сборка превращает ссылку в сноску:
+# первая ссылка на источник — полная, повторная — краткая, подряд та же — «Ibid.».
+# Список источников — по алфавиту, сначала кириллица, затем латиница (Правила ЕГУ, п. 2.5).
 
-CITE = re.compile(r"\[@([^\]]+)\]")
+CITE = re.compile(r"[ \u00a0]*\[@([^\]]+)\]")
 
 
 def load_refs() -> dict:
@@ -133,54 +185,82 @@ def cite_keys(match: re.Match) -> list[str]:
     return [k.strip().lstrip("@") for k in match.group(1).split(";")]
 
 
-def citation_order(lang: str = "ru") -> dict[str, int]:
-    """Номер каждого источника — по первому упоминанию в разделах по порядку."""
+def check_citations(lang: str) -> None:
+    """Каждый источник из списка процитирован хотя бы раз, и нет ссылок на несуществующие."""
     refs = load_refs()
-    order: dict[str, int] = {}
+    used: set[str] = set()
     for src in SOURCES:
         path = LANGS[lang]["dir"] / src
-        if not path.is_file():  # 03 и 04 генерируются и ссылок не содержат
+        if not path.is_file():
             continue
         for m in CITE.finditer(path.read_text()):
             for key in cite_keys(m):
                 if key not in refs:
                     raise SystemExit(f"Нет источника {key} в references.json")
-                order.setdefault(key, len(order) + 1)
-    missing = set(refs) - set(order)
+                used.add(key)
+    missing = set(refs) - used
     if missing:
-        raise SystemExit(f"Источники ни разу не процитированы: {sorted(missing)}")
-    return order
+        raise SystemExit(f"Источники ни разу не процитированы ({lang}): {sorted(missing)}")
 
 
-def cite_label(nums: list[int]) -> str:
-    """[1], [3] для отдельных номеров, [2]–[5] для трёх и больше подряд."""
-    nums = sorted(set(nums))
-    groups, start = [], 0
-    for i in range(1, len(nums) + 1):
-        if i == len(nums) or nums[i] != nums[i - 1] + 1:
-            run = nums[start:i]
-            groups.append(f"[{run[0]}]–[{run[-1]}]" if len(run) >= 3 else ", ".join(f"[{n}]" for n in run))
-            start = i
-    return ", ".join(groups)
+def bib_sort_key(entry: str) -> tuple:
+    text = entry.lstrip("“\"*").lower()
+    return (0 if re.match(r"[а-яё]", text) else 1, text)
 
 
-def cite_markdown(text: str, order: dict[str, int], escape: bool = False) -> str:
-    """Заменить [@key] на номера IEEE. escape — для Markdown, где [n] надо экранировать."""
-    def repl(m: re.Match) -> str:
-        label = cite_label([order[k] for k in cite_keys(m)])
-        return label.replace("[", "\\[").replace("]", "\\]") if escape else label
-    return CITE.sub(repl, text)
+def chicago_join(parts: list[str]) -> str:
+    """Склеить несколько ссылок в одну сноску: «A; B.» — точка внутри кавычек."""
+    clean = []
+    for part in parts:
+        part = part.rstrip(".")
+        if part.endswith(".”"):
+            part = part[:-2] + "”"
+        clean.append(part)
+    text = "; ".join(clean)
+    return text[:-1] + ".”" if text.endswith("”") else text + "."
+
+
+class Notes:
+    """Сноски Chicago для Markdown: полная при первой ссылке, дальше краткая, подряд — Ibid."""
+
+    def __init__(self) -> None:
+        self.refs = load_refs()
+        self.seen: set[str] = set()
+        self.defs: list[str] = []
+        self.last: list[str] = []
+
+    def note(self, keys: list[str]) -> str:
+        if keys == self.last and len(keys) == 1:
+            return "Ibid."
+        parts = []
+        for key in keys:
+            ref = self.refs[key]
+            parts.append(ref["short"] if key in self.seen else ref["note"])
+            self.seen.add(key)
+        self.last = keys
+        return chicago_join(parts)
+
+    def markdown(self, text: str) -> str:
+        """Заменить [@key; @key] на сноски Markdown [^n]."""
+        def repl(m: re.Match) -> str:
+            note = self.note(cite_keys(m))
+            self.defs.append(re.sub(r"(https?://[^\s<>]+?)(?=[.,;]?(?:\s|$))", r"<\1>", note))
+            return f"[^{len(self.defs)}]"
+        return CITE.sub(repl, text)
+
+    def definitions(self) -> str:
+        return "\n".join(f"[^{i}]: {d}" for i, d in enumerate(self.defs, 1))
 
 
 def build_references() -> None:
     refs = load_refs()
+    entries = sorted((r["bib"] for r in refs.values()), key=bib_sort_key)
+    linked = [re.sub(r"(https?://\S+?)(\.?)$", r"<\1>\2", e) for e in entries]
     for lang, cfg in LANGS.items():
-        order = citation_order(lang)
-        out = [f"# {cfg['references']}", ""]
-        for key, n in sorted(order.items(), key=lambda kv: kv[1]):
-            out += [f"\\[{n}\\] {refs[key]['ieee']}", ""]
+        check_citations(lang)
+        out = [f"# {cfg['references']}", "", *[f"{i}. {e}" for i, e in enumerate(linked, 1)], ""]
         (cfg["dir"] / "03-references.md").write_text("\n".join(out))
-        print(f"references ({lang}):", len(order))
+        print(f"references ({lang}):", len(entries))
 
 
 # --- Приложение 1 -----------------------------------------------------------
@@ -223,12 +303,12 @@ SUMMARY_HEADER = """# Бизнес-анализ: система создания
 
 def build_summary() -> None:
     parts = []
-    order = citation_order()
+    notes = Notes()
     for src, _, _ in SECTIONS:
-        text = cite_markdown((ROOT / src).read_text(), order, escape=True)
+        text = notes.markdown((ROOT / src).read_text())
         parts.append(re.sub(r"(?m)^(#+) ", r"#\1 ", text).rstrip() + "\n")
     body = "\n---\n\n".join(parts)
-    SUMMARY.write_text(SUMMARY_HEADER + "---\n\n" + body)
+    SUMMARY.write_text(SUMMARY_HEADER + "---\n\n" + body + "\n---\n\n" + notes.definitions() + "\n")
     print("summary:", SUMMARY.name)
 
 
@@ -417,14 +497,16 @@ def md_to_html(text: str) -> str:
 def build_site() -> None:
     for old in ["d01-summary", "d02-stakeholders", "d03-personas", "d04-stories", "d05-screens", "d06-nfr"]:
         (SITE / f"{old}.html").unlink(missing_ok=True)
-    order = citation_order()
     for src, page, title in SECTIONS:
         active = ' class="active"'
         nav = "\n".join(
             f'      <a{active if p == page else ""} href="{p}">{t}</a>'
             for _, p, t in SECTIONS
         )
-        text = cite_markdown((ROOT / src).read_text(), order, escape=True)
+        notes = Notes()
+        text = notes.markdown((ROOT / src).read_text())
+        if notes.defs:
+            text += "\n\n" + notes.definitions() + "\n"
         body = md_to_html(text)
         body = body.replace('src="wireframes/', 'src="')
         for heading, anchor in ANCHORS.items():
@@ -570,9 +652,9 @@ def build_docx_lang(lang: str, cfg: dict) -> None:
     spec = CACHE / f"docx-input-{lang}.json"
     spec.write_text(json.dumps({
         "root": str(ROOT), "dir": str(cfg["dir"]), "out": str(out), "sections": SOURCES,
-        "titleLines": cfg["title"], "labels": cfg["labels"], "author": "Kirill Kalashnikov",
+        "titleLines": cfg["title"], "labels": cfg["labels"], "annotation": cfg["annotation"], "author": "Kirill Kalashnikov",
         "docTitle": "A System for Creating 3D Game Maps from Video",
-        "citations": citation_order(lang),
+        "refs": list(load_refs().values()),
     }, ensure_ascii=False))
     subprocess.run(["node", str(ROOT / "scripts" / "build-docx.mjs"), str(spec)], check=True)
 
@@ -592,6 +674,9 @@ def build_docx_lang(lang: str, cfg: dict) -> None:
         shutil.copyfile(preview, CACHE / f"docx-preview-{lang}.pdf")
         shutil.copyfile(preview, cfg["pdf"])
     print(f"docx ({lang}):", out.name, out.stat().st_size, "· превью:", CACHE / f"docx-preview-{lang}.pdf")
+    declaration = SITE / ("Declaration_Kalashnikov_Kirill.docx" if lang == "en" else "Декларация_Калашников_Кирилл.docx")
+    subprocess.run(["node", str(ROOT / "scripts" / "build-declaration.mjs"), cfg["declaration"], str(declaration)], check=True)
+    print(f"declaration ({lang}):", declaration.name)
 
 
 STEPS = {
