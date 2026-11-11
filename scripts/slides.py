@@ -1,11 +1,13 @@
 """Презентация для защиты по «Defense and Presentation Requirements 2026/27».
 
-Восемь слайдов и титульный: одна мысль на слайд, до 30 слов текста, крупный визуальный
-элемент, внизу — ссылка на раздел работы. Связь «цель → показатель → эпик → история» показана на слайде 6.
-Запасные материалы и ответы на вопросы комиссии в показ не входят — они на странице prep.html.
+Доклад и слайды — на английском. Восемь слайдов и титульный: одна мысль на слайд, до 30 слов
+текста, крупный визуальный элемент, внизу — ссылка на раздел работы. Цепочка
+«проблема → цель → показатель → эпик → история» показана на слайде 6.
+У каждого слайда в ``notes`` — текст доклада простым английским (уровень A2); он попадает
+в заметки докладчика PowerPoint. Ответы на вопросы комиссии — в отдельном документе, не здесь.
 
-На слайдах нет сокращений и идентификаторов (KPI, NFR, US-4.1 и т. п.) — только слова.
-Цифры берутся из разделов 00–02; при их правке слайды правятся здесь.
+На слайдах нет идентификаторов (KPI, NFR, US-4.1 и т. п.) — только слова.
+Цифры берутся из английских разделов en/00–02; при их правке слайды правятся здесь.
 
 Содержимое описано данными: из него собираются и страница deck.html (render),
 и PowerPoint (scripts/build-pptx.mjs читает export_json).
@@ -18,191 +20,206 @@ import json
 from pathlib import Path
 
 DECK = "deck.html"
-PREP = "prep.html"
+PPTX = "NVC-Maps-defense.pptx"
 
 SLIDES = [
     {
-        "nav": "Титульный слайд",
+        "nav": "Opening",
         "kind": "title",
-        "ref": "Титульный лист",
+        "ref": "Title page",
         "blocks": [{
             "type": "title",
-            "kicker": "NVC Maps · бакалаврский проект",
-            "title": "Система создания игровых 3D-карт по видеозаписи",
-            "sub": "A System for Creating 3D Game Maps from Video",
-            "people": ["Кирилл Калашников", "Руководитель: доцент, кандидат технических наук Сергей Валентинович Авдейчик"],
+            "kicker": "NVC Maps · Bachelor project · European Humanities University, Informatics",
+            "title": "A System for Creating 3D Game Maps from Video",
+            "sub": "Kirill Kalashnikov",
+            "people": ["Supervisor: Associate Professor Sergey Avdeychik, Candidate of Technical Sciences"],
         }],
+        "notes": "Good morning. My name is Kirill Kalashnikov. My project is called NVC Maps. "
+                 "It is a system for creating 3D game maps from video.",
     },
     {
-        "nav": "Проблема",
-        "title": "Телефон снимает место, но не делает из него уровень",
-        "ref": "Введение: актуальность и проблема",
+        "nav": "Problem",
+        "title": "A phone scan is not a game level",
+        "ref": "Introduction: relevance and problem",
         "blocks": [{
             "type": "number",
-            "value": "70 000",
-            "caption": "авторов карт в Fortnite в 2024 году — почти втрое больше, чем годом раньше",
-            "text": "Опору для персонажа, упрощение и размеры делают вручную. Брак съёмки виден только в игровом движке.",
+            "value": "70,000",
+            "caption": "Fortnite map makers in 2024. A year before: 24,000.",
+            "text": "Scans are heavy, have no character floor and lose the real size.",
         }],
+        "notes": "Many people make small games today. In 2024, the number of Fortnite map makers grew "
+                 "from 24,000 to 70,000. Many of them want a level from a real place, for example a desk "
+                 "or a small room. A phone can scan a place. But a scan is not a game level. It is too heavy. "
+                 "It has no floor for the character. The size is often wrong. People fix it by hand, "
+                 "and this takes hours.",
     },
     {
-        "nav": "Цель",
-        "title": "Один обход телефоном — и проходимый уровень без ручной доводки",
-        "ref": "Введение: цель и задачи, объект и предмет",
+        "nav": "Goal",
+        "title": "One walk with a phone → a walkable level",
+        "ref": "Introduction: goal, objectives, object and subject",
         "blocks": [
             {"type": "tasks", "items": [
-                ["Раздел 1.1", "Как делают сейчас"],
-                ["Разделы 1.2–1.3", "Источники и аналоги"],
-                ["Раздел 2.1", "Видение и показатели"],
-                ["Разделы 2.5–2.7", "Требования"],
-                ["Разделы 2.8–2.10", "Право, риски, оценка"],
+                ["Objective 1", "Losses"],
+                ["Objective 2", "Analogs"],
+                ["Objective 3", "Targets"],
+                ["Objective 4", "Requirements"],
+                ["Objective 5", "Law and risks"],
             ]},
             {"type": "cards", "items": [
-                ["Объект", "Создание игрового уровня по реальному месту"],
-                ["Предмет", "Проверка съёмки, сборка карты, проверка ходьбой"],
+                ["Object", "A game level from a real place"],
+                ["Subject", "Capture check, build, walk check"],
             ]},
         ],
+        "notes": "The goal of my project is simple. One walk around a place with a phone must give "
+                 "a game level. The character can walk on it, and nobody fixes it by hand. I had five tasks. "
+                 "I studied the current process. I compared similar products. I set targets with numbers. "
+                 "I wrote the requirements. And I described the tests, the law and the risks.",
     },
     {
-        "nav": "Текущий процесс",
-        "title": "Время теряется на ручной доводке, данные — при экспорте",
-        "ref": "Разделы 1.1 и 2.2",
+        "nav": "Current process",
+        "title": "Time is lost on fixing, data on export",
+        "ref": "Sections 1.1 and 2.2",
         "blocks": [
             {"type": "flow", "items": [
-                ["Снять", "", ""],
-                ["Выгрузить", "", ""],
-                ["Почистить", "вручную", "lost"],
-                ["Построить опору", "вручную", "lost"],
-                ["Выставить размеры", "теряются", "lost"],
-                ["Проверить", "только в движке", "late"],
+                ["Capture", "", ""],
+                ["Export", "size lost", "lost"],
+                ["Clean up", "by hand", "lost"],
+                ["Build floor", "by hand", "lost"],
+                ["Engine test", "too late", "late"],
+                ["Redo", "", "late"],
             ]},
-            {"type": "matrix", "items": [
-                ["Сильное влияние, высокий интерес", "Пользователи, владелец продукта", True],
-                ["Сильное влияние, низкий интерес", "Apple, игровые движки, закон о данных", False],
-                ["Среднее влияние", "Хостинг, конкуренты", False],
-                ["Слабое влияние, высокий интерес", "Игрок, владелец места, человек в кадре", False],
-            ]},
+            {"type": "text", "text": "Key: users, product owner. Rules: Apple, game engines, data law."},
         ],
+        "notes": "This is how people work today. They scan a place with an app, for example Polycam. "
+                 "They export the model. Then they clean it by hand in Blender. They also build a simple "
+                 "hidden floor for the character. This takes the most time. Often the real size gets lost here. "
+                 "Only in the game engine do they see the problems. If the scan was bad, they start again. "
+                 "The key people are the users and the product owner. Apple, the game engines and the data "
+                 "protection law give us rules.",
     },
     {
-        "nav": "Аналоги",
-        "title": "Сканеры делают модель для просмотра, а не уровень",
-        "ref": "Разделы 1.3–1.4",
+        "nav": "Analogs",
+        "title": "Nobody gives all four together",
+        "ref": "Sections 1.3–1.4",
         "blocks": [
             {"type": "check",
-             "columns": ["Polycam, Scaniverse, KIRI Engine", "World Labs Marble", "Video2Game", "NVC Maps"],
+             "columns": ["Polycam", "World Labs Marble", "Video2Game", "NVC Maps"],
              "rows": [
-                 ["Размеры в метрах", "yes", "no", "no", "yes"],
-                 ["Лёгкая опора для персонажа", "no", "part", "yes", "yes"],
-                 ["Проверка ходьбой", "no", "part", "yes", "yes"],
-                 ["Отказ с причиной", "no", "no", "no", "yes"],
+                 ["Real size", "yes", "no", "none", "yes"],
+                 ["Character floor", "no", "yes", "yes", "yes"],
+                 ["Walk check", "none", "part", "yes", "yes"],
+                 ["Honest rejection", "none", "none", "none", "yes"],
              ]},
-            {"type": "text", "text": "Никто не отдаёт сразу опору в метрах, проверку ходьбой и честный отказ."},
+            {"type": "note", "text": "— not claimed. Analogs have better pictures: not our goal."},
         ],
+        "notes": "I compared seven similar products. Here you see four criteria. Scanners like Polycam keep "
+                 "the real size. But they do not make a floor for the character. World Labs Marble has this "
+                 "floor, but its world is not a real place. Video2Game can check walking, but it is a research "
+                 "project. And no product says: \"This capture is bad, and here is why.\" So nobody gives all "
+                 "four things together. The other products have better pictures. But my goal is different: "
+                 "a level that works in a game.",
     },
     {
-        "nav": "Видение и показатели",
-        "title": "Снял — прошёл по уровню в браузере — забрал в движок",
-        "ref": "Разделы 2.1 и 2.3",
+        "nav": "Vision and targets",
+        "title": "Capture → walk → take to the engine",
+        "ref": "Sections 2.1 and 2.3",
         "blocks": [
             {"type": "tiles", "items": [
-                ["Уровень без ручной доводки", "0% → 100%"],
-                ["От отправки до проверки ходьбой", "2–4 часа → до 15 минут"],
-                ["Брак получает отказ с причиной", "0% → 100%"],
-                ["Треугольников в карте", "сотни тысяч → до 50 000"],
+                ["No manual fixing", "0% → 100%"],
+                ["Time to check", "2–4 hours → 15 minutes"],
+                ["Honest rejection", "0% → 100%"],
+                ["Map triangles", "≤ 50,000"],
             ]},
             {"type": "scope",
-             "in": "Съёмка на iPhone с датчиком глубины, сборка на сервере, проверка в браузере, файлы для движков",
-             "out": "Игра, Android, текстуры, панель администрирования"},
+             "in": "iPhone app, server, browser",
+             "out": "Game, Android, textures"},
         ],
+        "notes": "My idea in one line: capture the place, walk on it in the browser, take it to the game "
+                 "engine. I have four goals, and each goal has a number. First, no manual fixing: from zero "
+                 "to one hundred percent. Second, time: from two to four hours down to fifteen minutes. "
+                 "Third, every bad capture gets a reason. Fourth, the map is light: no more than fifty thousand "
+                 "triangles. The project has an iPhone app, a server and a website. A full game, Android and "
+                 "textures are not part of it.",
     },
     {
-        "nav": "Эпики и сценарий",
-        "title": "Шесть эпиков ведут к показателям; ключевая история — ходьба по карте",
-        "ref": "Разделы 2.5–2.6",
+        "nav": "Epics and scenario",
+        "title": "From problem to story",
+        "ref": "Sections 2.5–2.6",
         "blocks": [
             {"type": "trace", "items": [
-                ["Цель: без ручной доводки", False],
-                ["Показатель: проходимый уровень", False],
-                ["Эпики: сборка, ходьба, файлы", False],
-                ["История: пройти по карте в браузере", True],
+                ["Problem: manual fixing", False],
+                ["Goal: no fixing", False],
+                ["Target: 100% walkable", False],
+                ["Epic: walk check", False],
+                ["Story: walk the map in a browser", True],
             ]},
             {"type": "chips", "items": [
-                ["Съёмка и проверка", False], ["Отправка и задания", False], ["Сборка и отчёт", False],
-                ["Ходьба по карте", True], ["Файлы для движка", False], ["Тестовая ссылка", False],
+                ["Capture", False], ["Upload", False], ["Build", False],
+                ["Walk check", True], ["Files", False], ["Operation", False],
             ]},
             {"type": "flow", "small": True, "items": [
-                ["Рамка зоны", "", ""],
-                ["Обход 10–30 секунд", "", ""],
-                ["Проверка записи", "нет — «Переснять»", "late"],
-                ["Отправить", "", ""],
-                ["Задание в очереди", "", ""],
+                ["Open link", "", ""],
+                ["Open job", "", ""],
+                ["Walk across", "", ""],
+                ["Download", "", ""],
             ]},
         ],
+        "notes": "Now, how the problem leads to the work. The problem is manual fixing. The goal is no manual "
+                 "fixing. The target is one hundred percent of good captures. The epic is \"Walk check in the "
+                 "browser\". The key user story is: \"As a map builder, I want to walk a character on the map in "
+                 "the browser, so that I can check it without a game engine.\" There are six epics and fourteen "
+                 "\"Must\" stories. The key scenario has four steps: open the link from the phone, open the job, "
+                 "walk from one side to the other, and download the files.",
     },
     {
-        "nav": "Качество и право",
-        "title": "Быстро, только своим и по закону",
-        "ref": "Разделы 2.7–2.8",
+        "nav": "Quality and law",
+        "title": "Fast, private and legal",
+        "ref": "Sections 2.7–2.8",
         "blocks": [
             {"type": "tiles", "items": [
-                ["Сборка карты", "до 10 минут"],
-                ["Открыть карту в браузере", "до 10 секунд"],
-                ["Сервис доступен", "не меньше 99% времени"],
-                ["Доступность веб-страниц", "уровень AA"],
+                ["Build", "≤ 10 minutes"],
+                ["Map opens", "≤ 10 seconds"],
+                ["Access", "Owner only"],
+                ["Uptime", "≥ 99%"],
             ]},
             {"type": "legal", "items": [
-                ["Своя съёмка", "Договор с пользователем — регламент Евросоюза о защите данных, статья 6"],
-                ["Случайные люди в кадре", "Законный интерес; лица крупным планом не публикуются"],
-                ["Хранение", "До 90 дней, удаление по запросу — до 30 дней"],
-                ["Библиотеки", "Только открытые лицензии"],
+                ["Data", "User key, video, network address"],
+                ["Basis", "EU data law, article 6"],
+                ["Kept", "90 days, deleted on request"],
             ]},
         ],
+        "notes": "Here are the main quality rules. A build takes no more than ten minutes. The map opens in "
+                 "ten seconds. Only the owner can see their jobs. The service works ninety-nine percent of the "
+                 "time. Now the law. We follow the GDPR. The personal data are the user key, the video and IP "
+                 "addresses. The legal basis is the contract and legitimate interest. We keep the data for "
+                 "ninety days. On request, we delete it within thirty days.",
     },
     {
-        "nav": "Концепция и риски",
-        "title": "Телефон снимает, сервер собирает, браузер проверяет",
-        "ref": "Разделы 2.4 и 2.9",
+        "nav": "Concept and risks",
+        "title": "Phone captures, server builds, browser checks",
+        "ref": "Sections 2.4 and 2.9",
         "blocks": [{
             "type": "concept",
             "nodes": [
-                ["Оператор", "Телефон", "съёмка с датчиком глубины", False],
-                ["Система", "Сервер", "приём, очередь, сборка карты", True],
-                ["Сборщик", "Браузер", "отчёт, ходьба, скачать", False],
+                ["User", "Phone", "video, depth", False],
+                ["System", "Server", "builds the map", True],
+                ["Builder", "Browser", "report, walk, files", False],
             ],
-            "arrows": ["съёмка →", "← карта и отчёт"],
-            "external": ["Хостинг: база и файлы", "Игровые движки: Godot, Unity, Unreal"],
+            "arrows": ["capture →", "← map"],
+            "external": ["Hosting", "Godot, Unity, Unreal"],
             "risks": [
-                ["Карта неузнаваема", "Маленькая зона, обязательные позы камеры, отказ вместо случайной геометрии"],
-                ["Опора не держит персонажа", "Проверка ходьбой до выдачи файлов"],
-                ["Портрет пользователя не подтверждён", "Пять интервью до следующего релиза"],
+                ["Map holes", "Small area, rejection"],
+                ["Character falls", "Walk check first"],
+                ["No interviews yet", "Five interviews planned"],
             ],
         }],
+        "notes": "This is the solution. The phone records the video and the depth. The server builds the map. "
+                 "The browser shows the report, and you can walk on the map. Then the files go to Godot, Unity "
+                 "or Unreal. There are three main risks. One: the map can have holes. So we use a small area and "
+                 "we reject bad captures. Two: the character can fall through the floor. So we check walking "
+                 "before the download. Three: I have not talked to real users yet. I plan five interviews before "
+                 "the next release. Thank you for your attention.",
     },
-]
-
-# Подготовка к защите: в показ не входит, открывается отдельной страницей.
-PREP_BACKUP = [
-    ["Раздел 1.3", "Полная таблица аналогов", "d01-analysis.html#analogs"],
-    ["Приложение 1", "Все эпики и истории", "d04-backlog.html"],
-    ["Раздел 2.9", "Таблица рисков", "d02-requirements.html#risks"],
-    ["Раздел 2.6", "Полный текст сценариев", "d02-requirements.html#use-cases"],
-]
-
-PREP_QA = [
-    ["Как вы убедились, что проблема реальна?",
-     "Анализ рынка и девяти аналогов: ни один не отдаёт опору в метрах и проверку ходьбой. Интервью пока не было — это отдельный риск, план: пять интервью с инди-разработчиками."],
-    ["Чем решение лучше аналога?",
-     "Это не сканер, а сборщик уровня: лёгкая опора, настоящие размеры, ходьба в браузере, честный отказ, повторяемость. Картинка проще — это осознанная граница."],
-    ["Почему такие показатели и как их измерить?",
-     "Каждый показатель — одна боль: ручная доводка, время, брак, вес карты. Измеряются прогоном четырёх эталонных съёмок по тестовой ссылке."],
-    ["Что вне проекта и почему?",
-     "Игра, Android, текстуры, своя модель глубины, панель администрирования. Один разработчик и фиксированный срок — в релиз входит только путь «снял — прошёл — забрал»."],
-    ["Какие истории обязательны и что уберёте при нехватке времени?",
-     "Четырнадцать обязательных историй, без которых не достичь показателей. Первыми уходят желательные: подсказка обхода, фильтр, сравнение сборок, рост персонажа, инструкция для Godot."],
-    ["Какие персональные данные и на каком основании?",
-     "Ключ устройства, видео участка, сетевые адреса в журналах. Регламент Евросоюза о защите данных, статья 6: договор и законный интерес; хранение до 90 дней, удаление по запросу."],
-    ["Что самое рискованное?",
-     "Качество карты. Снижаем маленькой зоной, обязательными позами камеры и отказом вместо случайной геометрии; проверяем ходьбой до выдачи."],
 ]
 
 MAIN = sum(1 for s in SLIDES if s.get("kind") != "title")
@@ -210,8 +227,8 @@ MAIN = sum(1 for s in SLIDES if s.get("kind") != "title")
 
 def label(i: int, slide: dict) -> str:
     if slide.get("kind") == "title":
-        return "Титул"
-    return f"{i} из {MAIN}"
+        return "Title"
+    return f"{i} of {MAIN}"
 
 
 # --- HTML ---------------------------------------------------------------------
@@ -246,7 +263,7 @@ def block_html(b: dict) -> str:
         return '<div class="s-matrix">' + "".join(
             f'<div{cls("hi" if hi else "")}><span>{e(a)}</span>{e(x)}</div>' for a, x, hi in b["items"]) + "</div>"
     if t == "check":
-        marks = {"yes": "✓", "no": "✕", "part": "частично"}
+        marks = {"yes": "✓", "no": "✕", "part": "partly", "none": "—"}
         last = len(b["columns"])
         head = "<tr><th></th>" + "".join(f'<th{cls("us" if i == last else "")}>{e(c)}</th>' for i, c in enumerate(b["columns"], 1)) + "</tr>"
         rows = "".join(
@@ -261,8 +278,8 @@ def block_html(b: dict) -> str:
     if t == "tiles":
         return '<div class="s-tiles">' + "".join(f"<div><span>{e(a)}</span><b>{e(x)}</b></div>" for a, x in b["items"]) + "</div>"
     if t == "scope":
-        return (f'<div class="s-split scope"><div class="in"><span>Входит</span>{e(b["in"])}</div>'
-                f'<div class="out"><span>Не входит</span>{e(b["out"])}</div></div>')
+        return (f'<div class="s-split scope"><div class="in"><span>In</span>{e(b["in"])}</div>'
+                f'<div class="out"><span>Out</span>{e(b["out"])}</div></div>')
     if t == "trace":
         return '<div class="s-trace">' + "<i>→</i>".join(
             f'<span{cls("hot" if hot else "")}>{e(x)}</span>' for x, hot in b["items"]) + "</div>"
@@ -283,11 +300,11 @@ def block_html(b: dict) -> str:
 
 
 PAGE = """<!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Защита · NVC Maps</title>
+  <title>Defense · NVC Maps</title>
   <link rel="stylesheet" href="wireframes.css?v=15" />
 </head>
 <body class="deck-view">
@@ -299,16 +316,16 @@ PAGE = """<!DOCTYPE html>
 {overview}
   </nav>
   <footer class="deck-toolbar">
-    <a class="deck-home" href="index.html">← Бизнес-анализ</a>
+    <a class="deck-home" href="index.html">← Business analysis</a>
     <div class="deck-controls">
-      <button type="button" data-go="-1" aria-label="Предыдущий слайд">◀</button>
+      <button type="button" data-go="-1" aria-label="Previous slide">◀</button>
       <span class="deck-pos"></span>
-      <button type="button" data-go="1" aria-label="Следующий слайд">▶</button>
+      <button type="button" data-go="1" aria-label="Next slide">▶</button>
     </div>
     <div class="deck-actions">
-      <button type="button" data-overview>Все слайды</button>
-      <button type="button" data-fullscreen>Во весь экран</button>
-      <a class="deck-download" href="NVC-Maps-защита.pptx" download="NVC-Maps-защита.pptx">Скачать презентацию</a>
+      <button type="button" data-overview>All slides</button>
+      <button type="button" data-fullscreen>Full screen</button>
+      <a class="deck-download" href="{pptx}" download="{pptx}">Download PowerPoint</a>
     </div>
   </footer>
   <script>
@@ -376,45 +393,6 @@ SCRIPT = """    var slides = Array.prototype.slice.call(document.querySelectorAl
     fromHash();"""
 
 
-PREP_PAGE = """<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Подготовка к защите · NVC Maps</title>
-  <link rel="stylesheet" href="wireframes.css?v=15" />
-</head>
-<body class="hub">
-  <header class="hub-header">
-    <a class="prep-back" href="index.html">← Бизнес-анализ</a>
-    <h1>Подготовка к защите</h1>
-    <p class="lede">Для себя: в презентацию не входит. Ответы на типовые вопросы комиссии и материалы, которые открывают после доклада, если комиссия спросит.</p>
-  </header>
-  <section class="hub-section" id="questions">
-    <h2>Ответы на типовые вопросы комиссии</h2>
-    <dl class="prep-qa">
-{qa}
-    </dl>
-  </section>
-  <section class="hub-section" id="backup">
-    <h2>Материалы после доклада</h2>
-    <div class="hub-grid">
-{backup}
-    </div>
-  </section>
-</body>
-</html>
-"""
-
-
-def prep_html() -> str:
-    qa = "\n".join(f"      <dt>{e(q)}</dt>\n      <dd>{e(a)}</dd>" for q, a in PREP_QA)
-    backup = "\n".join(
-        f'      <a class="hub-card" href="{h}">\n        <span class="tag">{e(a)}</span>\n        <strong>{e(x)}</strong>\n      </a>'
-        for a, x, h in PREP_BACKUP)
-    return PREP_PAGE.format(qa=qa, backup=backup)
-
-
 def render(site: Path) -> list[str]:
     sections, items = [], []
     for i, s in enumerate(SLIDES):
@@ -427,12 +405,11 @@ def render(site: Path) -> list[str]:
             f"    </section>"
         )
         items.append(f'    <a href="#{i}"><span>{label(i, s)}</span>{e(s["nav"])}</a>')
-    (site / DECK).write_text(PAGE.format(slides="\n".join(sections), overview="\n".join(items), script=SCRIPT))
-    (site / PREP).write_text(prep_html())
+    (site / DECK).write_text(PAGE.format(slides="\n".join(sections), overview="\n".join(items), script=SCRIPT, pptx=PPTX))
     # Прежние отдельные страницы слайдов заменены одной презентацией.
     for old in site.glob("s[0-9][0-9]-*.html"):
         old.unlink()
-    return [DECK, PREP]
+    return [DECK]
 
 
 def export_json(path: Path) -> None:

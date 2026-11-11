@@ -703,11 +703,3 @@ button, input, select { font: inherit; }
 }
 .chip-row a:hover { border-color: var(--accent); color: #0f766e; }
 
-/* Подготовка к защите (prep.html) */
-.prep-back { color: #0f766e; font-weight: 600; font-size: 0.92rem; }
-.prep-qa { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr); gap: 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
-.prep-qa dt, .prep-qa dd { margin: 0; padding: 14px 18px; border-bottom: 1px solid var(--line); line-height: 1.45; }
-.prep-qa dt { font-weight: 700; background: #f9fafb; }
-.prep-qa dd { color: #374151; }
-.prep-qa dt:nth-last-of-type(1), .prep-qa dd:last-child { border-bottom: none; }
-@media (max-width: 700px) { .prep-qa { grid-template-columns: minmax(0, 1fr); } .prep-qa dt { border-bottom: none; } }

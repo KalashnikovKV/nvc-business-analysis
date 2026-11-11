@@ -530,7 +530,7 @@ def build_slides() -> None:
     CACHE.mkdir(exist_ok=True)
     slides.export_json(CACHE / "slides.json")
     subprocess.run(["node", str(ROOT / "scripts" / "build-pptx.mjs"), str(CACHE / "slides.json"),
-                    str(SITE / "NVC-Maps-защита.pptx")], check=True)
+                    str(SITE / slides.PPTX)], check=True)
 
 
 # --- DOCX --------------------------------------------------------------------

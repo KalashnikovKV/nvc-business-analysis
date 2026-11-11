@@ -1,4 +1,5 @@
-// Собрать презентацию для защиты в PowerPoint из того же описания слайдов, что и deck.html.
+// Собрать презентацию для защиты (на английском) в PowerPoint из того же описания слайдов, что и deck.html.
+// Текст доклада из notes уходит в заметки докладчика.
 // Вызывается из scripts/build-ba.py: node scripts/build-pptx.mjs <slides.json> <out.pptx>
 
 import fs from "node:fs";
@@ -24,8 +25,8 @@ const FONT = "Calibri";
 
 const pres = new pptxgen();
 pres.layout = "LAYOUT_16x9";
-pres.title = "Система создания игровых 3D-карт по видеозаписи";
-pres.author = "Кирилл Калашников";
+pres.title = "A System for Creating 3D Game Maps from Video";
+pres.author = "Kirill Kalashnikov";
 pres.theme = { headFontFace: FONT, bodyFontFace: FONT };
 
 pres.defineSlideMaster({
@@ -120,7 +121,7 @@ const blocks = {
     return 2 * h + gap;
   },
   check(slide, b, y) {
-    const marks = { yes: ["✓", COLOR.teal, 20], no: ["✕", COLOR.red, 18], part: ["частично", COLOR.amber, 13] };
+    const marks = { yes: ["✓", COLOR.teal, 20], no: ["✕", COLOR.red, 18], part: ["partly", COLOR.amber, 13], none: ["—", COLOR.muted, 16] };
     const last = b.columns.length;
     const head = [{ text: "", options: {} }, ...b.columns.map((c, i) => ({
       text: c, options: { bold: true, fontSize: 11, color: i + 1 === last ? COLOR.teal : COLOR.muted, align: "center", fill: { color: i + 1 === last ? COLOR.tealTint : COLOR.white } },
@@ -129,12 +130,12 @@ const blocks = {
       { text: r[0], options: { bold: true, fontSize: 15, color: COLOR.ink } },
       ...r.slice(1).map((v, i) => {
         const [mark, color, size] = marks[v];
-        return { text: mark, options: { color, fontSize: size, bold: v !== "part", align: "center", fill: { color: i + 1 === last ? COLOR.tealTint : COLOR.white } } };
+        return { text: mark, options: { color, fontSize: size, bold: v === "yes" || v === "no", align: "center", fill: { color: i + 1 === last ? COLOR.tealTint : COLOR.white } } };
       }),
     ]);
     const rowH = [0.6, ...rows.map(() => 0.42)];
     slide.addTable([head, ...rows], {
-      x: X, y, w: CW, colW: [2.7, 2.1, 1.5, 1.2, 1.5], rowH, fontFace: FONT, valign: "middle",
+      x: X, y, w: CW, colW: [3.0, 1.5, 1.7, 1.4, 1.4], rowH, fontFace: FONT, valign: "middle",
       border: { type: "solid", pt: 0.75, color: COLOR.line }, margin: 0.06, objectName: "analogs",
     });
     // Небольшой запас под таблицей: строки с переносом чуть выше заданной высоты.
@@ -160,9 +161,9 @@ const blocks = {
   scope(slide, b, y) {
     const gap = 0.3, w = (CW - gap) / 2, h = 1.15;
     box(slide, X, y, w, h, COLOR.tealTint, { name: "scope-in" });
-    labelled(slide, "Входит", b.in, X, y, w, h, { size: 15 });
+    labelled(slide, "In", b.in, X, y, w, h, { size: 15 });
     box(slide, X + w + gap, y, w, h, COLOR.gray, { name: "scope-out" });
-    labelled(slide, "Не входит", b.out, X + w + gap, y, w, h, { size: 15, color: "4B5563" });
+    labelled(slide, "Out", b.out, X + w + gap, y, w, h, { size: 15, color: "4B5563" });
     return h;
   },
   trace(slide, b, y) {
@@ -228,16 +229,17 @@ const blocks = {
 // --- Слайды ------------------------------------------------------------------
 
 function titleSlide(s) {
-  const slide = pres.addSlide({ masterName: "TITLE", sectionTitle: "Доклад" });
+  const slide = pres.addSlide({ masterName: "TITLE", sectionTitle: "Talk" });
   const b = s.blocks[0];
   text(slide, b.kicker, X, 1.2, CW, 0.35, { size: 13, color: "5EEAD4", margin: 0 });
   text(slide, b.title, X, 1.6, 8.2, 1.5, { size: 38, bold: true, color: COLOR.white, margin: 0, name: "title" });
   text(slide, b.sub, X, 3.1, CW, 0.4, { size: 16, color: COLOR.slate, margin: 0 });
   text(slide, b.people.join("\n"), X, 3.9, CW, 0.8, { size: 14, color: "E2E8F0", margin: 0, paraSpaceAfter: 4 });
+  slide.addNotes(s.notes);
 }
 
 function contentSlide(s) {
-  const slide = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Доклад" });
+  const slide = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Talk" });
   slide.addText(s.title, { placeholder: "title" });
   let y = TOP;
   for (const b of s.blocks) {
@@ -247,10 +249,11 @@ function contentSlide(s) {
   }
   if (y - GAP > BOTTOM + 0.05) console.warn(`Слайд «${s.title}» выходит за границу: ${y.toFixed(2)}`);
   text(slide, s.ref, X, 5.2, 8.2, 0.3, { size: 10, color: COLOR.muted, margin: 0, name: "section-ref" });
+  slide.addNotes(s.notes);
   return slide;
 }
 
-pres.addSection({ title: "Доклад" });
+pres.addSection({ title: "Talk" });
 for (const s of data.slides) {
   if (s.kind === "title") titleSlide(s);
   else contentSlide(s);
