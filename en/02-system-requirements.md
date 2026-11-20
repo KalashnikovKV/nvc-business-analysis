@@ -336,7 +336,7 @@ Table 2.16. Non-functional requirements
 | NFR-3 | Performance | Package file size | `map.glb` ≤ 25 MB, `collision.glb` ≤ 8 MB | KPI-4; US-3.3 |
 | NFR-4 | Reliability | Build repeatability | Same reconstruction method, triangle count difference ≤ 15% | KPI-1; US-3.4 |
 | NFR-5 | Security | Access to jobs | The list, report, viewer and files are served only to the owner's session: 0 successful openings of someone else's job in testing | US-2.3, US-6.1 |
-| NFR-6 | Security | Link lifetime | The one-time link works once and for ≤ 10 min; a file link for ≤ 15 min | US-2.3, US-5.1 |
+| NFR-6 | Security | Link lifetime | The one-time link works once and for ≤ 10 min; there are no file links: a file is served only to the owner's session, on every request (NFR-5) | US-2.3, US-5.1 |
 | NFR-7 | Security | Secrets | 0 passwords and keys in the service image and repository; secrets are set by the hosting | — |
 | NFR-8 | Availability | Uptime | ≥ 99% per calendar month by external monitoring | KPI-2 |
 | NFR-9 | Usability | Web client | Compliance with WCAG 2.1 AA [@wcag]: text contrast ≥ 4.5 : 1, all forms can be completed with the keyboard | US-2.2, US-2.3 |
